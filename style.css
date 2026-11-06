@@ -63,7 +63,7 @@ body {
 }
 
 .nav-menu li {
-    margin-left: 30px;
+    margin-left: 6px;
 }
 
 .nav-menu a {
@@ -701,6 +701,19 @@ body {
     display: grid;
 }
 
+/* Small one-column dropdown (e.g. "More"), opens towards the left */
+.dropdown-small .dropdown-menu {
+    min-width: 220px;
+    grid-template-columns: 1fr;
+    left: auto;
+    right: 0;
+}
+
+.dropdown-small .dropdown-column a i {
+    width: 20px;
+    color: var(--primary-color);
+}
+
 .dropdown-column h4 {
     color: var(--primary-color);
     margin-bottom: 15px;
@@ -857,11 +870,17 @@ body {
     gap: 8px;
     padding: 8px 12px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: white;
+    background: var(--light-color);
+    border: 1px solid #dfe6e9;
+    color: var(--dark-color);
     font-weight: 600;
     font-size: 0.9rem;
+    white-space: nowrap;
+    flex: none;
+}
+
+.xp-pill i {
+    color: #f39c12;
 }
 
 .xp-pill small {
@@ -872,7 +891,7 @@ body {
 .xp-meter {
     width: 90px;
     height: 6px;
-    background: rgba(255, 255, 255, 0.25);
+    background: #d5dbdb;
     border-radius: 999px;
     overflow: hidden;
 }
@@ -880,7 +899,7 @@ body {
 .xp-meter > div {
     height: 100%;
     width: 0;
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--primary-color);
     border-radius: 999px;
     transition: width 0.3s ease;
 }
@@ -2022,4 +2041,108 @@ body {
     .resources-grid {
         grid-template-columns: 1fr;
     }
+}
+/* =========================
+   Navbar on mid-size screens (tablets / small laptops):
+   shrink the XP pill, nav icons and logo text so everything fits on one row
+   ========================= */
+@media (max-width: 1100px) {
+    .xp-meter,
+    .xp-pill small {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .nav-menu > li > a > i:first-child {
+        display: none;
+    }
+}
+
+@media (max-width: 920px) and (min-width: 769px) {
+    .logo span {
+        display: none;
+    }
+}
+
+/* =========================
+   Mobile overflow fixes
+   ========================= */
+
+/* Grid items default to min-width: auto, so a wide <pre> stretched the card
+   past the screen. min-width: 0 lets the <pre> scroll inside the card instead. */
+.example-card {
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .tag-reference th,
+    .tag-reference td {
+        padding: 10px 8px;
+    }
+
+    /* Long code examples wrap instead of pushing the table off-screen */
+    .tag-reference code {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Same min-width fix for the two-column exercise pages */
+.exercise-content > * {
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .lesson-table th,
+    .lesson-table td {
+        padding: 8px;
+    }
+
+    .lesson-table code {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Lesson pages: the content column sits in a flex row next to the sidebar,
+   so it needs min-width: 0 for wide code examples to scroll instead of overflow */
+.lesson-content {
+    min-width: 0;
+}
+
+.code-example pre {
+    overflow-x: auto;
+}
+
+/* Exercise checklists are flex rows; let long lines wrap on small screens */
+.requirements-list li {
+    flex-wrap: wrap;
+}
+
+/* Wide lesson tables scroll sideways inside the page on phones */
+@media (max-width: 768px) {
+    .lesson-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Very small phones (320px) */
+@media (max-width: 480px) {
+    /* Previous / Next lesson buttons stack instead of overflowing */
+    .lesson-navigation {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Exercise step indicator wraps onto two lines */
+    .progress-steps {
+        flex-wrap: wrap;
+    }
+}
+
+/* Button waiting for a second click (confirm-button.js) */
+.is-confirming {
+    background: #e67e22 !important;
+    border-color: #e67e22 !important;
+    color: white !important;
 }

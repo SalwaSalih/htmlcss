@@ -129,7 +129,7 @@
                         <button class="editor-action-btn run" onclick="runCode()"><i class="fas fa-play"></i> Run</button>
                         <button class="editor-action-btn check" onclick="checkSolution()"><i class="fas fa-check"></i> Check</button>
                         <button class="editor-action-btn reset" onclick="resetCode()"><i class="fas fa-rotate-left"></i> Reset</button>
-                        <button class="editor-action-btn solution" onclick="showSolution()"><i class="fas fa-lightbulb"></i> Solution</button>
+                        <button class="editor-action-btn solution" onclick="showSolution(this)"><i class="fas fa-lightbulb"></i> Solution</button>
                     </div>
                 </div>
 
@@ -160,6 +160,7 @@
         <div class="footer-bottom"><p>&copy; 2024 HTML Master. Practice makes progress.</p></div>
     </footer>
 
+    <script src="../confirm-button.js"></script>
     <script>
         const starterCode = `<!DOCTYPE html>
 <html>
@@ -211,12 +212,13 @@
             runCode();
         }
 
-        function showSolution(){
-            if (confirm('View the example solution? This will replace your current code.')) {
+        function showSolution(button) {
+            // Asks on the button itself; confirm() dialogs can be blocked
+            window.confirmButton(button, 'Replace your code with the solution? Click again', () => {
                 document.getElementById('exerciseCode').value = solutionCode;
                 hideFeedback();
                 runCode();
-            }
+            });
         }
 
         function runCode(){

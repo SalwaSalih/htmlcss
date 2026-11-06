@@ -35,9 +35,10 @@
         }
         .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; }
 
-        .tags-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .tags-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 25px; }
 
         .tag-card {
+            min-width: 0; /* lets long examples scroll inside the card on phones */
             background: white; border-radius: var(--border-radius); padding: 25px;
             box-shadow: var(--box-shadow); transition: var(--transition);
             border-top: 4px solid var(--primary-color);
@@ -274,6 +275,15 @@
         { tag: '<pre>', name: 'preformatted', category: 'formatting', description: 'Preformatted text', example: '<pre>\\n  Keep spaces\\n</pre>', attributes: 'id, class, style' },
     ];
 
+    // Tag names and examples are shown as text, not rendered as real elements.
+    // The data stores line breaks as a literal "\n", so turn those into real ones.
+    const escapeHTML = (s) => String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    const realNewlines = (s) => String(s).replace(/\\n/g, '\n');
+
     function renderTags(filter = 'all', search = '') {
         const container = document.getElementById('tagsContainer');
         container.innerHTML = '';
@@ -296,11 +306,11 @@
 
             tagCard.innerHTML = `
                 <div class="tag-header">
-                    <code class="tag-name">${tag.tag}</code>
+                    <code class="tag-name">${escapeHTML(tag.tag)}</code>
                     <span class="tag-category">${tag.category}</span>
                 </div>
-                <p class="tag-description">${tag.description}</p>
-                <pre class="tag-example" title="Click to copy">${tag.example}</pre>
+                <p class="tag-description">${escapeHTML(tag.description)}</p>
+                <pre class="tag-example" title="Click to copy">${escapeHTML(realNewlines(tag.example))}</pre>
                 ${tag.attributes !== 'none'
                     ? `<div class="tag-attributes"><strong>Common Attributes:</strong> ${tag.attributes}</div>`
                     : ''
@@ -324,12 +334,12 @@
             headings: '<h1>Main Heading</h1>\\n<h2>Subheading</h2>',
             paragraph: '<p>This is a paragraph of text.</p>',
             anchor: '<a href="https://example.com" target="_blank" rel="noopener">Open Example</a>',
-            image: '<img src="https://via.placeholder.com/180" alt="Example image">',
+            image: '<img src="https://placehold.co/180" alt="Example image">',
             table: '<table border="1">\\n  <tr><th>Name</th><th>Age</th></tr>\\n  <tr><td>John</td><td>25</td></tr>\\n</table>',
             form: '<form>\\n  <label>Name: <input type="text" placeholder="Type..."></label>\\n  <button type="submit">Submit</button>\\n</form>',
             video: '<video width="320" controls>\\n  <source src="movie.mp4" type="video/mp4">\\n</video>'
         };
-        return examples[tagName] || null;
+        return examples[tagName] ? realNewlines(examples[tagName]) : null;
     }
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -29,6 +29,7 @@ function addXP(amount, reason = "") {
 
   saveXP();
   updateXPHUD();
+  initProgressBar();
 }
 
 function updateXPHUD() {
@@ -47,6 +48,76 @@ function updateXPHUD() {
   );
   barEl.style.width = percent + "%";
 }
+
+/* -----------------------------
+   BADGES
+----------------------------- */
+function getBadges() {
+  try {
+    return JSON.parse(localStorage.getItem("htmlmaster_badges")) || [];
+  } catch {
+    return [];
+  }
+}
+
+function grantBadge(id, label = id) {
+  const badges = getBadges();
+  if (badges.includes(id)) return;
+
+  badges.push(id);
+  localStorage.setItem("htmlmaster_badges", JSON.stringify(badges));
+  showToast(`🏅 Badge unlocked: ${label}`);
+}
+
+/* -----------------------------
+   LESSON TRACKING (visiting a lesson page counts it)
+----------------------------- */
+const LESSONS = ["basics", "links-media", "tags", "forms", "advanced", "css-js", "apis"];
+
+function getCompletedLessons() {
+  try {
+    return JSON.parse(localStorage.getItem("htmlmaster_completed_lessons")) || [];
+  } catch {
+    return [];
+  }
+}
+
+function trackLessonVisit() {
+  const match = location.pathname.match(/\/lessons\/([\w-]+)\.html$/);
+  if (!match || !LESSONS.includes(match[1])) return;
+
+  const done = getCompletedLessons();
+  if (done.includes(match[1])) return;
+
+  done.push(match[1]);
+  localStorage.setItem("htmlmaster_completed_lessons", JSON.stringify(done));
+
+  if (done.length >= 1) grantBadge("first-lesson", "First Lesson");
+  if (done.length >= 5) grantBadge("five-lessons", "5 Lessons");
+  if (done.length >= LESSONS.length) grantBadge("all-lessons", "Course Explorer");
+}
+
+function resetProgress() {
+  HM.xp = 0;
+  HM.level = 1;
+  saveXP();
+  localStorage.removeItem("htmlmaster_badges");
+  localStorage.removeItem("htmlmaster_completed_lessons");
+  updateXPHUD();
+  initProgressBar();
+}
+
+/* -----------------------------
+   PUBLIC API (used by quiz.js and arcade.html)
+----------------------------- */
+window.HTMLMaster = {
+  awardXP: addXP,
+  grantBadge,
+  getBadges,
+  reset: resetProgress,
+  updateHUD: updateXPHUD,
+  updateProgressUI: () => initProgressBar()
+};
 
 /* -----------------------------
    SIMPLE TOAST (NO LIBRARY)
@@ -99,35 +170,9 @@ function initNavigation() {
 }
 
 /* -----------------------------
-   HTML EDITOR – RUN CODE
+   HTML EDITOR
+   Run, auto-save and restore are handled by editor.js
 ----------------------------- */
-function initEditor() {
-  const runBtn = document.getElementById("runCode");
-  const editor = document.getElementById("htmlCode");
-  const iframe = document.getElementById("outputFrame");
-
-  if (!runBtn || !editor || !iframe) return;
-
-  runBtn.addEventListener("click", () => {
-    const code = editor.value;
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-
-    doc.open();
-    doc.write(code);
-    doc.close();
-
-    addXP(10, "Run Code");
-  });
-
-  // Auto-save editor
-  editor.addEventListener("input", () => {
-    localStorage.setItem("htmlEditorCode", editor.value);
-  });
-
-  // Restore editor
-  const saved = localStorage.getItem("htmlEditorCode");
-  if (saved) editor.value = saved;
-}
 
 /* -----------------------------
    LOAD EXAMPLE FROM REFERENCE
@@ -139,55 +184,15 @@ function loadExampleFromReference() {
   const example = localStorage.getItem("tagExample");
   if (!example) return;
 
-  if (editor.value.trim()) {
-    const ok = confirm(
-      "Load example from Reference?\nThis will replace your current code."
-    );
-    if (!ok) {
-      localStorage.removeItem("tagExample");
-      return;
-    }
-  }
-
-  editor.value = example;
+  // No confirm() here: HMEditor.setCode keeps Ctrl+Z, so the old code can be brought back
+  const hadWork = editor.value.trim() && !window.HMEditor?.isStarter?.();
+  if (window.HMEditor) window.HMEditor.setCode(example);
+  else editor.value = example;
   localStorage.removeItem("tagExample");
 
   editor.scrollIntoView({ behavior: "smooth", block: "center" });
-  showToast("📘 Example loaded from Reference");
+  showToast(hadWork ? "📘 Example loaded – press Ctrl+Z to get your old code back" : "📘 Example loaded from Reference");
 }
-
-/* -----------------------------
-   QUICK EXAMPLES (Try It)
------------------------------ */
-window.loadExample = function (id) {
-  const examples = {
-    "table-example": `<table border="1">
-  <tr><th>Name</th><th>Age</th></tr>
-  <tr><td>John</td><td>25</td></tr>
-</table>`,
-    "image-example": `<a href="https://example.com">
-  <img src="https://via.placeholder.com/300" alt="Image">
-</a>`,
-    "form-example": `<form>
-  <input type="text" placeholder="Name">
-  <input type="email" placeholder="Email">
-  <button>Submit</button>
-</form>`,
-    "nav-example": `<nav>
-  <a href="#">Home</a> |
-  <a href="#">About</a> |
-  <a href="#">Contact</a>
-</nav>`
-  };
-
-  const editor = document.getElementById("htmlCode");
-  if (!editor || !examples[id]) return;
-
-  editor.value = examples[id];
-  editor.scrollIntoView({ behavior: "smooth" });
-
-  addXP(5, "Load Example");
-};
 
 /* -----------------------------
    EXERCISES (REAL PAGES)
@@ -225,8 +230,8 @@ function initProgressBar() {
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
-  initEditor();
   loadExampleFromReference();
   initProgressBar();
   updateXPHUD();
+  trackLessonVisit();
 });

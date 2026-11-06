@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn HTML - Complete Guide for Beginners</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="editor.css">
+    <link rel="stylesheet" href="examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -64,18 +67,22 @@
                         </div>
                     </div>
                 </li>
+                <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
                 <li><a href="arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
-                <li><a href="#resources"><i class="fas fa-book-open"></i> Resources</a></li>
-                <li><a href="#references"><i class="fas fa-book"></i> References</a></li>
-                <li><a href="#examples"><i class="fas fa-laptop-code"></i> Examples</a></li>
-                <li><a href="#exercises"><i class="fas fa-dumbbell"></i> Exercises</a></li>
                 <li><a href="#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-                <li><a href="#certificate"><i class="fas fa-award"></i> Certificate</a></li>
+                <li class="dropdown dropdown-small">
+                    <a href="#"><i class="fas fa-ellipsis-h"></i> More <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-column">
+                            <a href="#examples"><i class="fas fa-laptop-code"></i> Code Editor</a>
+                            <a href="#exercises"><i class="fas fa-dumbbell"></i> Exercises</a>
+                            <a href="#references"><i class="fas fa-book"></i> HTML References</a>
+                            <a href="#resources"><i class="fas fa-book-open"></i> Resources</a>
+                            <a href="#certificate"><i class="fas fa-award"></i> Certificate</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
-            <div class="search-box">
-                <input type="text" placeholder="Search tutorials..." id="searchInput">
-                <button><i class="fas fa-search"></i></button>
-            </div>
 
             <!-- XP HUD (powered by script.js localStorage) -->
             <div class="xp-pill" title="Your XP and Level">
@@ -101,36 +108,80 @@
                 <a href="#quiz" class="btn btn-secondary">Test Your Skills</a>                
                 <a href="arcade.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Play Arcade</a>
             </div>
-                <!-- Interactive Examples Section -->
+        </div>
+    </section>
+
+    <!-- Interactive Examples Section -->
     <section id="examples" class="examples-section">
         <div class="container">
             <h2>Try It Yourself</h2>
-            <p class="section-subtitle">Edit code and see results in real-time</p>
+            <p class="section-subtitle">Write HTML, see the result instantly, and get friendly tips while you learn</p>
 
-            <div class="code-editor">
-                <div class="editor-header">
-                    <div class="editor-title">HTML Editor</div>
-                    <button class="run-btn" id="runCode">
-                        <i class="fas fa-play"></i> Run Code
-                    </button>
-                </div>
-                <div class="editor-body">
-                    <div class="code-input">
-                        <h4>HTML Code:</h4>
-                        <textarea id="htmlCode" rows="15">
-
-                        </textarea>
+            <!-- Interactive HTML editor (logic in editor.js, styles in editor.css) -->
+            <div class="he" id="htmlEditor">
+                <div class="he-top">
+                    <div class="he-title"><i class="fas fa-code"></i> HTML Editor</div>
+                    <div class="he-actions">
+                        <label class="he-switch" title="Update the result while you type">
+                            <input type="checkbox" id="heLive" checked>
+                            <span>Live</span>
+                        </label>
+                        <button type="button" class="he-btn" id="heFormat" title="Fix the indentation"><i class="fas fa-align-left"></i><span>Tidy</span></button>
+                        <button type="button" class="he-btn" id="heCopy" title="Copy the code"><i class="far fa-copy"></i><span>Copy</span></button>
+                        <button type="button" class="he-btn" id="heDownload" title="Save as an .html file"><i class="fas fa-download"></i><span>Save</span></button>
+                        <button type="button" class="he-btn" id="heReset" title="Start again from the starter page"><i class="fas fa-undo"></i><span>Reset</span></button>
+                        <button type="button" class="he-btn he-run" id="runCode"><i class="fas fa-play"></i><span>Run</span></button>
                     </div>
-                    <div class="code-output">
-                        <h4>Output:</h4>
-                        <iframe id="outputFrame"></iframe>
+                </div>
+
+                <!-- Quick-insert buttons: click to add a tag at the cursor -->
+                <div class="he-snippets" id="heSnippets" aria-label="Insert a tag"></div>
+
+                <div class="he-body">
+                    <div class="he-code">
+                        <div class="he-pane-label">index.html <span id="heCursor">Line 1</span></div>
+                        <div class="he-editor">
+                            <div class="he-gutter" id="heGutter" aria-hidden="true"></div>
+                            <div class="he-area">
+                                <pre class="he-highlight" id="heHighlight" aria-hidden="true"></pre>
+                                <textarea id="htmlCode" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="HTML code"></textarea>
+                            </div>
+                        </div>
+                        <div class="he-explain" id="heExplain" aria-live="polite">
+                            <i class="fas fa-lightbulb"></i> Click on a tag in your code to see what it does.
+                        </div>
+                    </div>
+
+                    <div class="he-side">
+                        <div class="he-tabs" role="tablist">
+                            <button type="button" role="tab" class="he-tab" data-pane="preview" aria-selected="true"><i class="fas fa-eye"></i> Result</button>
+                            <button type="button" role="tab" class="he-tab" data-pane="structure" aria-selected="false"><i class="fas fa-sitemap"></i> Structure</button>
+                            <button type="button" role="tab" class="he-tab" data-pane="tips" aria-selected="false"><i class="fas fa-stethoscope"></i> Tips <span class="he-count" id="heTipCount">0</span></button>
+                        </div>
+                        <div class="he-pane" data-pane="preview">
+                            <iframe id="outputFrame" title="Result of your HTML" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+                        </div>
+                        <div class="he-pane" data-pane="structure" hidden>
+                            <p class="he-pane-help">This is how the browser sees your page: every tag is a box inside another box.</p>
+                            <div class="he-tree" id="heTree"></div>
+                        </div>
+                        <div class="he-pane" data-pane="tips" hidden>
+                            <ul class="he-tips" id="heTips"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-        </div>
 
+            <!-- Small guided tasks, checked automatically -->
+            <div class="he-challenges">
+                <div class="he-challenges-head">
+                    <h3><i class="fas fa-flag-checkered"></i> Challenges</h3>
+                    <span id="heChallengeProgress">0 / 0 done</span>
+                </div>
+                <p class="he-pane-help">Solve these in the editor above. They are checked automatically while you type.</p>
+                <ol class="he-challenge-list" id="heChallenges"></ol>
+            </div>
+        </div>
     </section>
 
     <!-- Tutorial Categories Section -->
@@ -238,13 +289,13 @@
         <div class="container">
             <div class="progress-header">
                 <h3>Your Learning Progress</h3>
-                <span class="progress-percent">35%</span>
+                <span class="progress-percent">0%</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
             <div class="progress-stats">
-                <span>Completed: 0/7 lessons</span>
+                <span>Based on your XP level</span>
                 <span>Next: HTML Basics</span>
             </div>
         </div>
@@ -350,67 +401,29 @@
         </div>
     </section>
 
-    <!-- Quick Examples Section -->
-    <section id="quick-examples" class="examples-section">
+    <!-- Example Gallery (logic in examples.js, styles in examples.css) -->
+    <section id="quick-examples" class="ex-section">
         <div class="container">
             <h2>HTML Examples</h2>
-            <p class="section-subtitle">Try these common HTML patterns</p>
+            <p class="section-subtitle">Ready-made examples you can preview, read and open in the editor</p>
 
-            <div class="examples-grid">
-                <div class="example-card">
-                    <h4>Basic Table</h4>
-                    <pre><code>&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;Name&lt;/th&gt;
-    &lt;th&gt;Age&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;John&lt;/td&gt;
-    &lt;td&gt;25&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;</code></pre>
-                    <button class="btn-small" onclick="loadExample('table-example')">Try It</button>
-                </div>
+            <div class="ex-toolbar">
+                <label class="ex-search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="search" id="exSearch" placeholder="Search examples, e.g. table, form, video&hellip;" aria-label="Search examples">
+                </label>
+                <div class="ex-levels" id="exLevels" aria-label="Filter by level"></div>
+            </div>
+            <div class="ex-cats" id="exCats" aria-label="Filter by topic"></div>
 
-                <div class="example-card">
-                    <h4>Image with Link</h4>
-                    <pre><code>&lt;a href="#"&gt;
-  &lt;img src="image.jpg" 
-       alt="Description"
-       width="300"&gt;
-&lt;/a&gt;</code></pre>
-                    <button class="btn-small" onclick="loadExample('image-example')">Try It</button>
-                </div>
-
-                <div class="example-card">
-                    <h4>Contact Form</h4>
-                    <pre><code>&lt;form&gt;
-  &lt;input type="text" 
-         placeholder="Name"&gt;
-  &lt;input type="email" 
-         placeholder="Email"&gt;
-  &lt;textarea&gt;Message&lt;/textarea&gt;
-  &lt;button&gt;Submit&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-                    <button class="btn-small" onclick="loadExample('form-example')">Try It</button>
-                </div>
-
-                <div class="example-card">
-                    <h4>Navigation Menu</h4>
-                    <pre><code>&lt;nav&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;</code></pre>
-                    <button class="btn-small" onclick="loadExample('nav-example')">Try It</button>
-                </div>
+            <p class="ex-count" id="exCount" aria-live="polite"></p>
+            <div class="ex-grid" id="exGrid"></div>
+            <p class="ex-empty" id="exEmpty" hidden>No examples match your search.</p>
+            <div class="ex-more">
+                <button type="button" class="btn btn-primary" id="exMore" hidden>Show all examples</button>
             </div>
         </div>
     </section>
-
-
 
     <!-- Exercises Section -->
     <section id="exercises" class="exercises-section">
@@ -634,8 +647,8 @@
                 <h3>Earn Your HTML Certificate</h3>
                 <p>Complete all lessons and quizzes to earn your HTML Master Certificate.</p>
                 <div class="certificate-progress">
-                    <div class="progress-item completed">
-                        <i class="fas fa-check-circle"></i>
+                    <div class="progress-item">
+                        <i class="far fa-circle"></i>
                         <span>Complete Tutorials</span>
                     </div>
                     <div class="progress-item">
@@ -846,23 +859,18 @@
         </div>
     </footer>
 
+    <script src="confirm-button.js"></script>
     <script src="quiz.js"></script>
     <script src="script.js"></script>
+    <script src="highlight.js"></script>
+    <script src="editor.js"></script>
+    <script src="examples.js"></script>
     <script>
         // Enhanced functionality for the new features
         document.addEventListener('DOMContentLoaded', function() {
-            // Search functionality
-            const searchInput = document.getElementById('searchInput');
+            // Tag reference search
             const tagSearch = document.getElementById('tagSearch');
             const tagTable = document.getElementById('tagTable');
-
-            if (searchInput) {
-                searchInput.addEventListener('input', function(e) {
-                    const searchTerm = e.target.value.toLowerCase();
-                    // Implement search logic here
-                    console.log('Searching for:', searchTerm);
-                });
-            }
 
             if (tagSearch && tagTable) {
                 tagSearch.addEventListener('input', function(e) {
@@ -876,76 +884,9 @@
                 });
             }
 
-            // Progress tracking
-            const progressFill = document.querySelector('.progress-fill');
-            const progressPercent = document.querySelector('.progress-percent');
-
-            if (progressFill && progressPercent) {
-                // Simulate progress update
-                setTimeout(() => {
-                    progressFill.style.width = '65%';
-                    progressPercent.textContent = '65%';
-                }, 1000);
-            }
-
-            // Mobile dropdown toggle
-            const dropdowns = document.querySelectorAll('.dropdown > a');
-            dropdowns.forEach(dropdown => {
-                dropdown.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        const menu = this.nextElementSibling;
-                        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-                    }
-                });
-            });
+            // Progress bar and mobile dropdown are handled by initProgressBar()
+            // and initNavigation() in script.js.
         });
-
-        // Load example into editor
-        window.loadExample = function(exampleId) {
-            const examples = {
-                'table-example': `<table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>25</td>
-  </tr>
-  <tr>
-    <td>Sarah</td>
-    <td>30</td>
-  </tr>
-</table>`,
-                'image-example': `<a href="https://example.com">
-  <img src="https://via.placeholder.com/300x150" 
-       alt="Example Image"
-       width="300">
-</a>`,
-                'form-example': `<form>
-  <label>Name: <input type="text" placeholder="Enter your name"></label><br>
-  <label>Email: <input type="email" placeholder="Enter your email"></label><br>
-  <label>Message: <textarea placeholder="Your message"></textarea></label><br>
-  <button type="submit">Submit</button>
-</form>`,
-                'nav-example': `<nav>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>`
-            };
-
-            if (examples[exampleId]) {
-                const editor = document.getElementById('htmlCode');
-                if (editor) {
-                    editor.value = examples[exampleId];
-                    document.getElementById('runCode').click();
-                }
-            }
-        };
 
         // Start exercise
         // NOTE: startExercise() is implemented in script.js and opens real exercise pages.
@@ -953,41 +894,12 @@
 
         // Show certificate info
         window.showCertificateInfo = function() {
-            alert('Certificate Requirements:\n\n1. Complete all HTML tutorials\n2. Pass all quizzes with 80% or higher\n3. Complete all exercises\n4. Submit final project\n\nYour progress: 35% complete');
+            const progress = document.querySelector('.progress-percent')?.textContent || '0%';
+            alert('Certificate Requirements:\n\n1. Complete all HTML tutorials\n2. Pass all quizzes with 80% or higher\n3. Complete all exercises\n4. Submit final project\n\nYour progress: ' + progress + ' complete');
         };
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === '/') {
-                e.preventDefault();
-                const search = document.getElementById('searchInput');
-                if (search) search.focus();
-            }
+        // Editor auto-save is handled by editor.js
 
-            if (e.key === 'Escape') {
-                const search = document.getElementById('searchInput');
-                if (search) search.value = '';
-            }
-        });
-
-        // Auto-save code in editor
-        let autoSaveTimer;
-        const htmlCode = document.getElementById('htmlCode');
-        if (htmlCode) {
-            htmlCode.addEventListener('input', function() {
-                clearTimeout(autoSaveTimer);
-                autoSaveTimer = setTimeout(() => {
-                    localStorage.setItem('htmlEditorCode', this.value);
-                    console.log('Code auto-saved');
-                }, 1000);
-            });
-
-            const savedCode = localStorage.getItem('htmlEditorCode');
-            if (savedCode) {
-                htmlCode.value = savedCode;
-            }
-        }
-        
         // Resource cards hover effect enhancement
         const resourceCards = document.querySelectorAll('.resource-card');
         resourceCards.forEach(card => {

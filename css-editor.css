@@ -1,0 +1,653 @@
+/* =========================================================
+   CSS EDITOR (lessons/css-properties.html #playground)
+   Logic lives in css-editor.js. All classes are prefixed "ce-".
+   Syntax colors come from highlight.css.
+========================================================= */
+
+.ce {
+    --ce-bg: #1e1e1e;
+    --ce-gutter: #252526;
+    --ce-text: #d4d4d4;
+    --ce-muted: #858585;
+    --ce-font: Consolas, 'Cascadia Code', 'Courier New', monospace;
+    --ce-size: 14px;
+    --ce-line: 21px;
+
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+/* ---------- Top bar ---------- */
+.ce-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #264de4, #2965f1);
+    color: white;
+}
+
+.ce-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.ce-title i {
+    margin-right: 6px;
+}
+
+.ce-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ce-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.ce-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.ce-run {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.ce-run:hover {
+    background: #27ae60;
+}
+
+.ce-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.ce-switch input {
+    accent-color: var(--secondary-color);
+    width: 16px;
+    height: 16px;
+}
+
+/* ---------- Snippet bar ---------- */
+.ce-snippets {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #f4f6f7;
+    border-bottom: 1px solid #e5e8e8;
+    overflow-x: auto;
+}
+
+.ce-snippet {
+    flex: none;
+    font-family: var(--ce-font);
+    font-size: 0.8rem;
+    border: 1px solid #d5dbdb;
+    background: white;
+    color: #1a5fb4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.ce-snippet:hover {
+    border-color: #2965f1;
+    background: #eaf0fe;
+}
+
+/* ---------- Body ---------- */
+.ce-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.ce-files {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--ce-bg);
+}
+
+.ce-file-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #2d2d2d;
+    color: #cccccc;
+    font-family: var(--ce-font);
+    font-size: 0.8rem;
+    border-top: 1px solid #3c3c3c;
+}
+
+.ce-file-label i.fa-css3-alt { color: #4a90e2; }
+.ce-file-label i.fa-html5 { color: #e44d26; }
+
+.ce-file-label small {
+    margin-left: auto;
+    color: var(--ce-muted);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.ce-editor {
+    display: flex;
+    background: var(--ce-bg);
+}
+
+.ce-editor-css { height: 320px; }
+.ce-editor-html { height: 200px; }
+
+.ce-gutter {
+    flex: none;
+    min-width: 44px;
+    padding: 12px 8px 12px 0;
+    background: var(--ce-gutter);
+    color: var(--ce-muted);
+    font-family: var(--ce-font);
+    font-size: var(--ce-size);
+    line-height: var(--ce-line);
+    text-align: right;
+    overflow: hidden;
+    user-select: none;
+}
+
+.ce-gutter div.ce-has-tip {
+    color: #f5b041;
+    font-weight: 700;
+}
+
+.ce-area {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ce-area pre,
+.ce-area textarea {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 12px;
+    border: 0;
+    font-family: var(--ce-font);
+    font-size: var(--ce-size);
+    line-height: var(--ce-line);
+    tab-size: 2;
+    white-space: pre;
+    overflow-wrap: normal;
+    letter-spacing: 0;
+}
+
+.ce-area pre {
+    color: var(--ce-text);
+    background: transparent;
+    border-radius: 0; /* undo the page's general .cr-section pre style */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ce-area textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    background: transparent;
+    color: transparent;
+    caret-color: white;
+    outline: none;
+    overflow: auto;
+}
+
+.ce-area textarea::selection {
+    background: rgba(38, 79, 120, 0.8);
+    color: transparent;
+}
+
+/* "What does this do?" bar */
+.ce-explain {
+    flex: 1;
+    background: #2d2d2d;
+    color: #e5e8e8;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    min-height: 64px;
+    border-top: 1px solid #3c3c3c;
+}
+
+.ce-explain > i {
+    color: #f4d03f;
+    margin-right: 6px;
+}
+
+.ce-explain code {
+    color: #9cdcfe;
+    font-family: var(--ce-font);
+    font-weight: 700;
+}
+
+.ce-explain a {
+    color: #85c1e9;
+}
+
+.ce-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+
+/* ---------- Right side ---------- */
+.ce-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-left: 1px solid #e5e8e8;
+}
+
+.ce-tabs {
+    display: flex;
+    background: #f4f6f7;
+    border-bottom: 1px solid #e5e8e8;
+}
+
+.ce-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #5d6d7e;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.ce-tab:hover {
+    color: var(--dark-color);
+}
+
+.ce-tab[aria-selected="true"] {
+    color: #2965f1;
+    border-bottom-color: #2965f1;
+    background: white;
+}
+
+.ce-count {
+    display: inline-block;
+    min-width: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 0.75rem;
+    line-height: 18px;
+}
+
+.ce-count.ce-has-issues {
+    background: #e67e22;
+}
+
+.ce-pane {
+    flex: 1;
+    min-height: 560px;
+    overflow: auto;
+    background: white;
+}
+
+.ce-pane[hidden] {
+    display: none;
+}
+
+.ce-pane[data-pane="rules"],
+.ce-pane[data-pane="tips"] {
+    padding: 14px;
+}
+
+.ce-pane iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
+    border: 0;
+    display: block;
+}
+
+.ce-help {
+    color: #5d6d7e;
+    font-size: 0.9rem;
+    margin: 0 0 12px;
+}
+
+.ce-help code {
+    background: #f4f6f7;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--ce-font);
+}
+
+/* Selectors pane */
+.ce-rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.ce-rule {
+    border: 1px solid #e5e8e8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.ce-rule:hover {
+    border-color: #2965f1;
+    background: #f5f8ff;
+}
+
+.ce-rule.ce-none {
+    border-style: dashed;
+    background: #fdfefe;
+}
+
+.ce-rule-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ce-rule-sel {
+    font-family: var(--ce-font);
+    font-weight: 700;
+    color: #1a5fb4;
+    background: #eef3fd;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.ce-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #f4f6f7;
+    color: #5d6d7e;
+    white-space: nowrap;
+}
+
+.ce-badge-match {
+    background: #d5f5e3;
+    color: #1e8449;
+}
+
+.ce-badge-nomatch {
+    background: #fdebd0;
+    color: #a04000;
+}
+
+.ce-rule-text {
+    color: #5d6d7e;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+.ce-rule-decls {
+    font-family: var(--ce-font);
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tips pane */
+.ce-tips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.ce-tip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fef5e7;
+    border-left: 4px solid #e67e22;
+    cursor: pointer;
+}
+
+.ce-tip.ce-info {
+    background: #ebf5fb;
+    border-left-color: var(--primary-color);
+}
+
+.ce-tip.ce-ok {
+    background: #e9f7ef;
+    border-left-color: var(--secondary-color);
+    cursor: default;
+}
+
+.ce-tip-icon {
+    grid-row: span 2;
+    font-size: 1.1rem;
+}
+
+.ce-tip-title {
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.ce-tip-title small {
+    font-weight: 600;
+    color: #7f8c8d;
+    margin-left: 6px;
+}
+
+.ce-tip-text {
+    color: #4d5656;
+    font-size: 0.9rem;
+}
+
+.ce-tip code {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--ce-font);
+    font-size: 0.85rem;
+}
+
+/* ---------- Challenges ---------- */
+.ce-challenges {
+    margin-top: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.ce-challenges-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.ce-challenges-head h3 {
+    color: var(--dark-color);
+}
+
+.ce-challenges-head h3 i {
+    color: #2965f1;
+    margin-right: 6px;
+}
+
+#ceChallengeProgress {
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.ce-challenge-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 12px;
+}
+
+.ce-challenge {
+    border: 2px solid #e5e8e8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.ce-challenge.ce-active {
+    border-color: #2965f1;
+    box-shadow: 0 0 0 3px rgba(41, 101, 241, 0.15);
+}
+
+.ce-challenge.ce-done {
+    border-color: var(--secondary-color);
+    background: #f4fbf7;
+}
+
+.ce-challenge-title {
+    font-weight: 700;
+    color: var(--dark-color);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.ce-challenge-title i {
+    color: #bdc3c7;
+}
+
+.ce-challenge.ce-done .ce-challenge-title i {
+    color: var(--secondary-color);
+}
+
+.ce-challenge p {
+    color: #5d6d7e;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.ce-challenge code {
+    background: #f4f6f7;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--ce-font);
+    font-size: 0.85rem;
+    color: #c0392b;
+}
+
+.ce-hint {
+    font-family: var(--ce-font);
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    color: #7d6608;
+    background: #fef9e7;
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+.ce-challenge-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.ce-challenge-actions button {
+    border: 1px solid #d5dbdb;
+    background: white;
+    color: var(--dark-color);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ce-challenge-actions button:hover {
+    border-color: #2965f1;
+    color: #2965f1;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .ce-body {
+        grid-template-columns: 1fr;
+    }
+
+    .ce-side {
+        border-left: none;
+        border-top: 1px solid #e5e8e8;
+    }
+
+    .ce-pane,
+    .ce-pane iframe {
+        min-height: 380px;
+    }
+
+    .ce-editor-css { height: 280px; }
+    .ce-editor-html { height: 180px; }
+}
+
+@media (max-width: 600px) {
+    .ce-btn span {
+        display: none;
+    }
+
+    .ce {
+        --ce-size: 13px;
+        --ce-line: 20px;
+    }
+
+    .ce-tab {
+        font-size: 0.8rem;
+        padding: 10px 4px;
+    }
+}

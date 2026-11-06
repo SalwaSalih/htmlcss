@@ -1,0 +1,607 @@
+/* =========================================================
+   HTML EDITOR (index.html #examples)
+   Logic lives in editor.js. All classes are prefixed "he-".
+========================================================= */
+
+/* Section heading above the editor, centered like its subtitle */
+#examples h2 {
+    text-align: center;
+    color: var(--dark-color);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.he {
+    --he-bg: #1e1e1e;
+    --he-gutter: #252526;
+    --he-text: #d4d4d4;
+    --he-muted: #858585;
+    --he-tag: #569cd6;
+    --he-font: Consolas, 'Cascadia Code', 'Courier New', monospace;
+    --he-size: 14px;
+    --he-line: 21px;
+    --he-height: 440px;
+
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    text-align: left;
+}
+
+/* ---------- Top bar ---------- */
+.he-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: var(--dark-color);
+    color: white;
+    padding: 12px 16px;
+}
+
+.he-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.he-title i {
+    color: var(--primary-color);
+    margin-right: 6px;
+}
+
+.he-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.he-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.he-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.he-run {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.he-run:hover {
+    background: #27ae60;
+}
+
+.he-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.he-switch input {
+    accent-color: var(--secondary-color);
+    width: 16px;
+    height: 16px;
+}
+
+/* ---------- Snippet bar ---------- */
+.he-snippets {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #f4f6f7;
+    border-bottom: 1px solid #e5e8e8;
+    overflow-x: auto;
+}
+
+.he-snippet {
+    flex: none;
+    font-family: var(--he-font);
+    font-size: 0.8rem;
+    border: 1px solid #d5dbdb;
+    background: white;
+    color: #2471a3;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.he-snippet:hover {
+    border-color: var(--primary-color);
+    background: #ebf5fb;
+}
+
+/* ---------- Body ---------- */
+.he-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.he-code {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--he-bg);
+}
+
+.he-pane-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--he-muted);
+    background: #2d2d2d;
+    padding: 6px 12px;
+    font-family: var(--he-font);
+}
+
+/* Code area: a transparent textarea on top of a highlighted <pre> */
+.he-editor {
+    display: flex;
+    flex: 1;
+    min-height: var(--he-height);
+    background: var(--he-bg);
+}
+
+.he-gutter {
+    flex: none;
+    min-width: 44px;
+    padding: 12px 8px 12px 0;
+    background: var(--he-gutter);
+    color: var(--he-muted);
+    font-family: var(--he-font);
+    font-size: var(--he-size);
+    line-height: var(--he-line);
+    text-align: right;
+    overflow: hidden;
+    user-select: none;
+}
+
+.he-gutter div.he-has-tip {
+    color: #f5b041;
+    font-weight: 700;
+}
+
+.he-area {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.he-highlight,
+#htmlCode {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 12px;
+    border: 0;
+    font-family: var(--he-font);
+    font-size: var(--he-size);
+    line-height: var(--he-line);
+    tab-size: 2;
+    white-space: pre;
+    overflow-wrap: normal;
+    letter-spacing: 0;
+}
+
+.he-highlight {
+    color: var(--he-text);
+    background: transparent;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#htmlCode {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    background: transparent;
+    color: transparent;
+    caret-color: white;
+    outline: none;
+    overflow: auto;
+}
+
+#htmlCode::selection {
+    background: rgba(38, 79, 120, 0.8);
+    color: transparent;
+}
+
+#htmlCode::placeholder {
+    color: var(--he-muted);
+}
+
+/* Syntax colors live in highlight.css */
+
+/* "What does this tag do?" bar */
+.he-explain {
+    background: #2d2d2d;
+    color: #e5e8e8;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    min-height: 44px;
+    border-top: 1px solid #3c3c3c;
+}
+
+.he-explain i {
+    color: #f4d03f;
+    margin-right: 6px;
+}
+
+.he-explain code {
+    color: var(--he-tag);
+    font-family: var(--he-font);
+    font-weight: 700;
+}
+
+.he-explain a {
+    color: #85c1e9;
+}
+
+/* ---------- Right side: Result / Structure / Tips ---------- */
+.he-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-left: 1px solid #e5e8e8;
+}
+
+.he-tabs {
+    display: flex;
+    background: #f4f6f7;
+    border-bottom: 1px solid #e5e8e8;
+}
+
+.he-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #5d6d7e;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+}
+
+.he-tab:hover {
+    color: var(--dark-color);
+}
+
+.he-tab[aria-selected="true"] {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background: white;
+}
+
+.he-count {
+    display: inline-block;
+    min-width: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 0.75rem;
+    line-height: 18px;
+}
+
+.he-count.he-has-issues {
+    background: #e67e22;
+}
+
+.he-pane {
+    flex: 1;
+    min-height: 0;
+    height: calc(var(--he-height) + 75px);
+    overflow: auto;
+    background: white;
+}
+
+.he-pane[hidden] {
+    display: none;
+}
+
+.he-pane iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: white;
+}
+
+.he-pane-help {
+    color: #5d6d7e;
+    font-size: 0.9rem;
+    margin: 0 0 10px;
+}
+
+.he-pane[data-pane="structure"],
+.he-pane[data-pane="tips"] {
+    padding: 14px;
+}
+
+/* Structure tree */
+.he-tree {
+    font-family: var(--he-font);
+    font-size: 0.85rem;
+}
+
+.he-node {
+    border-left: 2px solid #d6eaf8;
+    margin-left: 8px;
+    padding-left: 10px;
+}
+
+.he-node-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.he-node-row:hover {
+    background: #ebf5fb;
+}
+
+.he-node-tag {
+    color: #2471a3;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.he-node-desc {
+    color: #7f8c8d;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+}
+
+.he-node-text {
+    color: #566573;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 6px;
+}
+
+/* Tips list */
+.he-tips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.he-tip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fef5e7;
+    border-left: 4px solid #e67e22;
+    cursor: pointer;
+}
+
+.he-tip.he-info {
+    background: #ebf5fb;
+    border-left-color: var(--primary-color);
+}
+
+.he-tip.he-ok {
+    background: #e9f7ef;
+    border-left-color: var(--secondary-color);
+    cursor: default;
+}
+
+.he-tip-icon {
+    grid-row: span 2;
+    font-size: 1.1rem;
+}
+
+.he-tip-title {
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.he-tip-title small {
+    font-weight: 600;
+    color: #7f8c8d;
+    margin-left: 6px;
+}
+
+.he-tip-text {
+    color: #4d5656;
+    font-size: 0.9rem;
+}
+
+.he-tip code {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--he-font);
+    font-size: 0.85rem;
+}
+
+/* ---------- Challenges ---------- */
+.he-challenges {
+    margin-top: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    text-align: left;
+}
+
+.he-challenges-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.he-challenges-head h3 {
+    color: var(--dark-color);
+}
+
+.he-challenges-head h3 i {
+    color: var(--secondary-color);
+    margin-right: 6px;
+}
+
+#heChallengeProgress {
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.he-challenge-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 12px;
+}
+
+.he-challenge {
+    border: 2px solid #e5e8e8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.he-challenge.he-active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.he-challenge.he-done {
+    border-color: var(--secondary-color);
+    background: #f4fbf7;
+}
+
+.he-challenge-title {
+    font-weight: 700;
+    color: var(--dark-color);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.he-challenge-title i {
+    color: #bdc3c7;
+}
+
+.he-challenge.he-done .he-challenge-title i {
+    color: var(--secondary-color);
+}
+
+.he-challenge p {
+    color: #5d6d7e;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.he-challenge code {
+    background: #f4f6f7;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: var(--he-font);
+    font-size: 0.85rem;
+    color: #c0392b;
+}
+
+.he-challenge-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.he-challenge-actions button {
+    border: 1px solid #d5dbdb;
+    background: white;
+    color: var(--dark-color);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.he-challenge-actions button:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.he-hint {
+    font-size: 0.85rem;
+    color: #7d6608;
+    background: #fef9e7;
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .he-body {
+        grid-template-columns: 1fr;
+    }
+
+    .he-side {
+        border-left: none;
+        border-top: 1px solid #e5e8e8;
+    }
+
+    .he-pane {
+        height: 360px;
+    }
+
+    .he {
+        --he-height: 340px;
+    }
+}
+
+@media (max-width: 600px) {
+    .he-btn span {
+        display: none;
+    }
+
+    .he-tab {
+        font-size: 0.8rem;
+        padding: 10px 4px;
+        white-space: nowrap;
+    }
+
+    .he {
+        --he-size: 13px;
+        --he-line: 20px;
+    }
+}

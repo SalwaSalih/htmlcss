@@ -149,6 +149,13 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
+  // Questions mention tags like <img> and <script>; show them as text, not markup
+  const escapeHTML = (s) => String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
   // ---- State ----
   const pickRandom = (arr, n) => {
     const copy = [...arr];
@@ -188,12 +195,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     questionContainer.innerHTML = `
       <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-        <p style="margin:0; font-weight:800;">${q.q}</p>
+        <p style="margin:0; font-weight:800;">${escapeHTML(q.q)}</p>
         <div style="color: var(--gray-color); font-weight:700;">Score: <span id="scoreInline">${score}</span>${streakText}</div>
       </div>
       ${isLocked ? `
         <div class="explanation" style="margin-top: 14px; padding: 12px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--primary-color);">
-          <strong>Why:</strong> ${q.why}
+          <strong>Why:</strong> ${escapeHTML(q.why)}
         </div>
       ` : ''}
     `;
@@ -211,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       div.innerHTML = `
         <input type="radio" name="q${i}" id="q${i}_${idx}" ${ans === idx ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />
-        <label for="q${i}_${idx}">${opt.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</label>
+        <label for="q${i}_${idx}">${escapeHTML(opt)}</label>
       `;
 
       div.addEventListener('click', () => {
@@ -262,8 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.HTMLMaster?.awardXP) window.HTMLMaster.awardXP(XP_FINISH_BONUS, 'Quiz completed');
 
     if (window.HTMLMaster?.grantBadge) {
-      if (pct >= 75) window.HTMLMaster.grantBadge('quiz-75', 'Quiz Champ');
-      if (pct === 100) window.HTMLMaster.grantBadge('quiz-100', 'Perfect Score');
+      // Badge ids match BADGE_DEFS in arcade.html
+      if (pct >= 80) window.HTMLMaster.grantBadge('quiz-80', 'Quiz 80%+');
+      if (pct === 100) window.HTMLMaster.grantBadge('quiz-perfect', 'Perfect Quiz');
     }
 
     questionContainer.innerHTML = `
@@ -308,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.addEventListener('click', () => {
       const unanswered = answered.filter(v => v === null).length;
       if (unanswered > 0) {
-        if (confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) showResults();
+        window.confirmButton(submitBtn, `${unanswered} unanswered – click again to submit`, showResults);
         return;
       }
       showResults();

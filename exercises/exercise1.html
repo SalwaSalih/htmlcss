@@ -445,7 +445,7 @@
                         <button class="editor-action-btn check" onclick="checkSolution()">
                             <i class="fas fa-check"></i> Check Solution
                         </button>
-                        <button class="editor-action-btn" onclick="showSolution()" style="background: #9b59b6;">
+                        <button class="editor-action-btn" onclick="showSolution(this)" style="background: #9b59b6;">
                             <i class="fas fa-eye"></i> View Solution
                         </button>
                     </div>
@@ -520,6 +520,7 @@
         </div>
     </footer>
 
+    <script src="../confirm-button.js"></script>
     <script>
         // Starter code
         const starterCode = `<!DOCTYPE html>
@@ -553,11 +554,12 @@
         }
 
         // Show the solution
-        function showSolution() {
-            if (confirm("View the example solution? This will replace your current code.")) {
+        function showSolution(button) {
+            // Asks on the button itself; confirm() dialogs can be blocked
+            window.confirmButton(button, 'Replace your code with the solution? Click again', () => {
                 document.getElementById('exerciseCode').value = solutionCode;
                 hideFeedback();
-            }
+            });
         }
 
         // Check the solution

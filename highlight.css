@@ -1,0 +1,31 @@
+/* =========================================================
+   SHARED SYNTAX COLORS (used with highlight.js)
+   Dark-background theme for all code editors and examples.
+========================================================= */
+
+/* HTML */
+.he-t-tag { color: #569cd6; }
+.he-t-bracket { color: #808080; }
+.he-t-attr { color: #9cdcfe; }
+.he-t-string { color: #ce9178; }
+.he-t-comment { color: #6a9955; font-style: italic; }
+.he-t-entity { color: #d7ba7d; }
+.he-t-doctype { color: #c586c0; }
+
+/* CSS */
+.ce-t-tag { color: #d7ba7d; }
+.ce-t-class { color: #d7ba7d; }
+.ce-t-id { color: #e2c08d; font-weight: 600; }
+.ce-t-pseudo { color: #c586c0; }
+.ce-t-attr { color: #9cdcfe; }
+.ce-t-at { color: #c586c0; font-weight: 600; }
+.ce-t-prop { color: #9cdcfe; }
+.ce-t-punct { color: #a0a0a0; }
+.ce-t-number { color: #b5cea8; }
+.ce-t-unit { color: #8fbf7f; }
+.ce-t-color { color: #f48771; }
+.ce-t-string { color: #ce9178; }
+.ce-t-func { color: #dcdcaa; }
+.ce-t-keyword { color: #ce9178; }
+.ce-t-important { color: #f44747; font-weight: 700; }
+.ce-t-comment { color: #6a9955; font-style: italic; }

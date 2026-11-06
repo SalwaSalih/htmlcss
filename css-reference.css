@@ -1,0 +1,611 @@
+/* =========================================================
+   CSS PROPERTIES PAGE (lessons/css-properties.html)
+   Page-specific styles. Shared navbar/footer come from style.css.
+   All classes are prefixed with "cr-" so nothing clashes.
+========================================================= */
+
+.cr-page {
+    max-width: 1200px;
+    margin: 100px auto 60px;
+    padding: 0 20px;
+}
+
+.cr-breadcrumb {
+    margin-bottom: 24px;
+    color: var(--gray-color);
+}
+
+.cr-breadcrumb a {
+    color: var(--gray-color);
+    text-decoration: none;
+}
+
+.cr-breadcrumb a:hover {
+    color: var(--primary-color);
+}
+
+code,
+pre {
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+/* ---------- Hero ---------- */
+.cr-hero {
+    background: linear-gradient(135deg, #264de4 0%, #2965f1 55%, #1aa3e8 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 48px;
+}
+
+.cr-hero h1 {
+    font-size: 2.6rem;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.cr-hero p {
+    max-width: 720px;
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.cr-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.cr-jump a {
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.cr-jump a:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Sections ---------- */
+.cr-section {
+    margin-bottom: 64px;
+    scroll-margin-top: 90px;
+}
+
+.cr-section h2 {
+    color: var(--dark-color);
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+}
+
+.cr-lead {
+    color: #555;
+    max-width: 800px;
+    margin-bottom: 24px;
+}
+
+.cr-note {
+    margin-top: 20px;
+    padding: 14px 18px;
+    background: #eef6fc;
+    border-left: 4px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    color: #34495e;
+}
+
+.cr-note i {
+    color: var(--primary-color);
+    margin-right: 6px;
+}
+
+.cr-section pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 14px 16px;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.cr-file {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gray-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 12px 0 4px;
+}
+
+/* ---------- Three ways ---------- */
+.cr-ways {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.cr-way {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+}
+
+.cr-way h3 {
+    color: var(--dark-color);
+    margin: 8px 0 6px;
+}
+
+.cr-way > p {
+    color: #555;
+}
+
+.cr-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--light-color);
+    color: var(--dark-color);
+}
+
+.cr-badge-ok {
+    background: #d5f5e3;
+    color: #1e8449;
+}
+
+.cr-badge-warn {
+    background: #fdebd0;
+    color: #a04000;
+}
+
+/* ---------- Syntax anatomy ---------- */
+.cr-anatomy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--box-shadow);
+}
+
+.cr-anatomy pre {
+    font-size: 1.1rem;
+}
+
+.cr-anatomy ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.cr-sel { color: #f1c40f; font-weight: 700; }
+.cr-prop { color: #5dade2; font-weight: 700; }
+.cr-val { color: #58d68d; font-weight: 700; }
+
+.cr-anatomy li .cr-sel,
+.cr-anatomy li .cr-prop,
+.cr-anatomy li .cr-val {
+    display: inline-block;
+    min-width: 80px;
+    padding: 2px 8px;
+    margin-right: 8px;
+    border-radius: 4px;
+    background: #1e1e1e;
+}
+
+/* ---------- Selector table ---------- */
+.cr-table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+}
+
+.cr-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cr-table th,
+.cr-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.cr-table th {
+    background: var(--dark-color);
+    color: white;
+    font-weight: 600;
+}
+
+.cr-table tr:last-child td {
+    border-bottom: none;
+}
+
+.cr-table code {
+    background: #f4f6f7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #c0392b;
+    white-space: nowrap;
+}
+
+/* ---------- Toolbar ---------- */
+.cr-toolbar {
+    position: sticky;
+    top: 70px;
+    z-index: 5;
+    background: #f9f9f9;
+    padding: 12px 0;
+    margin-bottom: 12px;
+}
+
+.cr-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 999px;
+    padding: 10px 18px;
+    max-width: 560px;
+    margin-bottom: 12px;
+    transition: var(--transition);
+}
+
+.cr-search:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.cr-search i {
+    color: var(--gray-color);
+}
+
+.cr-search input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    background: transparent;
+}
+
+.cr-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 4px;
+}
+
+.cr-filter {
+    flex: none;
+    border: none;
+    background: white;
+    color: var(--dark-color);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.cr-filter:hover {
+    background: var(--light-color);
+}
+
+.cr-filter[aria-selected="true"] {
+    background: var(--primary-color);
+    color: white;
+}
+
+.cr-filter small {
+    opacity: 0.7;
+    margin-left: 4px;
+}
+
+/* ---------- Property cards ---------- */
+.cr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.cr-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    border-top: 4px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.cr-card[hidden] {
+    display: none;
+}
+
+.cr-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cr-name {
+    background: #1e1e1e;
+    color: #5dade2;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.cr-cat {
+    font-size: 0.75rem;
+    color: var(--gray-color);
+    background: var(--light-color);
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.cr-desc {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.cr-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cr-value {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.8rem;
+    border: 1px solid #d5dbdb;
+    background: #f8f9f9;
+    color: var(--dark-color);
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cr-value:hover {
+    border-color: var(--primary-color);
+}
+
+.cr-value[aria-pressed="true"] {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.cr-code {
+    font-size: 0.85rem;
+}
+
+.cr-code summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.cr-code pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 10px 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.cr-try {
+    align-self: flex-start;
+    margin-top: auto;
+    border: none;
+    background: var(--secondary-color);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cr-try:hover {
+    background: #27ae60;
+}
+
+.cr-empty {
+    text-align: center;
+    color: var(--gray-color);
+    padding: 40px 0;
+}
+
+/* ---------- Live demo area ---------- */
+.cr-demo {
+    background: repeating-conic-gradient(#f4f6f7 0% 25%, #fbfcfc 0% 50%) 50% / 20px 20px;
+    border: 1px dashed #d5dbdb;
+    border-radius: 8px;
+    padding: 16px;
+    min-height: 120px;
+    overflow: hidden;
+    position: relative;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* The element the property is applied to */
+.cr-demo .cr-t {
+    transition: none;
+}
+
+.cr-box {
+    background: #aed6f1;
+    border: 2px solid #2e86c1;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.cr-inner {
+    background: #f9e79f;
+    padding: 6px;
+}
+
+.cr-item {
+    background: #2e86c1;
+    color: white;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cr-item:nth-child(2) { background: #28b463; }
+.cr-item:nth-child(3) { background: #ca6f1e; }
+.cr-item:nth-child(4) { background: #884ea0; }
+
+.cr-flex {
+    display: flex;
+    gap: 8px;
+    min-height: 100px;
+    background: #ebf5fb;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.cr-grid-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    min-height: 100px;
+    background: #ebf5fb;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.cr-scroll {
+    height: 90px;
+    width: 100%;
+    background: white;
+    border: 2px solid #2e86c1;
+    padding: 8px;
+}
+
+.cr-pos-wrap {
+    position: relative;
+    height: 110px;
+    background: #ebf5fb;
+    border-radius: 4px;
+}
+
+.cr-demo table {
+    border-collapse: separate;
+    background: white;
+}
+
+.cr-demo td,
+.cr-demo th {
+    border: 1px solid #2e86c1;
+    padding: 4px 10px;
+}
+
+.cr-demo img {
+    width: 120px;
+    height: 80px;
+    display: block;
+    border: 2px solid #2e86c1;
+    background: #f9e79f;
+}
+
+.cr-demo input {
+    font-size: 15px;
+    padding: 6px 10px;
+}
+
+/* Transition demos: the property sets HOW it animates, this sets WHAT changes */
+.cr-demo-hover .cr-t:hover {
+    transform: translateX(100px) rotate(8deg);
+    background: #abebc6;
+}
+
+.cr-demo-hint {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-size: 0.7rem;
+    color: var(--gray-color);
+}
+
+/* Keyframes used by the animation demos */
+@keyframes cr-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(120px); }
+}
+
+@keyframes cr-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes cr-pulse {
+    50% { transform: scale(1.25); opacity: 0.6; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .cr-hero {
+        padding: 32px 22px;
+    }
+
+    .cr-hero h1 {
+        font-size: 2rem;
+    }
+
+    .cr-anatomy {
+        grid-template-columns: 1fr;
+    }
+
+    .cr-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cr-toolbar {
+        top: 60px;
+    }
+
+    /* One scrollable row on phones so the toolbar stays short */
+    .cr-filters {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cr-demo * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

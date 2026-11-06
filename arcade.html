@@ -194,6 +194,7 @@
     </div>
   </footer>
 
+  <script src="confirm-button.js"></script>
   <script src="script.js"></script>
   <script>
     // Tabs
@@ -239,13 +240,16 @@
       guessQuestion.textContent = `Which tag would you use to: ${item.q}?`;
       guessHint.textContent = '';
       guessChoices.innerHTML = '';
+      let solved = false; // ignore extra clicks while the next question loads
       item.choices.forEach((c, idx) => {
         const btn = document.createElement('div');
         btn.className = 'choice';
         btn.innerHTML = `<code>${c.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code>`;
         btn.addEventListener('click', () => {
+          if (solved) return;
           const correct = idx === item.a;
           if (correct) {
+            solved = true;
             btn.classList.add('correct');
             setStreak(streak + 1);
             const base = 10;
@@ -297,24 +301,28 @@
     ];
 
     let fixIndex = 0;
+    let fixSolved = false; // XP is only awarded once per puzzle
     const fixInput = document.getElementById('fixInput');
     const fixOutput = document.getElementById('fixOutput');
 
     function newFix() {
       const item = FIXES[fixIndex % FIXES.length];
       fixInput.value = item.broken;
+      fixSolved = false;
       fixOutput.textContent = 'Edit the code above and press “Check”.';
     }
 
     document.getElementById('newFix').addEventListener('click', () => { fixIndex++; newFix(); });
 
     document.getElementById('checkFix').addEventListener('click', () => {
+      if (fixSolved) return;
       const item = FIXES[fixIndex % FIXES.length];
       const text = fixInput.value;
       const must = (item.mustInclude || []).every(s => text.toLowerCase().includes(s.toLowerCase()));
       const forbidOk = (item.forbid || []).every(s => !text.toLowerCase().includes(s.toLowerCase()));
 
       if (must && forbidOk) {
+        fixSolved = true;
         fixOutput.textContent = `✅ Nice! ${item.explain}\n+20 XP`;
         window.HTMLMaster?.awardXP(20, 'Fix the HTML');
         window.HTMLMaster?.grantBadge('fixer', 'HTML Fixer');
@@ -345,7 +353,15 @@
       return arr;
     }
 
-    let currentStructure = shuffle([...STRUCTURE]);
+    // Shuffle until the order is actually wrong, so there is something to solve
+    function newStructure() {
+      let s;
+      do { s = shuffle([...STRUCTURE]); } while (s.every((v, i) => v === STRUCTURE[i]));
+      return s;
+    }
+
+    let currentStructure = newStructure();
+    let buildSolved = false; // XP is only awarded once per shuffle
 
     function renderBuild() {
       buildItems.innerHTML = '';
@@ -380,14 +396,18 @@
     }
 
     document.getElementById('shuffleBuild').addEventListener('click', () => {
-      currentStructure = shuffle([...STRUCTURE]);
+      currentStructure = newStructure();
+      buildSolved = false;
       buildOutput.textContent = 'Shuffled! Put them in the right order and press “Check”.';
       renderBuild();
     });
 
     document.getElementById('checkBuild').addEventListener('click', () => {
       const ok = currentStructure.every((v, i) => v === STRUCTURE[i]);
-      if (ok) {
+      if (ok && buildSolved) {
+        buildOutput.textContent = '✅ Already solved! Press “Shuffle” to play again.';
+      } else if (ok) {
+        buildSolved = true;
         buildOutput.textContent = '✅ Perfect structure! +25 XP';
         window.HTMLMaster?.awardXP(25, 'Build the structure');
         window.HTMLMaster?.grantBadge('builder', 'Structure Builder');
@@ -426,19 +446,26 @@
       });
     }
 
-    document.getElementById('resetProgress').addEventListener('click', () => {
-      if (!confirm('Reset XP, badges, and lesson progress?')) return;
-      localStorage.removeItem('htmlmaster_completed_lessons');
-      localStorage.removeItem('htmlmaster_xp');
-      localStorage.removeItem('htmlmaster_badges');
-      setStreak(0);
-      window.HTMLMaster?.updateHUD?.();
-      window.HTMLMaster?.updateProgressUI?.();
-      renderBadges();
-      window.HTMLMaster?.awardXP(0, '');
+    document.getElementById('resetProgress').addEventListener('click', (e) => {
+      window.confirmButton(e.currentTarget, 'Reset XP, badges and lessons? Click again', resetAll);
     });
 
+    function resetAll() {
+      localStorage.removeItem('htmlmaster_completed_lessons');
+      window.HTMLMaster?.reset?.();
+      setStreak(0);
+      renderBadges();
+    }
+
+    // Open the tab named in the URL (e.g. arcade.html#fix from the home page)
+    function showTabFromHash() {
+      const name = location.hash.slice(1);
+      if (document.getElementById('tab-' + name)) showTab(name);
+    }
+    window.addEventListener('hashchange', showTabFromHash);
+
     // Initialize
+    showTabFromHash();
     renderGuess();
     newFix();
     renderBuild();

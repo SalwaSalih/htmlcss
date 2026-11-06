@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Properties - HTML Master</title>
+    <meta name="description" content="All the CSS properties you need, with live demos and examples of how to use them in HTML." />
+
+    <!-- Shared site styles (navbar, footer) + this page's own stylesheet -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css-reference.css" />
+    <link rel="stylesheet" href="../highlight.css" />
+    <link rel="stylesheet" href="../css-editor.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script src="../confirm-button.js" defer></script>
+    <script src="../script.js" defer></script>
+    <script src="../css-reference.js" defer></script>
+    <script src="../highlight.js" defer></script>
+    <script src="../css-editor.js" defer></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-code"></i>
+            <span>HTML Master</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="dropdown">
+                <a href="#"><i class="fas fa-graduation-cap"></i> Tutorials <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column">
+                        <h4>HTML Basics</h4>
+                        <a href="basics.html#introduction"><i class="fas fa-chevron-right"></i> HTML Introduction</a>
+                        <a href="basics.html#structure"><i class="fas fa-chevron-right"></i> Document Structure</a>
+                        <a href="basics.html#elements"><i class="fas fa-chevron-right"></i> HTML Elements</a>
+                        <a href="basics.html#attributes"><i class="fas fa-chevron-right"></i> HTML Attributes</a>
+                    </div>
+                    <div class="dropdown-column">
+                        <h4>Links & Media</h4>
+                        <a href="links-media.html#links"><i class="fas fa-chevron-right"></i> HTML Links</a>
+                        <a href="links-media.html#images"><i class="fas fa-chevron-right"></i> HTML Images</a>
+                        <a href="links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Media</a>
+                    </div>
+                    <div class="dropdown-column">
+                        <h4>CSS</h4>
+                        <a href="#how-to-use"><i class="fas fa-chevron-right"></i> CSS in HTML</a>
+                        <a href="#selectors"><i class="fas fa-chevron-right"></i> Selectors</a>
+                        <a href="#playground"><i class="fas fa-chevron-right"></i> CSS Editor</a>
+                        <a href="#properties"><i class="fas fa-chevron-right"></i> All Properties</a>
+                        <a href="css-js.html"><i class="fas fa-chevron-right"></i> CSS &amp; JavaScript</a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
+            <li><a href="reference.html"><i class="fas fa-book"></i> References</a></li>
+            <li><a href="css-properties.html" class="active"><i class="fab fa-css3-alt"></i> CSS</a></li>
+            <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
+        </ul>
+
+        <div class="xp-pill" title="Your XP and Level">
+            <i class="fas fa-bolt"></i>
+            <span>Level <span data-hm-level>1</span></span>
+            <div class="xp-meter" aria-hidden="true"><div data-hm-xpbar></div></div>
+            <small><span data-hm-xp>0</span> XP</small>
+        </div>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<main class="cr-page">
+    <div class="cr-breadcrumb">
+        <a href="../index.html">Home</a> / <span>CSS Properties</span>
+    </div>
+
+    <header class="cr-hero">
+        <h1><i class="fab fa-css3-alt"></i> CSS Properties</h1>
+        <p>HTML gives a page its structure. CSS decides how it looks. Learn how to connect CSS to your HTML,
+            then explore every common property with a live demo you can click through.</p>
+        <nav class="cr-jump" aria-label="On this page">
+            <a href="#how-to-use">1. CSS in HTML</a>
+            <a href="#syntax">2. Syntax</a>
+            <a href="#selectors">3. Selectors</a>
+            <a href="#playground">4. CSS editor</a>
+            <a href="#properties">5. All properties</a>
+        </nav>
+    </header>
+
+    <!-- 1. How to add CSS to HTML -->
+    <section id="how-to-use" class="cr-section">
+        <h2>1. Three ways to add CSS to HTML</h2>
+        <p class="cr-lead">You can write CSS in three places. All three work, but an <strong>external stylesheet</strong>
+            is the best choice for real websites: one file styles every page, and HTML and CSS stay separate.</p>
+
+        <div class="cr-ways">
+            <article class="cr-way">
+                <span class="cr-badge cr-badge-ok">Recommended</span>
+                <h3>External stylesheet</h3>
+                <p>Put CSS in its own <code>.css</code> file and link it in <code>&lt;head&gt;</code>.</p>
+                <p class="cr-file">index.html</p>
+                <pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 class="title"&gt;Hello&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+                <p class="cr-file">style.css</p>
+                <pre><code>.title {
+  color: royalblue;
+  font-size: 40px;
+}</code></pre>
+            </article>
+
+            <article class="cr-way">
+                <span class="cr-badge">One page only</span>
+                <h3>Internal &lt;style&gt;</h3>
+                <p>Write CSS inside a <code>&lt;style&gt;</code> tag. It only affects that one page.</p>
+                <p class="cr-file">index.html</p>
+                <pre><code>&lt;head&gt;
+  &lt;style&gt;
+    .title {
+      color: royalblue;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 class="title"&gt;Hello&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+            </article>
+
+            <article class="cr-way">
+                <span class="cr-badge cr-badge-warn">Avoid</span>
+                <h3>Inline style=""</h3>
+                <p>Put CSS directly on one element with the <code>style</code> attribute. Hard to reuse and maintain.</p>
+                <p class="cr-file">index.html</p>
+                <pre><code>&lt;h1 style="color: royalblue;"&gt;
+  Hello
+&lt;/h1&gt;</code></pre>
+            </article>
+        </div>
+    </section>
+
+    <!-- 2. Syntax -->
+    <section id="syntax" class="cr-section">
+        <h2>2. CSS syntax</h2>
+        <p class="cr-lead">A CSS rule picks some HTML elements (the <strong>selector</strong>) and gives them
+            <strong>property: value</strong> pairs.</p>
+        <div class="cr-anatomy">
+            <pre><code><span class="cr-sel">h1</span> {
+  <span class="cr-prop">color</span>: <span class="cr-val">red</span>;
+  <span class="cr-prop">font-size</span>: <span class="cr-val">32px</span>;
+}</code></pre>
+            <ul>
+                <li><span class="cr-sel">Selector</span> which elements to style</li>
+                <li><span class="cr-prop">Property</span> what to change</li>
+                <li><span class="cr-val">Value</span> how to change it</li>
+                <li>Each declaration ends with <code>;</code> and the block is wrapped in <code>{ }</code></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3. Selectors -->
+    <section id="selectors" class="cr-section">
+        <h2>3. Selectors: connecting CSS to HTML</h2>
+        <p class="cr-lead">The selector is the bridge between your CSS file and your HTML.</p>
+        <div class="cr-table-wrap">
+            <table class="cr-table">
+                <thead>
+                    <tr><th>Selector</th><th>Matches</th><th>HTML</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>p</code></td><td>Every &lt;p&gt; element</td><td><code>&lt;p&gt;Text&lt;/p&gt;</code></td></tr>
+                    <tr><td><code>.card</code></td><td>Elements with class="card"</td><td><code>&lt;div class="card"&gt;</code></td></tr>
+                    <tr><td><code>#logo</code></td><td>The one element with id="logo"</td><td><code>&lt;img id="logo"&gt;</code></td></tr>
+                    <tr><td><code>nav a</code></td><td>&lt;a&gt; anywhere inside &lt;nav&gt;</td><td><code>&lt;nav&gt;&lt;a&gt;…&lt;/a&gt;&lt;/nav&gt;</code></td></tr>
+                    <tr><td><code>ul &gt; li</code></td><td>&lt;li&gt; that are direct children of &lt;ul&gt;</td><td><code>&lt;ul&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+                    <tr><td><code>h1, h2</code></td><td>Both &lt;h1&gt; and &lt;h2&gt;</td><td><code>&lt;h1&gt;…&lt;/h1&gt;&lt;h2&gt;…&lt;/h2&gt;</code></td></tr>
+                    <tr><td><code>a:hover</code></td><td>A link while the mouse is over it</td><td><code>&lt;a href="#"&gt;</code></td></tr>
+                    <tr><td><code>li:first-child</code></td><td>The first &lt;li&gt; in its list</td><td><code>&lt;li&gt;First&lt;/li&gt;</code></td></tr>
+                    <tr><td><code>input[type="email"]</code></td><td>Inputs with that attribute value</td><td><code>&lt;input type="email"&gt;</code></td></tr>
+                    <tr><td><code>p::first-line</code></td><td>The first line of every paragraph</td><td><code>&lt;p&gt;Long text…&lt;/p&gt;</code></td></tr>
+                    <tr><td><code>*</code></td><td>Every element</td><td>All elements</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="cr-note"><i class="fas fa-lightbulb"></i> If two rules set the same property, the more specific
+            selector wins: <code>#id</code> beats <code>.class</code>, which beats <code>p</code>. If they are equally
+            specific, the rule written last wins.</p>
+    </section>
+
+    <!-- 4. CSS editor (logic in css-editor.js, styles in css-editor.css) -->
+    <section id="playground" class="cr-section">
+        <h2>4. CSS editor</h2>
+        <p class="cr-lead">Write CSS in <code>style.css</code> and see it style <code>index.html</code> straight away &ndash;
+            just like a real project with two files. Click on anything in your CSS to learn what it does.</p>
+
+        <div class="ce" id="cssEditor">
+            <div class="ce-top">
+                <div class="ce-title"><i class="fab fa-css3-alt"></i> CSS Editor</div>
+                <div class="ce-actions">
+                    <label class="ce-switch" title="Update the result while you type">
+                        <input type="checkbox" id="ceLive" checked>
+                        <span>Live</span>
+                    </label>
+                    <button type="button" class="ce-btn" id="ceFormat" title="Tidy the CSS: one declaration per line"><i class="fas fa-align-left"></i><span>Tidy</span></button>
+                    <button type="button" class="ce-btn" id="ceCopy" title="Copy style.css"><i class="far fa-copy"></i><span>Copy</span></button>
+                    <button type="button" class="ce-btn" id="ceDownload" title="Download style.css and index.html"><i class="fas fa-download"></i><span>Save</span></button>
+                    <button type="button" class="ce-btn" id="ceReset" title="Start again"><i class="fas fa-undo"></i><span>Reset</span></button>
+                    <button type="button" class="ce-btn ce-run" id="ceRun"><i class="fas fa-play"></i><span>Run</span></button>
+                </div>
+            </div>
+
+            <!-- Quick-insert buttons for common properties -->
+            <div class="ce-snippets" id="ceSnippets" aria-label="Insert CSS"></div>
+
+            <div class="ce-body">
+                <div class="ce-files">
+                    <div class="ce-file-label"><i class="fab fa-css3-alt"></i> style.css <small>the design</small></div>
+                    <div class="ce-editor ce-editor-css">
+                        <div class="ce-gutter" id="ceCssGutter" aria-hidden="true"></div>
+                        <div class="ce-area">
+                            <pre id="ceCssHl" aria-hidden="true"></pre>
+                            <textarea id="ceCss" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="style.css"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="ce-file-label"><i class="fab fa-html5"></i> index.html <small>the structure</small></div>
+                    <div class="ce-editor ce-editor-html">
+                        <div class="ce-gutter" id="ceHtmlGutter" aria-hidden="true"></div>
+                        <div class="ce-area">
+                            <pre id="ceHtmlHl" aria-hidden="true"></pre>
+                            <textarea id="ceHtml" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="index.html"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="ce-explain" id="ceExplain" aria-live="polite"></div>
+                </div>
+
+                <div class="ce-side">
+                    <div class="ce-tabs" role="tablist">
+                        <button type="button" role="tab" class="ce-tab" data-pane="preview" aria-selected="true"><i class="fas fa-eye"></i> Result</button>
+                        <button type="button" role="tab" class="ce-tab" data-pane="rules" aria-selected="false"><i class="fas fa-crosshairs"></i> Selectors</button>
+                        <button type="button" role="tab" class="ce-tab" data-pane="tips" aria-selected="false"><i class="fas fa-stethoscope"></i> Tips <span class="ce-count" id="ceTipCount">0</span></button>
+                    </div>
+                    <div class="ce-pane" data-pane="preview">
+                        <iframe id="ceFrame" title="Result of your CSS" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                    </div>
+                    <div class="ce-pane" data-pane="rules" hidden>
+                        <p class="ce-help">Every rule in style.css, what it selects in index.html, and its specificity
+                            (<code>ids-classes-elements</code>). When two rules set the same property, the higher specificity wins. Click a rule to see its elements.</p>
+                        <ul class="ce-rules" id="ceRules"></ul>
+                    </div>
+                    <div class="ce-pane" data-pane="tips" hidden>
+                        <ul class="ce-tips" id="ceTips"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ce-challenges">
+            <div class="ce-challenges-head">
+                <h3><i class="fas fa-palette"></i> CSS challenges</h3>
+                <span id="ceChallengeProgress">0 / 0 done</span>
+            </div>
+            <p class="ce-help">Style the pet page step by step. Each challenge is checked automatically in the result.</p>
+            <ol class="ce-challenge-list" id="ceChallenges"></ol>
+        </div>
+    </section>
+
+    <!-- 5. Property reference (rendered by css-reference.js) -->
+    <section id="properties" class="cr-section">
+        <h2>5. All CSS properties</h2>
+        <p class="cr-lead">Click a value on any card to see it live. Each card shows the CSS and the HTML that uses it.
+            <span id="crCount"></span></p>
+
+        <div class="cr-toolbar">
+            <label class="cr-search">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="search" id="crSearch" placeholder="Search properties, e.g. margin, flex, shadow…" aria-label="Search CSS properties" />
+            </label>
+            <div class="cr-filters" id="crFilters" role="tablist" aria-label="Property categories"></div>
+        </div>
+
+        <div class="cr-grid" id="crGrid"></div>
+        <p class="cr-empty" id="crEmpty" hidden>No properties match your search.</p>
+
+        <p class="cr-note"><i class="fas fa-book-open"></i> CSS has hundreds of properties. This page covers the ones
+            you will use in everyday web pages. For the full list, see
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference" target="_blank" rel="noopener noreferrer">MDN's CSS reference</a>.</p>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>HTML Master</h3>
+            <p>Learn HTML and CSS with interactive examples, quizzes and games.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="reference.html">HTML Reference</a></li>
+                <li><a href="css-properties.html">CSS Properties</a></li>
+                <li><a href="../index.html#quiz">Quiz</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 HTML Master. Made with ❤️ for students.</p>
+    </div>
+</footer>
+</body>
+</html>
