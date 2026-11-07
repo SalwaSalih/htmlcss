@@ -65,13 +65,94 @@
         <p>HTML gives a page its structure. CSS decides how it looks. Learn how to connect CSS to your HTML,
             then explore every common property with a live demo you can click through.</p>
         <nav class="cr-jump" aria-label="On this page">
+            <a href="#playground">CSS editor</a>
             <a href="#how-to-use">1. CSS in HTML</a>
             <a href="#syntax">2. Syntax</a>
             <a href="#selectors">3. Selectors</a>
-            <a href="#playground">4. CSS editor</a>
-            <a href="#properties">5. All properties</a>
+            <a href="#properties">4. All properties</a>
         </nav>
     </header>
+
+    <!-- CSS editor first, so students can start coding right away (logic in css-editor.js, styles in css-editor.css) -->
+    <section id="playground" class="cr-section">
+        <h2>CSS editor</h2>
+        <p class="cr-lead">Write CSS in <code>style.css</code> and see it style <code>index.html</code> straight away &ndash;
+            just like a real project with two files. Click on anything in your CSS to learn what it does.</p>
+
+        <div class="ce" id="cssEditor">
+            <div class="ce-top">
+                <div class="ce-title"><i class="fab fa-css3-alt"></i> CSS Editor</div>
+                <div class="ce-actions">
+                    <button type="button" class="ce-focus-btn" id="ceFocus" title="Full screen: only the editor" aria-pressed="false"><i class="fas fa-expand"></i><span>Full screen</span></button>
+                    <label class="ce-switch" title="Update the result while you type">
+                        <input type="checkbox" id="ceLive" checked>
+                        <span>Live</span>
+                    </label>
+                    <button type="button" class="ce-btn" id="ceFormat" title="Tidy the CSS: one declaration per line"><i class="fas fa-align-left"></i><span>Tidy</span></button>
+                    <button type="button" class="ce-btn" id="ceCopy" title="Copy style.css"><i class="far fa-copy"></i><span>Copy</span></button>
+                    <button type="button" class="ce-btn" id="ceDownload" title="Download style.css and index.html"><i class="fas fa-download"></i><span>Save</span></button>
+                    <button type="button" class="ce-btn" id="ceReset" title="Start again"><i class="fas fa-undo"></i><span>Reset</span></button>
+                    <button type="button" class="ce-btn ce-run" id="ceRun"><i class="fas fa-play"></i><span>Run</span></button>
+                </div>
+            </div>
+
+            <!-- Quick-insert buttons for common properties -->
+
+            <div class="ce-body">
+                <div class="ce-files">
+                    <div class="ce-file-label"><i class="fab fa-css3-alt"></i> style.css <small>the design</small></div>
+                    <div class="ce-editor ce-editor-css">
+                        <div class="ce-gutter" id="ceCssGutter" aria-hidden="true"></div>
+                        <div class="ce-area">
+                            <pre id="ceCssHl" aria-hidden="true"></pre>
+                            <textarea id="ceCss" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="style.css"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Drag up/down to make style.css or index.html bigger (css-editor.js) -->
+                    <div class="ce-split" id="ceSplit" role="separator" aria-orientation="horizontal" aria-label="Drag to resize style.css and index.html" tabindex="0"><span></span></div>
+                    <div class="ce-file-label"><i class="fab fa-html5"></i> index.html <small>the structure</small></div>
+                    <div class="ce-editor ce-editor-html">
+                        <div class="ce-gutter" id="ceHtmlGutter" aria-hidden="true"></div>
+                        <div class="ce-area">
+                            <pre id="ceHtmlHl" aria-hidden="true"></pre>
+                            <textarea id="ceHtml" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="index.html"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="ce-explain" id="ceExplain" aria-live="polite"></div>
+                </div>
+
+                <div class="ce-side">
+                    <div class="ce-tabs" role="tablist">
+                        <button type="button" role="tab" class="ce-tab" data-pane="preview" aria-selected="true"><i class="fas fa-eye"></i> Result</button>
+                        <button type="button" role="tab" class="ce-tab" data-pane="rules" aria-selected="false"><i class="fas fa-crosshairs"></i> Selectors</button>
+                        <button type="button" role="tab" class="ce-tab" data-pane="tips" aria-selected="false"><i class="fas fa-stethoscope"></i> Tips <span class="ce-count" id="ceTipCount">0</span></button>
+                    </div>
+                    <div class="ce-pane" data-pane="preview">
+                        <iframe id="ceFrame" title="Result of your CSS" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                    </div>
+                    <div class="ce-pane" data-pane="rules" hidden>
+                        <p class="ce-help">Every rule in style.css, what it selects in index.html, and its specificity
+                            (<code>ids-classes-elements</code>). When two rules set the same property, the higher specificity wins. Click a rule to see its elements.</p>
+                        <ul class="ce-rules" id="ceRules"></ul>
+                    </div>
+                    <div class="ce-pane" data-pane="tips" hidden>
+                        <ul class="ce-tips" id="ceTips"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ce-challenges">
+            <div class="ce-challenges-head">
+                <h3><i class="fas fa-palette"></i> CSS challenge</h3>
+                <span id="ceChallengeProgress">0 / 0 done</span>
+            </div>
+            <ol class="ce-challenge-list" id="ceChallenges"></ol>
+            <button type="button" class="ce-all-btn" onclick="var b=this.closest('.ce-challenges');var o=b.classList.toggle('ce-show-all');this.textContent=o?'Show only my current challenge':'See all challenges';">See all challenges</button>
+        </div>
+    </section>
 
     <!-- 1. How to add CSS to HTML -->
     <section id="how-to-use" class="cr-section">
@@ -150,114 +231,45 @@
     <section id="selectors" class="cr-section">
         <h2>3. Selectors: connecting CSS to HTML</h2>
         <p class="cr-lead">The selector is the bridge between your CSS file and your HTML.</p>
-        <div class="cr-table-wrap">
-            <table class="cr-table">
-                <thead>
-                    <tr><th>Selector</th><th>Matches</th><th>HTML</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>p</code></td><td>Every &lt;p&gt; element</td><td><code>&lt;p&gt;Text&lt;/p&gt;</code></td></tr>
-                    <tr><td><code>.card</code></td><td>Elements with class="card"</td><td><code>&lt;div class="card"&gt;</code></td></tr>
-                    <tr><td><code>#logo</code></td><td>The one element with id="logo"</td><td><code>&lt;img id="logo"&gt;</code></td></tr>
-                    <tr><td><code>nav a</code></td><td>&lt;a&gt; anywhere inside &lt;nav&gt;</td><td><code>&lt;nav&gt;&lt;a&gt;…&lt;/a&gt;&lt;/nav&gt;</code></td></tr>
-                    <tr><td><code>ul &gt; li</code></td><td>&lt;li&gt; that are direct children of &lt;ul&gt;</td><td><code>&lt;ul&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
-                    <tr><td><code>h1, h2</code></td><td>Both &lt;h1&gt; and &lt;h2&gt;</td><td><code>&lt;h1&gt;…&lt;/h1&gt;&lt;h2&gt;…&lt;/h2&gt;</code></td></tr>
-                    <tr><td><code>a:hover</code></td><td>A link while the mouse is over it</td><td><code>&lt;a href="#"&gt;</code></td></tr>
-                    <tr><td><code>li:first-child</code></td><td>The first &lt;li&gt; in its list</td><td><code>&lt;li&gt;First&lt;/li&gt;</code></td></tr>
-                    <tr><td><code>input[type="email"]</code></td><td>Inputs with that attribute value</td><td><code>&lt;input type="email"&gt;</code></td></tr>
-                    <tr><td><code>p::first-line</code></td><td>The first line of every paragraph</td><td><code>&lt;p&gt;Long text…&lt;/p&gt;</code></td></tr>
-                    <tr><td><code>*</code></td><td>Every element</td><td>All elements</td></tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- Closed by default; click the summary to open the table -->
+        <details class="tag-details cr-selectors-details">
+            <summary>
+                <i class="fas fa-crosshairs" aria-hidden="true"></i>
+                <span>Selector table <small>11 common selectors – click to open</small></span>
+                <i class="fas fa-chevron-down tag-details-arrow" aria-hidden="true"></i>
+            </summary>
+            <div class="tag-details-body">
+                <div class="cr-table-wrap">
+                    <table class="cr-table">
+                        <thead>
+                            <tr><th>Selector</th><th>Matches</th><th>HTML</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>p</code></td><td>Every &lt;p&gt; element</td><td><code>&lt;p&gt;Text&lt;/p&gt;</code></td></tr>
+                            <tr><td><code>.card</code></td><td>Elements with class="card"</td><td><code>&lt;div class="card"&gt;</code></td></tr>
+                            <tr><td><code>#logo</code></td><td>The one element with id="logo"</td><td><code>&lt;img id="logo"&gt;</code></td></tr>
+                            <tr><td><code>nav a</code></td><td>&lt;a&gt; anywhere inside &lt;nav&gt;</td><td><code>&lt;nav&gt;&lt;a&gt;…&lt;/a&gt;&lt;/nav&gt;</code></td></tr>
+                            <tr><td><code>ul &gt; li</code></td><td>&lt;li&gt; that are direct children of &lt;ul&gt;</td><td><code>&lt;ul&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+                            <tr><td><code>h1, h2</code></td><td>Both &lt;h1&gt; and &lt;h2&gt;</td><td><code>&lt;h1&gt;…&lt;/h1&gt;&lt;h2&gt;…&lt;/h2&gt;</code></td></tr>
+                            <tr><td><code>a:hover</code></td><td>A link while the mouse is over it</td><td><code>&lt;a href="#"&gt;</code></td></tr>
+                            <tr><td><code>li:first-child</code></td><td>The first &lt;li&gt; in its list</td><td><code>&lt;li&gt;First&lt;/li&gt;</code></td></tr>
+                            <tr><td><code>input[type="email"]</code></td><td>Inputs with that attribute value</td><td><code>&lt;input type="email"&gt;</code></td></tr>
+                            <tr><td><code>p::first-line</code></td><td>The first line of every paragraph</td><td><code>&lt;p&gt;Long text…&lt;/p&gt;</code></td></tr>
+                            <tr><td><code>*</code></td><td>Every element</td><td>All elements</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </details>
         <p class="cr-note"><i class="fas fa-lightbulb"></i> If two rules set the same property, the more specific
             selector wins: <code>#id</code> beats <code>.class</code>, which beats <code>p</code>. If they are equally
             specific, the rule written last wins.</p>
     </section>
 
-    <!-- 4. CSS editor (logic in css-editor.js, styles in css-editor.css) -->
-    <section id="playground" class="cr-section">
-        <h2>4. CSS editor</h2>
-        <p class="cr-lead">Write CSS in <code>style.css</code> and see it style <code>index.html</code> straight away &ndash;
-            just like a real project with two files. Click on anything in your CSS to learn what it does.</p>
-
-        <div class="ce" id="cssEditor">
-            <div class="ce-top">
-                <div class="ce-title"><i class="fab fa-css3-alt"></i> CSS Editor</div>
-                <div class="ce-actions">
-                    <label class="ce-switch" title="Update the result while you type">
-                        <input type="checkbox" id="ceLive" checked>
-                        <span>Live</span>
-                    </label>
-                    <button type="button" class="ce-btn" id="ceFormat" title="Tidy the CSS: one declaration per line"><i class="fas fa-align-left"></i><span>Tidy</span></button>
-                    <button type="button" class="ce-btn" id="ceCopy" title="Copy style.css"><i class="far fa-copy"></i><span>Copy</span></button>
-                    <button type="button" class="ce-btn" id="ceDownload" title="Download style.css and index.html"><i class="fas fa-download"></i><span>Save</span></button>
-                    <button type="button" class="ce-btn" id="ceReset" title="Start again"><i class="fas fa-undo"></i><span>Reset</span></button>
-                    <button type="button" class="ce-btn ce-run" id="ceRun"><i class="fas fa-play"></i><span>Run</span></button>
-                </div>
-            </div>
-
-            <!-- Quick-insert buttons for common properties -->
-            <div class="ce-snippets" id="ceSnippets" aria-label="Insert CSS"></div>
-
-            <div class="ce-body">
-                <div class="ce-files">
-                    <div class="ce-file-label"><i class="fab fa-css3-alt"></i> style.css <small>the design</small></div>
-                    <div class="ce-editor ce-editor-css">
-                        <div class="ce-gutter" id="ceCssGutter" aria-hidden="true"></div>
-                        <div class="ce-area">
-                            <pre id="ceCssHl" aria-hidden="true"></pre>
-                            <textarea id="ceCss" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="style.css"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="ce-file-label"><i class="fab fa-html5"></i> index.html <small>the structure</small></div>
-                    <div class="ce-editor ce-editor-html">
-                        <div class="ce-gutter" id="ceHtmlGutter" aria-hidden="true"></div>
-                        <div class="ce-area">
-                            <pre id="ceHtmlHl" aria-hidden="true"></pre>
-                            <textarea id="ceHtml" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="index.html"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="ce-explain" id="ceExplain" aria-live="polite"></div>
-                </div>
-
-                <div class="ce-side">
-                    <div class="ce-tabs" role="tablist">
-                        <button type="button" role="tab" class="ce-tab" data-pane="preview" aria-selected="true"><i class="fas fa-eye"></i> Result</button>
-                        <button type="button" role="tab" class="ce-tab" data-pane="rules" aria-selected="false"><i class="fas fa-crosshairs"></i> Selectors</button>
-                        <button type="button" role="tab" class="ce-tab" data-pane="tips" aria-selected="false"><i class="fas fa-stethoscope"></i> Tips <span class="ce-count" id="ceTipCount">0</span></button>
-                    </div>
-                    <div class="ce-pane" data-pane="preview">
-                        <iframe id="ceFrame" title="Result of your CSS" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
-                    </div>
-                    <div class="ce-pane" data-pane="rules" hidden>
-                        <p class="ce-help">Every rule in style.css, what it selects in index.html, and its specificity
-                            (<code>ids-classes-elements</code>). When two rules set the same property, the higher specificity wins. Click a rule to see its elements.</p>
-                        <ul class="ce-rules" id="ceRules"></ul>
-                    </div>
-                    <div class="ce-pane" data-pane="tips" hidden>
-                        <ul class="ce-tips" id="ceTips"></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ce-challenges">
-            <div class="ce-challenges-head">
-                <h3><i class="fas fa-palette"></i> CSS challenges</h3>
-                <span id="ceChallengeProgress">0 / 0 done</span>
-            </div>
-            <p class="ce-help">Style the pet page step by step. Each challenge is checked automatically in the result.</p>
-            <ol class="ce-challenge-list" id="ceChallenges"></ol>
-        </div>
-    </section>
-
-    <!-- 5. Property reference (rendered by css-reference.js) -->
+    <!-- 4. Property reference (rendered by css-reference.js) -->
     <section id="properties" class="cr-section">
-        <h2>5. All CSS properties</h2>
-        <p class="cr-lead">Click a value on any card to see it live. Each card shows the CSS and the HTML that uses it.
+        <h2>4. All CSS properties</h2>
+        <p class="cr-lead">Click a property to open it, then click a value to see it live.
             <span id="crCount"></span></p>
 
         <div class="cr-toolbar">

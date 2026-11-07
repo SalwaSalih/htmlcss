@@ -609,3 +609,288 @@ pre {
         transition: none !important;
     }
 }
+
+/* =========================================================
+   CLEAN-UP: more compact page, phones especially
+========================================================= */
+.cr-page { margin-top: 84px; }
+.cr-breadcrumb { margin-bottom: 12px; font-size: 0.85rem; }
+
+.cr-hero { padding: 26px 30px; margin-bottom: 28px; }
+.cr-hero h1 { font-size: 2rem; margin-bottom: 8px; }
+.cr-hero p { font-size: 1rem; }
+.cr-jump { margin-top: 14px; gap: 8px; }
+.cr-jump a { padding: 6px 12px; font-size: 0.88rem; }
+
+.cr-section { margin-bottom: 36px; }
+.cr-section h2 { font-size: 1.5rem; margin-bottom: 6px; }
+.cr-lead { margin-bottom: 14px; }
+
+.cr-ways { gap: 14px; }
+.cr-way { padding: 16px 18px; }
+.cr-anatomy { padding: 18px; gap: 16px; }
+
+.cr-grid { gap: 14px; }
+.cr-card { padding: 14px 16px; gap: 10px; }
+
+/* Card head: chevron that only matters on phones */
+.cr-card-head::after { content: none; }
+
+@media (max-width: 768px) {
+    .cr-page { margin-top: 78px; padding: 0 12px; }
+    .cr-breadcrumb { display: none; }
+
+    .cr-hero { padding: 18px 16px; margin-bottom: 20px; border-radius: 14px; }
+    .cr-hero h1 { font-size: 1.5rem; }
+    .cr-hero p { font-size: 0.92rem; }
+
+    /* Jump links: one swipeable row */
+    .cr-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -16px; padding-right: 16px; }
+    .cr-jump::-webkit-scrollbar { display: none; }
+    .cr-jump a { flex: none; }
+
+    .cr-section { margin-bottom: 26px; }
+    .cr-section h2 { font-size: 1.2rem; }
+    .cr-lead { font-size: 0.92rem; }
+
+    .cr-way { padding: 14px; }
+    .cr-way pre { font-size: 0.8rem; }
+
+    /* Selector table: each row becomes a small card */
+    .cr-table thead { display: none; }
+    .cr-table, .cr-table tbody { display: block; }
+    .cr-table-wrap { background: transparent; box-shadow: none; overflow: visible; }
+
+    .cr-table tr {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4px 10px;
+        align-items: center;
+        background: white;
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .cr-table td { padding: 0 !important; border: none !important; font-size: 0.9rem; }
+    .cr-table td:first-child code { white-space: nowrap; }
+    .cr-table td:nth-child(3) { grid-column: 1 / -1; overflow-x: auto; }
+    .cr-table td:nth-child(3) code { white-space: nowrap; font-size: 0.82rem; }
+
+    /* Property cards: compact rows, tap to open */
+    .cr-grid { gap: 8px; }
+    .cr-card { padding: 12px 14px; gap: 6px; border-top-width: 3px; }
+
+    .cr-card-head { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+
+    .cr-card-head::after {
+        content: "\f078";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.8rem;
+        color: var(--gray-color);
+        margin-left: auto;
+        transition: transform .2s ease;
+    }
+
+    .cr-card.is-open .cr-card-head::after { transform: rotate(180deg); }
+
+    .cr-card:not(.is-open) > :not(.cr-card-head):not(.cr-desc) { display: none !important; }
+    .cr-card:not(.is-open) .cr-desc {
+        font-size: 0.85rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .cr-toolbar { top: 70px; padding: 8px 0; }
+}
+
+/* CSS editor challenges: one at a time (like the HTML editor) */
+.cr-page .ce-challenges { padding: 14px 18px; margin-top: 16px; }
+.cr-page .ce-challenges:not(.ce-show-all) .ce-challenge:not(.ce-active) { display: none; }
+.cr-page .ce-challenge-list { grid-template-columns: 1fr; gap: 8px; margin-top: 8px; }
+
+.cr-page .ce-all-btn {
+    margin-top: 8px;
+    padding: 4px 0;
+    border: none;
+    background: none;
+    color: #2965f1;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cr-page .ce-all-btn:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .cr-page .ce-challenges { padding: 12px 14px; }
+    .cr-page .ce-challenge-actions button { flex: 1; min-height: 42px; }
+
+    /* Three ways to add CSS: tap a title to open it */
+    .cr-way h3 { cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 0; }
+    .cr-way h3::after {
+        content: "\f078";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.8rem;
+        color: var(--gray-color);
+        margin-left: auto;
+        transition: transform .2s ease;
+    }
+    .cr-way.is-open h3::after { transform: rotate(180deg); }
+    .cr-way:not(.is-open) > :not(h3):not(.cr-badge) { display: none; }
+    .cr-way.is-open h3 { margin-bottom: 6px; }
+}
+
+/* ---------- Full screen (like the HTML editor) ---------- */
+.ce-focus-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.ce-focus-btn:hover { background: rgba(255, 255, 255, 0.22); }
+
+body.he-focus-open { overflow: hidden; }
+
+.ce.ce-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.ce.ce-fullscreen .ce-body { flex: 1; min-height: 0; }
+.ce.ce-fullscreen .ce-files { min-height: 0; }
+/* Split the code area: style.css bigger, index.html smaller */
+.ce.ce-fullscreen .ce-editor-css { height: auto; flex: 3; min-height: 0; }
+.ce.ce-fullscreen .ce-editor-html { height: auto; flex: 2; min-height: 0; }
+.ce.ce-fullscreen .ce-side { min-height: 0; }
+.ce.ce-fullscreen .ce-pane,
+.ce.ce-fullscreen .ce-pane iframe { min-height: 0; height: 100%; }
+
+@media (max-width: 768px) {
+    .cr-page .ce .ce-title { grid-column: 1 / 4; }
+
+    .cr-page .ce-focus-btn {
+        grid-column: 4;
+        grid-row: 1;
+        justify-self: end;
+        width: 40px;
+        height: 36px;
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+        border-radius: 999px;
+    }
+
+    .cr-page .ce-focus-btn span { display: none; }
+
+    .ce.ce-fullscreen { padding-bottom: env(safe-area-inset-bottom); }
+    .ce.ce-fullscreen .ce-body.mc-box { flex: 1; display: flex !important; flex-direction: column; }
+    .ce.ce-fullscreen .ce-body.mc-box > .mc-code,
+    .ce.ce-fullscreen .ce-body.mc-box.mc-show-result > .mc-result { flex: 1; }
+}
+
+/* ---------- Property examples: closed by default on every screen (like <details>) ---------- */
+.cr-grid { align-items: start; }
+.cr-card { gap: 6px; padding: 12px 14px; border-top-width: 3px; }
+.cr-card.is-open { gap: 10px; box-shadow: 0 6px 18px rgba(0, 0, 0, .12); }
+
+.cr-card-head { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.cr-card-head:hover .cr-name { filter: brightness(1.2); }
+
+.cr-card-head::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    margin-left: auto;
+    transition: transform .2s ease;
+}
+
+.cr-card.is-open .cr-card-head::after { transform: rotate(180deg); }
+
+.cr-card:not(.is-open) > :not(.cr-card-head):not(.cr-desc) { display: none !important; }
+
+.cr-card:not(.is-open) .cr-desc {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* Open card spans the whole row on large screens, so the demo has room */
+@media (min-width: 769px) {
+    .cr-card.is-open { grid-column: 1 / -1; }
+}
+
+.cr-grid { grid-auto-flow: row dense; }
+
+/* Selector table inside a closed <details> (styles shared with the tag table in style.css) */
+.cr-selectors-details { margin-bottom: 14px; }
+.cr-selectors-details .cr-table-wrap { box-shadow: none; border-radius: 10px; border: 1px solid #eef1f4; }
+
+@media (max-width: 768px) {
+    .cr-selectors-details .cr-table-wrap { border: none; }
+    .cr-selectors-details .cr-table tr { box-shadow: none; border: 1px solid #eef1f4; }
+}
+
+/* ---------- Drag bar between style.css and index.html ---------- */
+.ce-split {
+    flex: none;
+    height: 14px;
+    display: grid;
+    place-items: center;
+    background: #2a2a2a;
+    border-top: 1px solid #3c3c3c;
+    border-bottom: 1px solid #3c3c3c;
+    cursor: row-resize;
+    touch-action: none;
+    user-select: none;
+}
+
+.ce-split span {
+    width: 44px;
+    height: 4px;
+    border-radius: 999px;
+    background: #6b6b6b;
+    transition: background .15s ease, width .15s ease;
+}
+
+.ce-split:hover span,
+.ce-split:focus-visible span,
+.ce-split.is-dragging span { background: #5dade2; width: 64px; }
+
+.ce-split:focus-visible { outline: 2px solid #5dade2; outline-offset: -2px; }
+
+body.ce-resizing { cursor: row-resize; user-select: none; }
+body.ce-resizing iframe { pointer-events: none; }
+
+/* The help text under the code is not shown (kept in the page for the editor's logic) */
+.cr-page .ce-explain { display: none !important; }
+
+@media (max-width: 768px) {
+    .ce-split { height: 22px; }      /* bigger target for fingers */
+    .ce-split span { width: 56px; height: 5px; }
+}

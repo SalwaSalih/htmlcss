@@ -1033,75 +1033,6 @@ ${inner}
   tabs.forEach((t) => t.addEventListener("click", () => showPane(t.dataset.pane)));
 
   /* -----------------------------
-     SNIPPETS
-  ----------------------------- */
-  const SNIPPETS = [
-    ["color", "color: |crimson;"],
-    ["background", "background-color: |lightyellow;"],
-    ["font-size", "font-size: |20px;"],
-    ["font-family", "font-family: |Arial, sans-serif;"],
-    ["margin", "margin: |20px;"],
-    ["padding", "padding: |10px 20px;"],
-    ["border", "border: |2px solid steelblue;"],
-    ["border-radius", "border-radius: |8px;"],
-    ["width", "width: |300px;"],
-    ["box-shadow", "box-shadow: |0 4px 12px rgba(0, 0, 0, 0.15);"],
-    ["flex", "display: flex;\ngap: |16px;"],
-    ["center", "display: flex;\njustify-content: center;\nalign-items: center;|"],
-    ["transition", "transition: |all 0.3s ease;"],
-    ["new rule", ".|my-class {\n  \n}", true],
-    [":hover", "|button:hover {\n  background-color: seagreen;\n}", true],
-    ["@media", "@media (max-width: 600px) {\n  |\n}", true]
-  ];
-
-  // Is the cursor inside a rule's { } (where declarations go)?
-  function insideDeclarations(code, pos) {
-    const segs = H.scanCss(code.slice(0, pos));
-    const open = [];
-    segs.forEach((s, i) => {
-      if (s.type !== "punct") return;
-      if (s.text === "{") open.push(i);
-      if (s.text === "}") open.pop();
-    });
-    if (!open.length) return false;
-    // Directly inside @media { } we need a rule, not a declaration
-    const head = segs[open[open.length - 1] - 1];
-    return !(head && head.type === "at" && /^\s*@(media|supports|container|layer)/i.test(head.text));
-  }
-
-  function insertSnippet(snippet, isRule) {
-    const ta = cssPane.ta;
-    if (ta.selectionStart !== ta.selectionEnd) ta.setSelectionRange(ta.selectionEnd, ta.selectionEnd);
-    let text = snippet;
-    // Declarations must go inside a rule; outside one, wrap them in "h1 { }"
-    if (!isRule && !insideDeclarations(ta.value, ta.selectionStart)) {
-      text = "h1 {\n" + text.split("\n").map((l) => INDENT + l).join("\n") + "\n}\n";
-      toast("Declarations go inside a rule. Change h1 to the element you want to style.");
-    }
-    const indent = cssPane.currentIndent();
-    text = text.replace(/\n/g, "\n" + indent);
-    const caret = text.indexOf("|");
-    text = text.replace("|", "");
-    const start = ta.selectionStart;
-    cssPane.insert(text);
-    if (caret >= 0) ta.setSelectionRange(start + caret, start + caret);
-    explainFrom = "css";
-    updateExplain();
-  }
-
-  const snippetBar = $("ceSnippets");
-  SNIPPETS.forEach(([label, code, isRule]) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "ce-snippet";
-    b.textContent = label;
-    const info = describeProp(label === "background" ? "background-color" : label);
-    b.title = info ? info.desc : isRule ? "Insert a new rule" : "Insert at the cursor";
-    b.addEventListener("click", () => insertSnippet(code, !!isRule));
-    snippetBar?.appendChild(b);
-  });
-
-  /* -----------------------------
      TOOLBAR
   ----------------------------- */
   function formatCss(code) {
@@ -1173,6 +1104,83 @@ ${inner}
     download("index.html", wrapPage(htmlPane.ta.value), "text/html");
     toast("💾 Saved style.css and index.html – keep them in the same folder");
   });
+
+  /* -----------------------------
+     RESIZE: drag the bar between style.css and index.html (mouse, touch or arrow keys)
+  ----------------------------- */
+  const splitEl = $("ceSplit");
+  const cssBox = document.querySelector(".ce-editor-css");
+  const htmlBox = document.querySelector(".ce-editor-html");
+  const MIN = 70;
+
+  function setSplit(cssH, total) {
+    const h = Math.max(MIN, Math.min(total - MIN, cssH));
+    [cssBox.style.flex, htmlBox.style.flex] = ["none", "none"];
+    cssBox.style.height = h + "px";
+    htmlBox.style.height = (total - h) + "px";
+  }
+
+  function resetSplit() {
+    if (!cssBox || !htmlBox) return;
+    ["flex", "height"].forEach((k) => { cssBox.style[k] = ""; htmlBox.style[k] = ""; });
+  }
+
+  if (splitEl && cssBox && htmlBox) {
+    let startY = 0, startCss = 0, total = 0;
+    const move = (e) => setSplit(startCss + (e.clientY - startY), total);
+    const stop = () => {
+      splitEl.classList.remove("is-dragging");
+      document.body.classList.remove("ce-resizing");
+      removeEventListener("pointermove", move);
+      removeEventListener("pointerup", stop);
+      removeEventListener("pointercancel", stop);
+    };
+    splitEl.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      startY = e.clientY;
+      startCss = cssBox.getBoundingClientRect().height;
+      total = startCss + htmlBox.getBoundingClientRect().height;
+      splitEl.classList.add("is-dragging");
+      document.body.classList.add("ce-resizing");
+      addEventListener("pointermove", move);
+      addEventListener("pointerup", stop);
+      addEventListener("pointercancel", stop);
+    });
+    splitEl.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+      e.preventDefault();
+      const c = cssBox.getBoundingClientRect().height;
+      setSplit(c + (e.key === "ArrowDown" ? 20 : -20), c + htmlBox.getBoundingClientRect().height);
+    });
+    // Double-click puts it back to the normal size
+    splitEl.addEventListener("dblclick", resetSplit);
+  }
+
+  /* -----------------------------
+     FULL SCREEN: only the CSS editor is shown (same as the HTML editor)
+  ----------------------------- */
+  const focusBtn = $("ceFocus");
+  function setFocus(on) {
+    const ce = $("cssEditor");
+    if (!ce || !focusBtn) return;
+    ce.classList.toggle("ce-fullscreen", on);
+    document.body.classList.toggle("he-focus-open", on);
+    resetSplit();
+    focusBtn.setAttribute("aria-pressed", String(on));
+    focusBtn.title = on ? "Leave full screen" : "Full screen: only the editor";
+    focusBtn.innerHTML = on
+      ? '<i class="fas fa-compress"></i><span>Exit</span>'
+      : '<i class="fas fa-expand"></i><span>Full screen</span>';
+    if (on) $("ceCss")?.focus({ preventScroll: true });
+    else ce.scrollIntoView({ block: "start" });
+  }
+  focusBtn?.addEventListener("click", () => setFocus(!$("cssEditor").classList.contains("ce-fullscreen")));
+  document.addEventListener("keydown", (e) => {
+    const inCode = document.activeElement && document.activeElement.tagName === "TEXTAREA";
+    if (e.key === "Escape" && !inCode && $("cssEditor")?.classList.contains("ce-fullscreen")) setFocus(false);
+  });
+  // Open straight in full screen with css-properties.html#code
+  if (location.hash === "#code") setFocus(true);
 
   $("ceReset")?.addEventListener("click", (e) => {
     const reset = () => {

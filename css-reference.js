@@ -397,6 +397,19 @@
   /* -----------------------------
      RENDERING
   ----------------------------- */
+  // Phones: the "three ways" cards open and close (the recommended one starts open)
+  document.querySelectorAll(".cr-way").forEach((way, i) => {
+    const h = way.querySelector("h3");
+    if (!h) return;
+    if (i === 0) way.classList.add("is-open");
+    h.setAttribute("role", "button");
+    h.setAttribute("tabindex", "0");
+    const toggle = () => h.setAttribute("aria-expanded", String(way.classList.toggle("is-open")));
+    h.setAttribute("aria-expanded", String(i === 0));
+    h.addEventListener("click", toggle);
+    h.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+
   const grid = document.getElementById("crGrid");
   const filtersEl = document.getElementById("crFilters");
   const searchEl = document.getElementById("crSearch");
@@ -406,7 +419,8 @@
   if (!grid || !filtersEl || !searchEl) return;
 
   const categories = ["All", ...new Set(P.map((x) => x.c))];
-  let activeCat = "All";
+  // Start with the first category (not all cards at once) so the page stays short
+  let activeCat = categories[1] || "All";
 
   function buildCard(prop) {
     const card = document.createElement("article");
@@ -422,6 +436,13 @@
     cat.className = "cr-cat";
     cat.textContent = prop.c;
     head.append(name, cat);
+    // Phones: cards start closed; tap the name to open the demo (CSS does the hiding)
+    head.setAttribute("role", "button");
+    head.setAttribute("tabindex", "0");
+    head.setAttribute("aria-expanded", "false");
+    const toggle = () => head.setAttribute("aria-expanded", String(card.classList.toggle("is-open")));
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
 
     const desc = document.createElement("p");
     desc.className = "cr-desc";
@@ -505,7 +526,8 @@
     const q = searchEl.value.trim().toLowerCase();
     let shown = 0;
     cards.forEach(({ prop, card, text }) => {
-      const visible = (activeCat === "All" || prop.c === activeCat) && (!q || text.includes(q));
+      // While searching, look in every category
+      const visible = q ? text.includes(q) : (activeCat === "All" || prop.c === activeCat);
       card.hidden = !visible;
       if (visible) shown++;
     });
