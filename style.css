@@ -3703,29 +3703,6 @@ body.pr-open { overflow: hidden; }
     .lc-task-grid.mc-box iframe { border-radius: 0 0 10px 10px; height: 220px; }
 }
 
-/* "Install the app" button in the hero (PWA, script.js initInstallApp) */
-.install-app:empty { display: none; }
-.install-app { margin-top: 12px; }
-
-.install-app-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 8px 16px;
-    border: 1px dashed rgba(255, 255, 255, .7);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, .12);
-    color: white;
-    font: inherit;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.install-app-btn:hover { background: rgba(255, 255, 255, .22); }
-.install-app-btn[hidden] { display: none; }
-
 /* Installed app (opened from the home screen): room for the phone's notch */
 @media (display-mode: standalone) {
     .navbar { padding-top: env(safe-area-inset-top); }

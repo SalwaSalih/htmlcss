@@ -560,50 +560,12 @@ function initMobileCodeBoxes() {
 }
 
 /* -----------------------------
-   INSTALL AS AN APP (PWA): service worker + "Install app" button
+   OFFLINE SUPPORT (service worker: pages the student opened also work without internet)
 ----------------------------- */
-function initInstallApp() {
-  const r = rootPrefix();
+function initOffline() {
   if ("serviceWorker" in navigator && /^https:|^http:\/\/(localhost|127\.0\.0\.1)/.test(location.href)) {
-    navigator.serviceWorker.register(r + "sw.js").catch(() => { /* offline support is optional */ });
+    navigator.serviceWorker.register(rootPrefix() + "sw.js").catch(() => { /* optional */ });
   }
-
-  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  const slot = document.querySelector("[data-install-app]");
-  if (!slot || standalone) return;
-
-  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  let deferred = null;
-
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "install-app-btn";
-  btn.innerHTML = '<i class="fas fa-mobile-alt"></i> Install the app';
-
-  btn.addEventListener("click", async () => {
-    if (deferred) {
-      deferred.prompt();
-      try { await deferred.userChoice; } catch { /* ignore */ }
-      deferred = null;
-      btn.hidden = true;
-    } else if (isIOS) {
-      showToast("On iPhone/iPad: tap the Share button, then \"Add to Home Screen\"");
-    } else {
-      showToast("Open the browser menu (⋮) and choose \"Install app\" or \"Add to Home screen\"");
-    }
-  });
-
-  // Chrome / Edge / Android: show the button when the browser allows installing
-  addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferred = e;
-    btn.hidden = false;
-  });
-  addEventListener("appinstalled", () => { btn.hidden = true; showToast("✅ App installed! Find ROJ Institute on your home screen."); });
-
-  // iPhone has no install event, so show the button with instructions there
-  btn.hidden = !isIOS;
-  slot.appendChild(btn);
 }
 
 /* -----------------------------
@@ -618,5 +580,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initLessonPage();
   initHomePage();
   initMobileCodeBoxes();
-  initInstallApp();
+  initOffline();
 });
