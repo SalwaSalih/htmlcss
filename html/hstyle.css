@@ -1,0 +1,32 @@
+
+nav ul {
+   
+}
+
+ul{
+    padding: 1px;
+    text-align: center;
+    display: flex;
+   list-style-type: none;
+   justify-content: space-evenly;
+   text-decoration: solid;
+    font-size:  20px; 
+   font-weight: bold;
+    margin: 2px;
+   color: rgb(192, 192, 192);
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    
+
+
+}
+a{
+    text-decoration:none;
+    
+}
+a.h:hover{
+  color: rgb(255, 255, 255);  
+}
+a.n:hover{
+  color:rgb(255, 255, 255);
+}

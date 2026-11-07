@@ -1,0 +1,29 @@
+nav{
+    text-align-last: center;
+    margin:0.2%;
+    padding: 0.7px; 
+    background-color: rgb(34, 30, 30);
+    height: 30px;
+    padding-bottom: 0.5% ;
+    border-radius: 25px;
+    
+}
+p{
+margin-top: 0.5%;
+font-size: 14px;
+text-align: center;
+color: rgb(250, 250, 246);
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+img{
+
+    height: 18px;
+    width:18px;
+    
+
+}
+div{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}

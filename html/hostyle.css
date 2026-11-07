@@ -1,0 +1,42 @@
+body{
+    background-image:url("newee.jpg" );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1{
+    text-align:center;
+    color: rgb(0, 0, 0);
+font-size:50pt;
+font-family:Georgia, 'Times New Roman', Times, serif;
+text-shadow:rgb(8, 8, 8) 4px -10px 34px;
+-webkit-text-fill-color:rgb(0, 0, 0);
+-webkit-text-stroke-width: 1px;
+
+
+}
+
+.a{
+    background-color: rgb(182, 182, 182);
+    margin:0;
+letter-spacing: 2px;
+    padding:0;
+
+    position: absolute;
+    top: 55%; 
+    left:50%;
+    
+    font-size: 24px;
+    font-family:'cursive';
+    color: rgb(0, 0, 0);
+    font-weight:  bolder;
+border:1px solid rgb(148, 155, 148) ;
+text-align: left;
+
+transform: translate(-50%,-50%);
+border-color: rgb(165, 159, 159);
+-webkit-text-fill-color:rgb(0, 0, 0);
+-webkit-text-stroke-width: 0.2px;
+
+}

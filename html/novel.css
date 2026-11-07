@@ -1,0 +1,59 @@
+body{
+    background-color: rgb(193, 196, 159);
+}
+h1{
+    color: rgb(221, 0, 0);
+    text-align: right;
+}
+.img1{
+    position: absolute;
+    height: 350px;
+    width: 300px;
+    left:77%;
+    
+}
+h6{
+    position: absolute;
+    letter-spacing: 1px;
+    font-size: 26px;
+    border-color: black;
+    top:20%;
+    left:15%;
+    border: 2px;
+    border:2px solid rgb(22, 99, 45) ;
+}
+.p{
+    position: absolute;
+    font-size: 28px;
+    font-weight: bold;
+    top:42%;
+    left:38%;
+    
+
+}
+.imga{
+    position: absolute;
+    height: 350px;
+    width: 300px;
+    left:77%;
+    top:110;
+}
+.h6h{
+    position: absolute;
+    letter-spacing: 1px;
+    font-size: 26px;
+    border-color: black;
+    top:100%;
+    left:15%;
+    border: 2px;
+    border:2px solid rgb(100, 96, 50) ;
+}
+.t{
+    position: absolute;
+    font-size: 28px;
+    font-weight: bold;
+    top:122%;
+    left:38%;
+    
+
+}

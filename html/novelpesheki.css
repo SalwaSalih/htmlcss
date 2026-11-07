@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(193,196,159);
+}
+
+
+.nimg1{
+    position:absolute;
+    height:650px;
+    width:600px;
+    left: 8%;
+    top:10%;
+   
+}
+.nimg{
+    position:absolute;
+    height: 650px;
+    width: 600px;
+    left:48%;
+    top:12%;
+
+}
