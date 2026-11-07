@@ -3797,9 +3797,26 @@ body.pr-open { overflow: hidden; }
     .explore { padding: 0 40px; }
 }
 
-/* Phones: "Lessons" is its own screen on the home page (script.js initMobileLessonsView) */
-@media (max-width: 768px) {
-    body:not(.view-lessons) #lessons { display: none; }
-    body.view-lessons > section:not(#lessons) { display: none; }
-    body.view-lessons #lessons { margin-top: 84px !important; min-height: calc(100vh - 220px); }
+
+/* Arcade: highlight the new Code Puzzle card */
+.arcade-card-new { position: relative; border: 2px solid var(--secondary-color); }
+.arcade-new {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: .05em;
+    padding: 2px 8px;
+    border-radius: 999px;
 }
+
+/* Lessons page (lessons.html) */
+.lessons-page { margin-top: 90px !important; }
+@media (max-width: 768px) {
+    .lessons-page { margin-top: 84px !important; }
+}
+/* Short pages: keep the footer at the bottom of the screen */
+.page-main { min-height: calc(100vh - 250px); }

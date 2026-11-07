@@ -26,7 +26,7 @@
                 <span>ROJ Institute</span>
             </a>
             <ul class="nav-menu">
-                <li><a href="#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="lessons.html"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
                 <li><a href="#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
                 <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
                 <li><a href="practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
@@ -54,7 +54,7 @@
             <p class="hero-teacher"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> with Salwa S. Younis &middot; ROJ Institute</p>
             <p>Short lessons, a live code editor and quizzes. Start with lesson 1 and go one step at a time.</p>
             <div class="hero-buttons">
-                <a href="#lessons" class="btn btn-primary">Start Learning</a>
+                <a href="lessons.html" class="btn btn-primary">Start Learning</a>
                 <a href="practice.html#quiz" class="btn btn-secondary">Test Your Skills</a>
                 <a href="arcade.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Play Arcade</a>
             </div>
@@ -74,6 +74,7 @@
                 <div class="he-top">
                     <div class="he-title"><i class="fas fa-code"></i> HTML Editor</div>
                     <div class="he-actions">
+                        <button type="button" class="he-focus-btn" id="heFocus" title="Full screen: only the editor" aria-pressed="false"><i class="fas fa-expand"></i><span>Full screen</span></button>
                         <label class="he-switch" title="Update the result while you type">
                             <input type="checkbox" id="heLive" checked>
                             <span>Live</span>
@@ -112,6 +113,7 @@
                             <button type="button" role="tab" class="he-tab" data-pane="preview" aria-selected="true"><i class="fas fa-eye"></i> Result</button>
                             <button type="button" role="tab" class="he-tab" data-pane="structure" aria-selected="false"><i class="fas fa-sitemap"></i> Structure</button>
                             <button type="button" role="tab" class="he-tab" data-pane="tips" aria-selected="false"><i class="fas fa-stethoscope"></i> Tips <span class="he-count" id="heTipCount">0</span></button>
+                            <button type="button" role="tab" class="he-tab" data-pane="challenges" aria-selected="false"><i class="fas fa-flag-checkered"></i> Tasks <span class="he-count" id="heChallengeCount">0/8</span></button>
                         </div>
                         <div class="he-pane" data-pane="preview">
                             <iframe id="outputFrame" title="Result of your HTML" sandbox="allow-scripts allow-forms allow-modals"></iframe>
@@ -123,154 +125,22 @@
                         <div class="he-pane" data-pane="tips" hidden>
                             <ul class="he-tips" id="heTips"></ul>
                         </div>
+                        <!-- Small guided tasks, checked automatically while you type -->
+                        <div class="he-pane" data-pane="challenges" hidden>
+                        <div class="he-challenges">
+                            <div class="he-challenges-head">
+                                <h3><i class="fas fa-flag-checkered"></i> Challenge</h3>
+                                <div class="he-dots" id="heDots" aria-hidden="true"></div>
+                                <span id="heChallengeProgress">0 / 0 done</span>
+                            </div>
+                            <ol class="he-challenge-list" id="heChallenges"></ol>
+                            <p class="he-all-done" id="heAllDone" hidden><i class="fas fa-trophy"></i> All challenges done – great work!</p>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Small guided tasks, checked automatically -->
-            <div class="he-challenges">
-                <div class="he-challenges-head">
-                    <h3><i class="fas fa-flag-checkered"></i> Challenge</h3>
-                    <div class="he-dots" id="heDots" aria-hidden="true"></div>
-                    <span id="heChallengeProgress">0 / 0 done</span>
-                </div>
-                <ol class="he-challenge-list" id="heChallenges"></ol>
-                <p class="he-all-done" id="heAllDone" hidden><i class="fas fa-trophy"></i> All challenges done – great work!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lessons Section -->
-    <section id="lessons" class="lessons-section">
-        <div class="container">
-            <!-- Title + progress on one line (progress filled in by script.js) -->
-            <div class="path-head">
-                <div>
-                    <h2>HTML Learning Path</h2>
-                    <p class="path-sub">Follow the steps in order.</p>
-                </div>
-                <div class="path-progress" aria-label="Your progress">
-                    <span data-lessons-done>0 of 6 lessons completed</span>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                    <span class="progress-percent">0%</span>
-                </div>
-            </div>
-
-            <div class="learning-path">
-                <!-- Lesson 1 -->
-                <div class="lesson-card">
-                    <div class="lesson-number">01</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-file-code"></i>
-                    </div>
-                    <h3>HTML Basics</h3>
-                    <ul class="lesson-topics">
-                        <li>Document Structure</li>
-                        <li>Headings & Paragraphs</li>
-                        <li>Elements & Attributes</li>
-                    </ul>
-                    <a href="lessons/basics.html" class="lesson-btn">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 2 -->
-                <div class="lesson-card">
-                    <div class="lesson-number">02</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-link"></i>
-                    </div>
-                    <h3>Links & Media</h3>
-                    <ul class="lesson-topics">
-                        <li>Links & Anchors</li>
-                        <li>Images</li>
-                        <li>Audio, Video & iframe</li>
-                    </ul>
-                    <a href="lessons/links-media.html" class="lesson-btn">Continue</a>
-                </div>
-
-                <!-- Lesson 3 -->
-                <div class="lesson-card">
-                    <div class="lesson-number">03</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-tags"></i>
-                    </div>
-                    <h3>HTML Tags</h3>
-                    <ul class="lesson-topics">
-                        <li>Semantic Tags</li>
-                        <li>Formatting Tags</li>
-                        <li>Best Practices</li>
-                    </ul>
-                    <a href="lessons/tags.html" class="lesson-btn">Continue</a>
-                </div>
-
-                <!-- Lesson 4 -->
-                <div class="lesson-card">
-                    <div class="lesson-number">04</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    <h3>Forms & Validation</h3>
-                    <ul class="lesson-topics">
-                        <li>Form Elements</li>
-                        <li>Input Types</li>
-                        <li>HTML5 Validation</li>
-                    </ul>
-                    <a href="lessons/forms.html" class="lesson-btn">Continue</a>
-                </div>
-
-                <!-- Lesson 5 (NEW) -->
-                <div class="lesson-card">
-                    <div class="lesson-number">05</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <h3>HTML Advanced</h3>
-                    <ul class="lesson-topics">
-                        <li>Accessibility & SEO</li>
-                        <li>Responsive HTML</li>
-                        <li>Entities & Best Practices</li>
-                    </ul>
-                    <a href="lessons/advanced.html" class="lesson-btn">Continue</a>
-                </div>
-
-                <!-- Lesson 6 -->
-                <div class="lesson-card">
-                    <div class="lesson-number">06</div>
-                    <div class="lesson-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>CSS Basics</h3>
-                    <ul class="lesson-topics">
-                        <li>Colors &amp; Text</li>
-                        <li>Padding, Border, Margin</li>
-                        <li>Classes</li>
-                    </ul>
-                    <a href="lessons/css-js.html" class="lesson-btn">Continue</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- More to explore: each part has its own page -->
-    <section class="explore">
-        <div class="container">
-            <h2>More to explore</h2>
-            <div class="explore-grid">
-                <a href="practice.html" class="ex-teaser-card">
-                    <i class="fas fa-dumbbell" aria-hidden="true"></i>
-                    <span><strong>Practice &amp; Quiz</strong><small>Exercises, quiz and certificate</small></span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="tutorials.html" class="ex-teaser-card">
-                    <i class="fas fa-book-open" aria-hidden="true"></i>
-                    <span><strong>All Tutorials</strong><small>Every topic in one list</small></span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="examples.html" class="ex-teaser-card">
-                    <i class="fas fa-shapes" aria-hidden="true"></i>
-                    <span><strong>HTML Examples</strong><small>Ready-made code to try in the editor</small></span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
         </div>
     </section>
 

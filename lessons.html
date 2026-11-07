@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - ROJ Institute</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="images/roj-logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="index.html" aria-label="ROJ Institute - home">
+                <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="lessons.html" class="active" aria-current="page"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
+            </ul>
+
+            <!-- XP HUD (powered by script.js localStorage) -->
+            <div class="xp-pill" title="Your XP and Level">
+                <i class="fas fa-bolt"></i>
+                <span>Level <span data-hm-level>1</span></span>
+                <div class="xp-meter" aria-hidden="true"><div data-hm-xpbar></div></div>
+                <small><span data-hm-xp>0</span> XP</small>
+            </div>
+
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Tutorial Categories Section -->
+    <main class="page-main">
+    <!-- Lessons Section -->
+    <section id="lessons" class="lessons-section lessons-page">
+        <div class="container">
+            <!-- Title + progress on one line (progress filled in by script.js) -->
+            <div class="path-head">
+                <div>
+                    <h2>HTML Learning Path</h2>
+                    <p class="path-sub">Follow the steps in order.</p>
+                </div>
+                <div class="path-progress" aria-label="Your progress">
+                    <span data-lessons-done>0 of 6 lessons completed</span>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <span class="progress-percent">0%</span>
+                </div>
+            </div>
+
+            <div class="learning-path">
+                <!-- Lesson 1 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">01</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>HTML Basics</h3>
+                    <ul class="lesson-topics">
+                        <li>Document Structure</li>
+                        <li>Headings & Paragraphs</li>
+                        <li>Elements & Attributes</li>
+                    </ul>
+                    <a href="lessons/basics.html" class="lesson-btn">Start Lesson</a>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">02</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Links & Media</h3>
+                    <ul class="lesson-topics">
+                        <li>Links & Anchors</li>
+                        <li>Images</li>
+                        <li>Audio, Video & iframe</li>
+                    </ul>
+                    <a href="lessons/links-media.html" class="lesson-btn">Continue</a>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">03</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>HTML Tags</h3>
+                    <ul class="lesson-topics">
+                        <li>Semantic Tags</li>
+                        <li>Formatting Tags</li>
+                        <li>Best Practices</li>
+                    </ul>
+                    <a href="lessons/tags.html" class="lesson-btn">Continue</a>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">04</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Forms & Validation</h3>
+                    <ul class="lesson-topics">
+                        <li>Form Elements</li>
+                        <li>Input Types</li>
+                        <li>HTML5 Validation</li>
+                    </ul>
+                    <a href="lessons/forms.html" class="lesson-btn">Continue</a>
+                </div>
+
+                <!-- Lesson 5 (NEW) -->
+                <div class="lesson-card">
+                    <div class="lesson-number">05</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>HTML Advanced</h3>
+                    <ul class="lesson-topics">
+                        <li>Accessibility & SEO</li>
+                        <li>Responsive HTML</li>
+                        <li>Entities & Best Practices</li>
+                    </ul>
+                    <a href="lessons/advanced.html" class="lesson-btn">Continue</a>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card">
+                    <div class="lesson-number">06</div>
+                    <div class="lesson-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>CSS Basics</h3>
+                    <ul class="lesson-topics">
+                        <li>Colors &amp; Text</li>
+                        <li>Padding, Border, Margin</li>
+                        <li>Classes</li>
+                    </ul>
+                    <a href="lessons/css-js.html" class="lesson-btn">Continue</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More to explore: each part has its own page -->
+    <section class="explore">
+        <div class="container">
+            <h2>More to explore</h2>
+            <div class="explore-grid">
+                <a href="practice.html" class="ex-teaser-card">
+                    <i class="fas fa-dumbbell" aria-hidden="true"></i>
+                    <span><strong>Practice &amp; Quiz</strong><small>Exercises, quiz and certificate</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="tutorials.html" class="ex-teaser-card">
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                    <span><strong>All Tutorials</strong><small>Every topic in one list</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="examples.html" class="ex-teaser-card">
+                    <i class="fas fa-shapes" aria-hidden="true"></i>
+                    <span><strong>HTML Examples</strong><small>Ready-made code to try in the editor</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ROJ Institute</h3>
+                <p>A comprehensive resource for learning HTML with interactive examples and quizzes.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="practice.html#references">References</a></li>
+                    <li><a href="practice.html#exercises">Exercises</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Practice</h3>
+                <ul>
+                    <li><a href="index.html#examples">Code Editor</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="practice.html#quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

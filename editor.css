@@ -813,3 +813,83 @@
         background: none;
     }
 }
+
+/* ---------- Challenges live in the editor's "Tasks" tab ---------- */
+.he-pane[data-pane="challenges"] { background: white; }
+
+.he-pane .he-challenges {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 14px 16px;
+}
+
+.he-pane .he-challenges-head { flex-wrap: wrap; }
+
+@media (max-width: 768px) {
+    .he-tab { font-size: 0.78rem; padding: 10px 2px; }
+    .he-tab .he-count { min-width: 0; padding: 0 5px; }
+    .he-pane .he-challenges { padding: 12px; }
+}
+
+/* ---------- Full screen button + full screen mode ---------- */
+.he-focus-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.he-focus-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+body.he-focus-open { overflow: hidden; }
+
+.he.he-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    --he-height: calc(100vh - 175px);
+    --he-height: calc(100dvh - 175px);
+}
+
+.he.he-fullscreen .he-body { flex: 1; min-height: 0; }
+.he.he-fullscreen .he-pane { height: calc(var(--he-height) + 75px); }
+
+@media (max-width: 768px) {
+    /* Title row on phones: title · full screen · Live */
+    .he .he-title { grid-column: 1 / 4; }
+
+    .he-focus-btn {
+        grid-column: 4;
+        grid-row: 1;
+        justify-self: end;
+        width: 40px;
+        height: 36px;
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+        border-radius: 999px;
+    }
+
+    .he-focus-btn span { display: none; }
+
+    .he.he-fullscreen {
+        --he-height: calc(100vh - 290px);
+        --he-height: calc(100dvh - 290px);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .he.he-fullscreen .he-pane { height: calc(var(--he-height) + 90px); }
+}

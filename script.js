@@ -276,7 +276,7 @@ function initBottomNav() {
   const items = [
     { href: home + "#home", icon: "fa-home", label: "Home", key: "home" },
     { href: home + "#examples", icon: "fa-laptop-code", label: "Editor", key: "examples" },
-    { href: home + "#lessons", icon: "fa-graduation-cap", label: "Lessons", key: "lessons" },
+    { href: r + "lessons.html", icon: "fa-graduation-cap", label: "Lessons", key: "lessons" },
     { href: r + "practice.html", icon: "fa-dumbbell", label: "Practice", key: "exercises" },
     { href: r + "arcade.html", icon: "fa-gamepad", label: "Arcade", key: "arcade" }
   ];
@@ -286,8 +286,9 @@ function initBottomNav() {
   else if (inExercises) active = "exercises";
   else if (page === "arcade.html") active = "arcade";
   else if (page === "examples.html") active = "examples";
-  else if (page === "tutorials.html") active = "lessons";
+  else if (page === "tutorials.html" || page === "lessons.html") active = "lessons";
   else if (page === "practice.html") active = "exercises";
+  else if (page === "puzzle.html") active = "arcade";
 
   const nav = document.createElement("nav");
   nav.className = "bottom-nav";
@@ -313,7 +314,7 @@ function initBottomNav() {
         });
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    ["home", "lessons", "examples"].forEach(id => {
+    ["home", "examples"].forEach(id => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -559,25 +560,6 @@ function initMobileCodeBoxes() {
 }
 
 /* -----------------------------
-   PHONES, HOME PAGE: the learning path is its own screen ("Lessons" tab).
-   index.html#lessons shows only the path; any other address shows the
-   rest of the home page without it. CSS does the hiding (phones only),
-   so the desktop page is unchanged.
------------------------------ */
-function initMobileLessonsView() {
-  if (!document.getElementById("lessons") || !document.getElementById("examples")) return; // home page only
-  const apply = () => document.body.classList.toggle("view-lessons", location.hash === "#lessons");
-  addEventListener("hashchange", () => {
-    apply();
-    // The browser jumped while the target may still have been hidden: jump again now it is shown
-    let target = null;
-    try { target = location.hash && document.querySelector(location.hash); } catch { /* not a valid selector */ }
-    requestAnimationFrame(() => (target ? target.scrollIntoView() : scrollTo(0, 0)));
-  });
-  apply();
-}
-
-/* -----------------------------
    INSTALL AS AN APP (PWA): service worker + "Install app" button
 ----------------------------- */
 function initInstallApp() {
@@ -637,5 +619,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initHomePage();
   initMobileCodeBoxes();
   initInstallApp();
-  initMobileLessonsView();
 });

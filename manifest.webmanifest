@@ -15,7 +15,7 @@
     { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Lessons", "url": "./index.html#lessons", "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Lessons", "url": "./lessons.html", "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
     { "name": "Editor", "url": "./index.html#examples", "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
     { "name": "Practice", "url": "./practice.html", "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] }
   ]

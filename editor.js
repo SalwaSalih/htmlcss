@@ -678,6 +678,8 @@
       listEl.appendChild(li);
     });
     if (progressEl) progressEl.textContent = `${done.size} / ${CHALLENGES.length} done`;
+    const countEl = $("heChallengeCount");
+    if (countEl) { countEl.textContent = `${done.size}/${CHALLENGES.length}`; countEl.classList.toggle("he-has-issues", false); }
     // One dot per challenge: green = done, blue = the one to do now
     const dots = $("heDots");
     if (dots) dots.innerHTML = CHALLENGES.map((_, i) =>
@@ -988,6 +990,31 @@
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
+
+  /* -----------------------------
+     FULL SCREEN: only the editor is shown, so students can just code
+  ----------------------------- */
+  const focusBtn = $("heFocus");
+  function setFocus(on) {
+    const he = $("htmlEditor");
+    if (!he || !focusBtn) return;
+    he.classList.toggle("he-fullscreen", on);
+    document.body.classList.toggle("he-focus-open", on);
+    focusBtn.setAttribute("aria-pressed", String(on));
+    focusBtn.title = on ? "Leave full screen" : "Full screen: only the editor";
+    focusBtn.innerHTML = on
+      ? '<i class="fas fa-compress"></i><span>Exit</span>'
+      : '<i class="fas fa-expand"></i><span>Full screen</span>';
+    if (on) ta.focus({ preventScroll: true });
+    else he.scrollIntoView({ block: "start" });
+  }
+  focusBtn?.addEventListener("click", () => setFocus(!$("htmlEditor").classList.contains("he-fullscreen")));
+  // Esc leaves full screen (inside the code box Esc is used to leave the editor with Tab)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.activeElement !== ta && $("htmlEditor")?.classList.contains("he-fullscreen")) setFocus(false);
+  });
+  // Open straight in full screen with index.html#code
+  if (location.hash === "#code") setFocus(true);
 
   $("heReset")?.addEventListener("click", (e) => {
     const reset = () => {
