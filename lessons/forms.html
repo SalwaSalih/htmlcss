@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Forms - Learn HTML</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -31,21 +39,22 @@
         .form-example { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
         .validation-demo { background: #e8f4fc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3498db; }
     </style>
+    <script src="../lesson-check.js" defer></script>
     <script src="../script.js" defer></script>
 </head>
 <body data-lesson="forms">
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <span>Learn HTML</span>
-            </div>
+            <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+                <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="../index.html#home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="../index.html#lessons" class="active"><i class="fas fa-book"></i> Lessons</a></li>
-                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Examples</a></li>
-                <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-                <li><a href="../index.html#cheatsheet"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+                <li><a href="../index.html#lessons" class="active" aria-current="page"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="../practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -198,12 +207,12 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Learn HTML</h3>
+                <h3>ROJ Institute</h3>
                 <p>Master HTML step by step with interactive examples.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Learn HTML. Made for students.</p>
+            <p>&copy; 2026 ROJ Institute. Made for students.</p>
         </div>
     </footer>
 

@@ -360,3 +360,23 @@
         flex: none;
     }
 }
+
+/* ---------- Gallery on its own page (examples.html) ---------- */
+.ex-page {
+    margin-top: 90px;
+    margin-bottom: 60px;
+}
+
+.ex-page h1 {
+    text-align: center;
+    color: var(--dark-color);
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+}
+
+.ex-page .section-subtitle { margin-bottom: 24px; }
+
+@media (max-width: 768px) {
+    .ex-page { margin-top: 84px; padding: 0 12px; }
+    .ex-page h1 { font-size: 1.7rem; }
+}

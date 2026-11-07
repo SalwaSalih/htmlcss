@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise 1: Create Your First Page - HTML Master</title>
+    <title>Exercise 1: Create Your First Page - ROJ Institute</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -285,7 +293,7 @@
         
         .step-label {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: #5f6c70;
             text-align: center;
         }
         
@@ -338,16 +346,16 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <span>HTML Master</span>
-            </div>
+            <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+                <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="../index.html#tutorials"><i class="fas fa-book"></i> Tutorials</a></li>
-                <li><a href="../index.html#exercises" class="active"><i class="fas fa-dumbbell"></i> Exercises</a></li>
-                <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-                <li><a href="../index.html#cheatsheet"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+                <li><a href="../index.html#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="../lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="../practice.html" class="active" aria-current="page"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -495,7 +503,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>HTML Master</h3>
+                <h3>ROJ Institute</h3>
                 <p>Learn HTML through interactive exercises and examples.</p>
             </div>
             <div class="footer-section">
@@ -509,18 +517,19 @@
             <div class="footer-section">
                 <h3>Resources</h3>
                 <ul>
-                    <li><a href="../index.html#cheatsheet">HTML Cheatsheet</a></li>
+                    <li><a href="../practice.html#cheatsheet">HTML Cheatsheet</a></li>
                     <li><a href="../index.html#examples">Code Editor</a></li>
-                    <li><a href="../index.html#quiz">Practice Quiz</a></li>
+                    <li><a href="../practice.html#quiz">Practice Quiz</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 HTML Master. Exercise 1: Create Your First Page</p>
+            <p>&copy; 2026 ROJ Institute. Exercise 1: Create Your First Page</p>
         </div>
     </footer>
 
     <script src="../confirm-button.js"></script>
+    <script src="../script.js"></script>
     <script>
         // Starter code
         const starterCode = `<!DOCTYPE html>

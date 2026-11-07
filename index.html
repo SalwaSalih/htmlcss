@@ -4,84 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn HTML - Complete Guide for Beginners</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="images/roj-logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="highlight.css">
     <link rel="stylesheet" href="editor.css">
-    <link rel="stylesheet" href="examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <span>HTML Master</span>
-            </div>
+            <a class="logo" href="index.html" aria-label="ROJ Institute - home">
+                <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
-                <li class="dropdown">
-                    <a href="#"><i class="fas fa-graduation-cap"></i> Tutorials <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-column">
-                            <h4>HTML Basics</h4>
-                            <a href="lessons/basics.html#introduction"><i class="fas fa-chevron-right"></i> HTML Introduction</a>
-                            <a href="lessons/basics.html#structure"><i class="fas fa-chevron-right"></i> Document Structure</a>
-                            <a href="lessons/basics.html#elements"><i class="fas fa-chevron-right"></i> HTML Elements</a>
-                            <a href="lessons/basics.html#attributes"><i class="fas fa-chevron-right"></i> HTML Attributes</a>
-                            <a href="lessons/basics.html#headings"><i class="fas fa-chevron-right"></i> Headings & Paragraphs</a>
-                        </div>
-
-                        <div class="dropdown-column">
-                            <h4>Links & Media</h4>
-                            <a href="lessons/links-media.html#links"><i class="fas fa-chevron-right"></i> HTML Links</a>
-                            <a href="lessons/links-media.html#paths"><i class="fas fa-chevron-right"></i> Paths (Relative/Absolute)</a>
-                            <a href="lessons/links-media.html#images"><i class="fas fa-chevron-right"></i> HTML Images</a>
-                            <a href="lessons/links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Media</a>
-                            <a href="lessons/links-media.html#embed"><i class="fas fa-chevron-right"></i> HTML iframe</a>
-                        </div>
-
-                        <div class="dropdown-column">
-                            <h4>HTML Advanced</h4>
-                            <a href="lessons/tags.html#semantic"><i class="fas fa-chevron-right"></i> Semantic HTML</a>
-                            <a href="lessons/tags.html#formatting"><i class="fas fa-chevron-right"></i> Formatting Tags</a>
-                            <a href="lessons/advanced.html#responsive"><i class="fas fa-chevron-right"></i> Responsive HTML</a>
-                            <a href="lessons/advanced.html#accessibility"><i class="fas fa-chevron-right"></i> Accessibility</a>
-                            <a href="lessons/advanced.html#entities"><i class="fas fa-chevron-right"></i> Entities & Symbols</a>
-                        </div>
-
-                        <div class="dropdown-column">
-                            <h4>HTML Forms</h4>
-                            <a href="lessons/forms.html#basic-form"><i class="fas fa-chevron-right"></i> HTML Forms</a>
-                            <a href="lessons/forms.html#input-types"><i class="fas fa-chevron-right"></i> Input Types</a>
-                            <a href="lessons/forms.html#validation"><i class="fas fa-chevron-right"></i> Form Validation</a>
-                        </div>
-
-                        <div class="dropdown-column">
-                            <h4>HTML APIs</h4>
-                            <a href="lessons/apis.html#geolocation"><i class="fas fa-chevron-right"></i> Geolocation</a>
-                            <a href="lessons/apis.html#dragdrop"><i class="fas fa-chevron-right"></i> Drag &amp; Drop</a>
-                            <a href="lessons/apis.html#storage"><i class="fas fa-chevron-right"></i> Web Storage</a>
-                            <a href="lessons/apis.html#workers"><i class="fas fa-chevron-right"></i> Web Workers</a>
-                            <a href="lessons/apis.html#sse"><i class="fas fa-chevron-right"></i> SSE</a>
-                        </div>
-                    </div>
-                </li>
+                <li><a href="#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
                 <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
                 <li><a href="arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
-                <li><a href="#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-                <li class="dropdown dropdown-small">
-                    <a href="#"><i class="fas fa-ellipsis-h"></i> More <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-column">
-                            <a href="#examples"><i class="fas fa-laptop-code"></i> Code Editor</a>
-                            <a href="#exercises"><i class="fas fa-dumbbell"></i> Exercises</a>
-                            <a href="#references"><i class="fas fa-book"></i> HTML References</a>
-                            <a href="#resources"><i class="fas fa-book-open"></i> Resources</a>
-                            <a href="#certificate"><i class="fas fa-award"></i> Certificate</a>
-                        </div>
-                    </div>
-                </li>
             </ul>
 
             <!-- XP HUD (powered by script.js localStorage) -->
@@ -101,13 +50,16 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Salwa S. Younis - Roj institute</h1>
-            <p>Learn HTML with interactive examples, practical exercises, and comprehensive tutorials designed for beginners to advanced learners.</p>
+            <h1>Learn HTML step by step</h1>
+            <p class="hero-teacher"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> with Salwa S. Younis &middot; ROJ Institute</p>
+            <p>Short lessons, a live code editor and quizzes. Start with lesson 1 and go one step at a time.</p>
             <div class="hero-buttons">
-                <a href="#tutorials" class="btn btn-primary">Start Learning</a>
-                <a href="#quiz" class="btn btn-secondary">Test Your Skills</a>                
+                <a href="#lessons" class="btn btn-primary">Start Learning</a>
+                <a href="practice.html#quiz" class="btn btn-secondary">Test Your Skills</a>
                 <a href="arcade.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Play Arcade</a>
             </div>
+            <!-- "Install the app" button appears here when the browser allows it (script.js) -->
+            <div class="install-app" data-install-app></div>
         </div>
     </section>
 
@@ -129,13 +81,16 @@
                         <button type="button" class="he-btn" id="heFormat" title="Fix the indentation"><i class="fas fa-align-left"></i><span>Tidy</span></button>
                         <button type="button" class="he-btn" id="heCopy" title="Copy the code"><i class="far fa-copy"></i><span>Copy</span></button>
                         <button type="button" class="he-btn" id="heDownload" title="Save as an .html file"><i class="fas fa-download"></i><span>Save</span></button>
-                        <button type="button" class="he-btn" id="heReset" title="Start again from the starter page"><i class="fas fa-undo"></i><span>Reset</span></button>
+                        <button type="button" class="he-btn" id="heReset" title="Clear the editor"><i class="fas fa-undo"></i><span>Reset</span></button>
                         <button type="button" class="he-btn he-run" id="runCode"><i class="fas fa-play"></i><span>Run</span></button>
                     </div>
                 </div>
 
-                <!-- Quick-insert buttons: click to add a tag at the cursor -->
-                <div class="he-snippets" id="heSnippets" aria-label="Insert a tag"></div>
+                <!-- Phones only: switch between the code and the result -->
+                <div class="he-view" role="tablist" aria-label="Show code or result">
+                    <button type="button" role="tab" class="he-view-btn" data-view="code" aria-selected="true"><i class="fas fa-code"></i> Code</button>
+                    <button type="button" role="tab" class="he-view-btn" data-view="result" aria-selected="false"><i class="fas fa-eye"></i> Result</button>
+                </div>
 
                 <div class="he-body">
                     <div class="he-code">
@@ -144,7 +99,7 @@
                             <div class="he-gutter" id="heGutter" aria-hidden="true"></div>
                             <div class="he-area">
                                 <pre class="he-highlight" id="heHighlight" aria-hidden="true"></pre>
-                                <textarea id="htmlCode" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="HTML code"></textarea>
+                                <textarea id="htmlCode" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="HTML code" placeholder="Add your HTML code here"></textarea>
                             </div>
                         </div>
                         <div class="he-explain" id="heExplain" aria-live="polite">
@@ -175,128 +130,12 @@
             <!-- Small guided tasks, checked automatically -->
             <div class="he-challenges">
                 <div class="he-challenges-head">
-                    <h3><i class="fas fa-flag-checkered"></i> Challenges</h3>
+                    <h3><i class="fas fa-flag-checkered"></i> Challenge</h3>
+                    <div class="he-dots" id="heDots" aria-hidden="true"></div>
                     <span id="heChallengeProgress">0 / 0 done</span>
                 </div>
-                <p class="he-pane-help">Solve these in the editor above. They are checked automatically while you type.</p>
                 <ol class="he-challenge-list" id="heChallenges"></ol>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tutorial Categories Section -->
-    <section id="tutorials" class="tutorials-section">
-        <div class="container">
-            <h2>Complete HTML Tutorial</h2>
-            <p class="section-subtitle">Master HTML with our comprehensive tutorial series</p>
-
-            <div class="tutorial-categories">
-                <!-- Category 1 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-rocket"></i> HTML Basics</h3>
-                    <ul>
-                        <li><a href="lessons/basics.html#introduction"><i class="fas fa-chevron-right"></i> HTML Introduction</a></li>
-                        <li><a href="lessons/basics.html#editors"><i class="fas fa-chevron-right"></i> HTML Editors</a></li>
-                        <li><a href="lessons/basics.html#basic"><i class="fas fa-chevron-right"></i> HTML Basic</a></li>
-                        <li><a href="lessons/basics.html#elements"><i class="fas fa-chevron-right"></i> HTML Elements</a></li>
-                        <li><a href="lessons/basics.html#attributes"><i class="fas fa-chevron-right"></i> HTML Attributes</a></li>
-                        <li><a href="lessons/basics.html#headings"><i class="fas fa-chevron-right"></i> HTML Headings</a></li>
-                        <li><a href="lessons/basics.html#paragraphs"><i class="fas fa-chevron-right"></i> HTML Paragraphs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-link"></i> HTML Links & Media</h3>
-                    <ul>
-                        <li><a href="lessons/links-media.html#links"><i class="fas fa-chevron-right"></i> HTML Links</a></li>
-                        <li><a href="lessons/links-media.html#images"><i class="fas fa-chevron-right"></i> HTML Images</a></li>
-                        <li><a href="lessons/links-media.html#paths"><i class="fas fa-chevron-right"></i> Paths (Relative vs Absolute)</a></li>
-                        <li><a href="lessons/links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Media (Audio/Video)</a></li>
-                        <li><a href="lessons/links-media.html#embed"><i class="fas fa-chevron-right"></i> HTML iframe</a></li>
-                        <li><a href="lessons/links-media.html#exercise"><i class="fas fa-chevron-right"></i> Practice Exercise</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> HTML Favicon (Coming Soon)</a></li>
-                    </ul>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-edit"></i> HTML Forms</h3>
-                    <ul>
-                        <li><a href="lessons/forms.html#basic-form"><i class="fas fa-chevron-right"></i> HTML Forms</a></li>
-                        <li><a href="lessons/forms.html#input-types"><i class="fas fa-chevron-right"></i> Form Elements</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Input Types (Coming Soon)</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Input Attributes (Coming Soon)</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Input Form Attributes (Coming Soon)</a></li>
-                        <li><a href="lessons/forms.html#validation"><i class="fas fa-chevron-right"></i> Form Validation</a></li>
-                    </ul>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-paint-brush"></i> HTML Graphics</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> HTML Canvas (Coming Soon)</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> HTML SVG (Coming Soon)</a></li>
-                        <li><a href="lessons/links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Media</a></li>
-                        <li><a href="lessons/links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Video</a></li>
-                        <li><a href="lessons/links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Audio</a></li>
-                        <li><a href="lessons/links-media.html#embed"><i class="fas fa-chevron-right"></i> HTML YouTube (iframe)</a></li>
-                    </ul>
-                </div>
-
-                <!-- Category 5 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-code"></i> HTML APIs</h3>
-                    <ul>
-                        <li><a href="lessons/apis.html#geolocation"><i class="fas fa-chevron-right"></i> HTML Geolocation</a></li>
-                        <li><a href="lessons/apis.html#dragdrop"><i class="fas fa-chevron-right"></i> HTML Drag/Drop</a></li>
-                        <li><a href="lessons/apis.html#storage"><i class="fas fa-chevron-right"></i> HTML Web Storage</a></li>
-                        <li><a href="lessons/apis.html#workers"><i class="fas fa-chevron-right"></i> HTML Web Workers</a></li>
-                        <li><a href="lessons/apis.html#sse"><i class="fas fa-chevron-right"></i> HTML SSE</a></li>
-                    </ul>
-                </div>
-
-                <!-- Category 6 -->
-                <div class="category-card">
-                    <h3><i class="fas fa-mobile-alt"></i> HTML Advanced</h3>
-                    <ul>
-                        <li><a href="lessons/tags.html#semantic"><i class="fas fa-chevron-right"></i> HTML Semantics</a></li>
-                        <li><a href="lessons/advanced.html#responsive"><i class="fas fa-chevron-right"></i> HTML Responsive</a></li>
-                        <li><a href="lessons/advanced.html#accessibility"><i class="fas fa-chevron-right"></i> HTML Accessibility</a></li>
-                        <li><a href="lessons/advanced.html#entities"><i class="fas fa-chevron-right"></i> HTML Symbols</a></li>
-                        <li><a href="lessons/advanced.html#entities"><i class="fas fa-chevron-right"></i> HTML Emojis</a></li>
-                        <li><a href="lessons/advanced.html#entities"><i class="fas fa-chevron-right"></i> HTML Entities</a></li>
-                    </ul>
-                </div>
-
-                <!-- Bonus Category: Arcade -->
-                <div class="category-card">
-                    <h3><i class="fas fa-gamepad"></i> HTML Arcade</h3>
-                    <ul>
-                        <li><a href="arcade.html#guess"><i class="fas fa-chevron-right"></i> Guess the Tag</a></li>
-                        <li><a href="arcade.html#fix"><i class="fas fa-chevron-right"></i> Fix the HTML</a></li>
-                        <li><a href="arcade.html#build"><i class="fas fa-chevron-right"></i> Build the Structure</a></li>
-                        <li><a href="arcade.html#badges"><i class="fas fa-chevron-right"></i> Badges &amp; XP</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Progress Tracker -->
-    <section class="progress-tracker">
-        <div class="container">
-            <div class="progress-header">
-                <h3>Your Learning Progress</h3>
-                <span class="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
-            <div class="progress-stats">
-                <span>Based on your XP level</span>
-                <span>Next: HTML Basics</span>
+                <p class="he-all-done" id="heAllDone" hidden><i class="fas fa-trophy"></i> All challenges done – great work!</p>
             </div>
         </div>
     </section>
@@ -304,8 +143,18 @@
     <!-- Lessons Section -->
     <section id="lessons" class="lessons-section">
         <div class="container">
-            <h2>HTML Learning Path</h2>
-            <p class="section-subtitle">Follow these pedagogical steps to master HTML</p>
+            <!-- Title + progress on one line (progress filled in by script.js) -->
+            <div class="path-head">
+                <div>
+                    <h2>HTML Learning Path</h2>
+                    <p class="path-sub">Follow the steps in order.</p>
+                </div>
+                <div class="path-progress" aria-label="Your progress">
+                    <span data-lessons-done>0 of 6 lessons completed</span>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <span class="progress-percent">0%</span>
+                </div>
+            </div>
 
             <div class="learning-path">
                 <!-- Lesson 1 -->
@@ -389,11 +238,11 @@
                     <div class="lesson-icon">
                         <i class="fas fa-paint-brush"></i>
                     </div>
-                    <h3>CSS & JavaScript</h3>
+                    <h3>CSS Basics</h3>
                     <ul class="lesson-topics">
-                        <li>Basic Styling</li>
-                        <li>DOM Manipulation</li>
-                        <li>Simple Interactions</li>
+                        <li>Colors &amp; Text</li>
+                        <li>Padding, Border, Margin</li>
+                        <li>Classes</li>
                     </ul>
                     <a href="lessons/css-js.html" class="lesson-btn">Continue</a>
                 </div>
@@ -401,430 +250,26 @@
         </div>
     </section>
 
-    <!-- Example Gallery (logic in examples.js, styles in examples.css) -->
-    <section id="quick-examples" class="ex-section">
+    <!-- More to explore: each part has its own page -->
+    <section class="explore">
         <div class="container">
-            <h2>HTML Examples</h2>
-            <p class="section-subtitle">Ready-made examples you can preview, read and open in the editor</p>
-
-            <div class="ex-toolbar">
-                <label class="ex-search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <input type="search" id="exSearch" placeholder="Search examples, e.g. table, form, video&hellip;" aria-label="Search examples">
-                </label>
-                <div class="ex-levels" id="exLevels" aria-label="Filter by level"></div>
-            </div>
-            <div class="ex-cats" id="exCats" aria-label="Filter by topic"></div>
-
-            <p class="ex-count" id="exCount" aria-live="polite"></p>
-            <div class="ex-grid" id="exGrid"></div>
-            <p class="ex-empty" id="exEmpty" hidden>No examples match your search.</p>
-            <div class="ex-more">
-                <button type="button" class="btn btn-primary" id="exMore" hidden>Show all examples</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Exercises Section -->
-    <section id="exercises" class="exercises-section">
-        <div class="container">
-            <h2>HTML Exercises</h2>
-            <p class="section-subtitle">Practice with hands-on exercises</p>
-
-            <div class="exercises-grid">
-                <div class="exercise-card">
-                    <div class="exercise-difficulty easy">Easy</div>
-                    <h4>Create Your First Page</h4>
-                    <p>Create a simple HTML page with heading and paragraph.</p>
-                    <div class="exercise-meta">
-                        <span><i class="far fa-clock"></i> 5 min</span>
-                        <span><i class="fas fa-star"></i> 10 points</span>
-                    </div>
-                    <button class="btn-small" onclick="startExercise(1)">Start Exercise</button>
-                </div>
-
-                <div class="exercise-card">
-                    <div class="exercise-difficulty medium">Medium</div>
-                    <h4>Build a Form</h4>
-                    <p>Create a registration form with validation.</p>
-                    <div class="exercise-meta">
-                        <span><i class="far fa-clock"></i> 15 min</span>
-                        <span><i class="fas fa-star"></i> 25 points</span>
-                    </div>
-                    <button class="btn-small" onclick="startExercise(2)">Start Exercise</button>
-                </div>
-
-                <div class="exercise-card">
-                    <div class="exercise-difficulty hard">Hard</div>
-                    <h4>Responsive Layout</h4>
-                    <p>Create a responsive webpage using semantic HTML.</p>
-                    <div class="exercise-meta">
-                        <span><i class="far fa-clock"></i> 30 min</span>
-                        <span><i class="fas fa-star"></i> 50 points</span>
-                    </div>
-                    <button class="btn-small" onclick="startExercise(3)">Start Exercise</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quiz Section -->
-    <section id="quiz" class="quiz-section">
-        <div class="container">
-            <h2>Test Your Knowledge</h2>
-            <p class="section-subtitle">Take this quiz to check your understanding</p>
-
-            <div class="quiz-container">
-                <div class="quiz-header">
-                    <div class="quiz-progress">
-                        <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
-                    </div>
-                    <div class="quiz-score">
-                        Score: <span id="score">0</span>
-                    </div>
-                </div>
-
-                <div class="quiz-body">
-                    <div id="questionContainer">
-                        <!-- Questions will be loaded here -->
-                    </div>
-
-                    <div class="quiz-options" id="optionsContainer">
-                        <!-- Options will be loaded here -->
-                    </div>
-
-                    <div class="quiz-navigation">
-                        <button id="prevBtn" class="nav-btn">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </button>
-                        <button id="nextBtn" class="nav-btn">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button id="submitBtn" class="submit-btn">
-                            Submit Quiz
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HTML Tag Reference Section -->
-    <section id="references" class="references-section">
-        <div class="container">
-            <h2>HTML Tag Reference</h2>
-            <p class="section-subtitle">Complete list of HTML tags with examples</p>
-
-            <div class="search-tags">
-                <input type="text" placeholder="Search HTML tags..." id="tagSearch">
-            </div>
-
-            <table class="tag-reference">
-                <thead>
-                    <tr>
-                        <th>Tag</th>
-                        <th>Description</th>
-                        <th>Example</th>
-                    </tr>
-                </thead>
-                <tbody id="tagTable">
-                    <tr>
-                        <td><code>&lt;!DOCTYPE&gt;</code></td>
-                        <td>Defines document type</td>
-                        <td><code>&lt;!DOCTYPE html&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;html&gt;</code></td>
-                        <td>Root element</td>
-                        <td><code>&lt;html&gt;...&lt;/html&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;head&gt;</code></td>
-                        <td>Container for metadata</td>
-                        <td><code>&lt;head&gt;&lt;title&gt;...&lt;/head&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;title&gt;</code></td>
-                        <td>Document title</td>
-                        <td><code>&lt;title&gt;My Page&lt;/title&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;body&gt;</code></td>
-                        <td>Document body</td>
-                        <td><code>&lt;body&gt;content&lt;/body&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;h1&gt; to &lt;h6&gt;</code></td>
-                        <td>HTML headings</td>
-                        <td><code>&lt;h1&gt;Heading&lt;/h1&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;p&gt;</code></td>
-                        <td>Paragraph</td>
-                        <td><code>&lt;p&gt;Paragraph&lt;/p&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;a&gt;</code></td>
-                        <td>Hyperlink</td>
-                        <td><code>&lt;a href="#"&gt;Link&lt;/a&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;img&gt;</code></td>
-                        <td>Image</td>
-                        <td><code>&lt;img src="img.jpg"&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;ul&gt;</code></td>
-                        <td>Unordered list</td>
-                        <td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;ol&gt;</code></td>
-                        <td>Ordered list</td>
-                        <td><code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;div&gt;</code></td>
-                        <td>Division/container</td>
-                        <td><code>&lt;div&gt;content&lt;/div&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;span&gt;</code></td>
-                        <td>Inline container</td>
-                        <td><code>&lt;span&gt;text&lt;/span&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;table&gt;</code></td>
-                        <td>Table</td>
-                        <td><code>&lt;table&gt;...&lt;/table&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;form&gt;</code></td>
-                        <td>Form</td>
-                        <td><code>&lt;form&gt;inputs&lt;/form&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;input&gt;</code></td>
-                        <td>Input field</td>
-                        <td><code>&lt;input type="text"&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;button&gt;</code></td>
-                        <td>Clickable button</td>
-                        <td><code>&lt;button&gt;Click&lt;/button&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;textarea&gt;</code></td>
-                        <td>Multi-line input</td>
-                        <td><code>&lt;textarea&gt;&lt;/textarea&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;select&gt;</code></td>
-                        <td>Dropdown list</td>
-                        <td><code>&lt;select&gt;&lt;option&gt;1&lt;/option&gt;&lt;/select&gt;</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;video&gt;</code></td>
-                        <td>Video player</td>
-                        <td><code>&lt;video src="vid.mp4"&gt;&lt;/video&gt;</code></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="view-all">
-                <a href="lessons/reference.html" class="btn">View Complete Reference</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificate Section -->
-    <section id="certificate" class="certificate-section">
-        <div class="container">
-            <div class="certificate-card">
-                <div class="certificate-icon">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h3>Earn Your HTML Certificate</h3>
-                <p>Complete all lessons and quizzes to earn your HTML Master Certificate.</p>
-                <div class="certificate-progress">
-                    <div class="progress-item">
-                        <i class="far fa-circle"></i>
-                        <span>Complete Tutorials</span>
-                    </div>
-                    <div class="progress-item">
-                        <i class="far fa-circle"></i>
-                        <span>Pass All Quizzes</span>
-                    </div>
-                    <div class="progress-item">
-                        <i class="far fa-circle"></i>
-                        <span>Submit Exercises</span>
-                    </div>
-                </div>
-                <button class="btn" onclick="showCertificateInfo()">View Certificate Requirements</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section id="resources" class="resources-section">
-        <div class="container">
-            <h2>HTML Learning Resources</h2>
-            <p class="section-subtitle">Expand your knowledge with these valuable external resources</p>
-            
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <h3>Official Documentation</h3>
-                    <p>Comprehensive references from authoritative sources</p>
-                    <ul class="resource-links">
-                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN Web Docs <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener noreferrer">HTML Living Standard <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://www.w3.org/TR/html52/" target="_blank" rel="noopener noreferrer">W3C HTML 5.2 <i class="fas fa-external-link-alt"></i></a></li>
-                    </ul>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Tools & Validators</h3>
-                    <p>Essential tools to improve your HTML code quality</p>
-                    <ul class="resource-links">
-                        <li><a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Markup Validator <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://wave.webaim.org/" target="_blank" rel="noopener noreferrer">WAVE Accessibility Evaluator <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://caniuse.com/" target="_blank" rel="noopener noreferrer">Can I Use <i class="fas fa-external-link-alt"></i></a></li>
-                    </ul>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Additional Learning</h3>
-                    <p>Further your HTML education with these resources</p>
-                    <ul class="resource-links">
-                        <li><a href="https://www.freecodecamp.org/learn/responsive-web-design/" target="_blank" rel="noopener noreferrer">freeCodeCamp <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://web.dev/learn/html/" target="_blank" rel="noopener noreferrer">web.dev HTML Course <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://www.codecademy.com/learn/learn-html" target="_blank" rel="noopener noreferrer">Codecademy HTML <i class="fas fa-external-link-alt"></i></a></li>
-                    </ul>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-universal-access"></i>
-                    </div>
-                    <h3>Accessibility</h3>
-                    <p>Learn to make your HTML accessible to everyone</p>
-                    <ul class="resource-links">
-                        <li><a href="https://www.w3.org/WAI/fundamentals/" target="_blank" rel="noopener noreferrer">W3C Web Accessibility Initiative <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://webaim.org/techniques/semanticstructure/" target="_blank" rel="noopener noreferrer">WebAIM Semantic Structure <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="https://a11y-style-guide.com/style-guide/" target="_blank" rel="noopener noreferrer">A11Y Style Guide <i class="fas fa-external-link-alt"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="download-resources">
-                <a href="#" class="btn btn-primary" onclick="alert('HTML Cheatsheet PDF will be available soon!')">
-                    <i class="fas fa-download"></i> Download HTML Cheatsheet
+            <h2>More to explore</h2>
+            <div class="explore-grid">
+                <a href="practice.html" class="ex-teaser-card">
+                    <i class="fas fa-dumbbell" aria-hidden="true"></i>
+                    <span><strong>Practice &amp; Quiz</strong><small>Exercises, quiz and certificate</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cheatsheet Section -->
-    <section id="cheatsheet" class="cheatsheet-section">
-        <div class="container">
-            <h2>HTML Quick Reference</h2>
-            <div class="cheatsheet-grid">
-                <div class="cheatsheet-category">
-                    <h3><i class="fas fa-heading"></i> Text Tags</h3>
-                    <table class="cheatsheet-table">
-                        <tr>
-                            <td><code>&lt;h1&gt;</code></td>
-                            <td>Main heading</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;p&gt;</code></td>
-                            <td>Paragraph</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;strong&gt;</code></td>
-                            <td>Important text</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;em&gt;</code></td>
-                            <td>Emphasized text</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="cheatsheet-category">
-                    <h3><i class="fas fa-link"></i> Links & Media</h3>
-                    <table class="cheatsheet-table">
-                        <tr>
-                            <td><code>&lt;a href="#"&gt;</code></td>
-                            <td>Hyperlink</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;img src="#"&gt;</code></td>
-                            <td>Image</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;video&gt;</code></td>
-                            <td>Video player</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;audio&gt;</code></td>
-                            <td>Audio player</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="cheatsheet-category">
-                    <h3><i class="fas fa-table"></i> Structure</h3>
-                    <table class="cheatsheet-table">
-                        <tr>
-                            <td><code>&lt;div&gt;</code></td>
-                            <td>Division/container</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;span&gt;</code></td>
-                            <td>Inline container</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;header&gt;</code></td>
-                            <td>Header section</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;footer&gt;</code></td>
-                            <td>Footer section</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="cheatsheet-category">
-                    <h3><i class="fas fa-list"></i> Lists & Forms</h3>
-                    <table class="cheatsheet-table">
-                        <tr>
-                            <td><code>&lt;ul&gt;</code></td>
-                            <td>Unordered list</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;input&gt;</code></td>
-                            <td>Form input</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;button&gt;</code></td>
-                            <td>Clickable button</td>
-                        </tr>
-                        <tr>
-                            <td><code>&lt;textarea&gt;</code></td>
-                            <td>Multi-line input</td>
-                        </tr>
-                    </table>
-                </div>
+                <a href="tutorials.html" class="ex-teaser-card">
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                    <span><strong>All Tutorials</strong><small>Every topic in one list</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="examples.html" class="ex-teaser-card">
+                    <i class="fas fa-shapes" aria-hidden="true"></i>
+                    <span><strong>HTML Examples</strong><small>Ready-made code to try in the editor</small></span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -833,83 +278,35 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>HTML Master</h3>
+                <h3>ROJ Institute</h3>
                 <p>A comprehensive resource for learning HTML with interactive examples and quizzes.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#tutorials">Tutorials</a></li>
-                    <li><a href="#references">References</a></li>
-                    <li><a href="#exercises">Exercises</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="practice.html#references">References</a></li>
+                    <li><a href="practice.html#exercises">Exercises</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Practice</h3>
                 <ul>
                     <li><a href="#examples">Code Editor</a></li>
-                    <li><a href="#quick-examples">Examples</a></li>
-                    <li><a href="#quiz">Quiz</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="practice.html#quiz">Quiz</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 HTML Master. Made with ❤️ for students.</p>
+            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
         </div>
     </footer>
 
     <script src="confirm-button.js"></script>
-    <script src="quiz.js"></script>
     <script src="script.js"></script>
     <script src="highlight.js"></script>
     <script src="editor.js"></script>
-    <script src="examples.js"></script>
-    <script>
-        // Enhanced functionality for the new features
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tag reference search
-            const tagSearch = document.getElementById('tagSearch');
-            const tagTable = document.getElementById('tagTable');
-
-            if (tagSearch && tagTable) {
-                tagSearch.addEventListener('input', function(e) {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const rows = tagTable.getElementsByTagName('tr');
-
-                    for (let row of rows) {
-                        const text = row.textContent.toLowerCase();
-                        row.style.display = text.includes(searchTerm) ? '' : 'none';
-                    }
-                });
-            }
-
-            // Progress bar and mobile dropdown are handled by initProgressBar()
-            // and initNavigation() in script.js.
-        });
-
-        // Start exercise
-        // NOTE: startExercise() is implemented in script.js and opens real exercise pages.
-        // Do not override it here.
-
-        // Show certificate info
-        window.showCertificateInfo = function() {
-            const progress = document.querySelector('.progress-percent')?.textContent || '0%';
-            alert('Certificate Requirements:\n\n1. Complete all HTML tutorials\n2. Pass all quizzes with 80% or higher\n3. Complete all exercises\n4. Submit final project\n\nYour progress: ' + progress + ' complete');
-        };
-
-        // Editor auto-save is handled by editor.js
-
-        // Resource cards hover effect enhancement
-        const resourceCards = document.querySelectorAll('.resource-card');
-        resourceCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.querySelector('.resource-icon').style.transform = 'scale(1.1) rotate(5deg)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.querySelector('.resource-icon').style.transform = 'scale(1) rotate(0)';
-            });
-        });
-    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* =========================================================
-   HTML MASTER – EXAMPLE GALLERY (index.html #quick-examples)
+   HTML MASTER – EXAMPLE GALLERY (examples.html)
    Each example: live preview, highlighted code, what you learn,
    and a button that opens it in the HTML editor (editor.js).
    Styles: examples.css
@@ -711,31 +711,6 @@
     <p>Served with fries</p>
   </section>
 </div>`
-    },
-    {
-      title: "Click counter",
-      cat: "Projects", level: 3,
-      desc: "Your first bit of JavaScript: a button that counts clicks.",
-      learn: ["<code>id</code> lets JavaScript find an element", "<code>&lt;script&gt;</code> goes at the end so the HTML exists first", "<code>addEventListener</code> runs code when you click"],
-      code: `<h2>Click counter</h2>
-<p>You clicked <strong id="count">0</strong> times.</p>
-<button id="add">Click me!</button>
-<button id="reset">Reset</button>
-
-<script>
-  let clicks = 0;
-  const count = document.getElementById("count");
-
-  document.getElementById("add").addEventListener("click", function () {
-    clicks = clicks + 1;
-    count.textContent = clicks;
-  });
-
-  document.getElementById("reset").addEventListener("click", function () {
-    clicks = 0;
-    count.textContent = clicks;
-  });
-</script>`
     }
   ];
 
@@ -743,7 +718,9 @@
      HELPERS
   ----------------------------- */
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const highlight = (code) => (window.HMEditor?.highlight ? window.HMEditor.highlight(code) : esc(code));
+  const highlight = (code) => (window.HMEditor?.highlight
+    ? window.HMEditor.highlight(code)
+    : window.HMHighlight?.html ? window.HMHighlight.html(code) : esc(code));
 
   // Unique tag names used in the code, in order of appearance
   function tagsIn(code) {
@@ -865,7 +842,13 @@
 
   function openInEditor(ex) {
     const editor = document.getElementById("htmlCode");
-    if (!editor) return;
+    if (!editor) {
+      // The gallery has its own page: hand the code to the editor on the home page
+      // (script.js loads "tagExample" into the editor there)
+      try { localStorage.setItem("tagExample", ex.code); } catch { /* ignore */ }
+      window.location.href = "index.html#examples";
+      return;
+    }
     if (window.HMEditor) window.HMEditor.setCode(ex.code);
     else editor.value = ex.code;
     document.getElementById("htmlEditor")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -882,7 +865,7 @@
   const emptyEl = document.getElementById("exEmpty");
   const moreBtn = document.getElementById("exMore");
 
-  const INITIAL = 9;
+  const INITIAL = window.matchMedia("(max-width: 768px)").matches ? 4 : 9;
   let activeCat = "All";
   let activeLevel = 0;
   let showAll = false;

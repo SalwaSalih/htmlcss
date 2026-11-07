@@ -28,7 +28,10 @@
   const STORAGE_CHALLENGES = "htmlmaster_editor_challenges";
   const INDENT = "  ";
 
-  const STARTER = `<!DOCTYPE html>
+  // The editor starts empty; the textarea placeholder says "Add your HTML code here"
+  const STARTER = "";
+  // Code that older versions put in the editor; treated as "nothing written yet"
+  const OLD_STARTER = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -527,7 +530,7 @@
   /* -----------------------------
      EXPLAIN THE TAG UNDER THE CURSOR
   ----------------------------- */
-  const DEFAULT_EXPLAIN = `<i class="fas fa-lightbulb"></i> Click on a tag in your code to see what it does. <small>(Press Esc then Tab to leave the editor.)</small>`;
+  const DEFAULT_EXPLAIN = `<i class="fas fa-lightbulb"></i> Click on a tag in your code to see what it does. <small class="he-kbd-hint">(Press Esc then Tab to leave the editor.)</small>`;
 
   function explainAt(pos) {
     const code = ta.value;
@@ -675,6 +678,12 @@
       listEl.appendChild(li);
     });
     if (progressEl) progressEl.textContent = `${done.size} / ${CHALLENGES.length} done`;
+    // One dot per challenge: green = done, blue = the one to do now
+    const dots = $("heDots");
+    if (dots) dots.innerHTML = CHALLENGES.map((_, i) =>
+      `<span class="${done.has(i) ? "is-done" : i === activeIndex ? "is-now" : ""}"></span>`).join("");
+    const allDone = $("heAllDone");
+    if (allDone) allDone.hidden = activeIndex !== -1;
   }
 
   function checkChallenges(doc, code) {
@@ -807,20 +816,6 @@
     return ta.value.slice(start).match(/^[ \t]*/)[0];
   }
 
-  // Insert a snippet at the cursor; "|" marks where the cursor ends up
-  function insertSnippet(snippet) {
-    // Never overwrite selected code: insert after the selection instead
-    if (ta.selectionStart !== ta.selectionEnd) ta.setSelectionRange(ta.selectionEnd, ta.selectionEnd);
-    const indent = currentIndent();
-    let text = snippet.replace(/\n/g, "\n" + indent);
-    const caret = text.indexOf("|");
-    text = text.replace("|", "");
-    const startPos = ta.selectionStart;
-    insertText(text);
-    if (caret >= 0) ta.setSelectionRange(startPos + caret, startPos + caret);
-    updateCursor();
-    explainAt(startPos + 1);
-  }
 
   // Challenge examples go on their own line just before </body> (or at the end)
   function insertExample(code) {
@@ -834,6 +829,7 @@
     insertText("\n" + indent + code.replace(/\n/g, "\n" + indent));
     const line = lineOf(ta.value, pos + 1);
     scrollToLine(line);
+    setView("code");
     ta.closest(".he")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -942,39 +938,6 @@
   }
 
   /* -----------------------------
-     SNIPPET BAR
-  ----------------------------- */
-  const SNIPPETS = [
-    ["h1", "<h1>|Heading</h1>"],
-    ["p", "<p>|Some text.</p>"],
-    ["a", "<a href=\"https://example.com\">|Link text</a>"],
-    ["img", "<img src=\"https://placehold.co/200\" alt=\"|Describe the image\">"],
-    ["ul", "<ul>\n  <li>|Item 1</li>\n  <li>Item 2</li>\n</ul>"],
-    ["ol", "<ol>\n  <li>|First</li>\n  <li>Second</li>\n</ol>"],
-    ["table", "<table>\n  <tr>\n    <th>|Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>Ada</td>\n    <td>36</td>\n  </tr>\n</table>"],
-    ["form", "<form>\n  <label for=\"name\">Name</label>\n  <input id=\"name\" type=\"text\" placeholder=\"|Your name\">\n  <button type=\"submit\">Send</button>\n</form>"],
-    ["button", "<button>|Click me</button>"],
-    ["div", "<div>\n  |\n</div>"],
-    ["strong", "<strong>|important</strong>"],
-    ["br", "<br>|"],
-    ["comment", "<!-- | -->"],
-    ["style", "<style>\n  h1 {\n    color: |royalblue;\n  }\n</style>"]
-  ];
-
-  const snippetBar = $("heSnippets");
-  if (snippetBar) {
-    SNIPPETS.forEach(([label, code]) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "he-snippet";
-      b.textContent = label === "comment" ? "<!-- -->" : `<${label}>`;
-      b.title = TAGS[label] ? `${TAGS[label][0]}: ${TAGS[label][1]}` : "Comment: a note the browser ignores";
-      b.addEventListener("click", () => insertSnippet(code));
-      snippetBar.appendChild(b);
-    });
-  }
-
-  /* -----------------------------
      TOOLBAR
   ----------------------------- */
   let lastRewarded = null;
@@ -982,6 +945,7 @@
   $("runCode")?.addEventListener("click", () => {
     run();
     showPane("preview");
+    setView("result");
     // XP only when the code actually changed, so Run can't be farmed
     if (ta.value.trim() && ta.value !== lastRewarded) {
       lastRewarded = ta.value;
@@ -1029,12 +993,17 @@
     const reset = () => {
       ta.focus();
       ta.setSelectionRange(0, ta.value.length);
-      insertText(STARTER);
+      // "delete" keeps Ctrl+Z working; fall back to clearing the value
+      if (!(document.execCommand && document.execCommand("delete"))) {
+        ta.value = "";
+        ta.dispatchEvent(new Event("input"));
+      }
       run();
-      toast("↺ Back to the starter page – press Ctrl+Z to undo");
+      setView("code");
+      toast("↺ Editor cleared – press Ctrl+Z to undo");
     };
     // Only ask when there is work to lose
-    if (!ta.value.trim() || ta.value === STARTER) reset();
+    if (!ta.value.trim()) { toast("The editor is already empty"); return; }
     else window.confirmButton(e.currentTarget, "Sure? Click again", reset);
   });
 
@@ -1052,11 +1021,43 @@
   tabs.forEach((t) => t.addEventListener("click", () => showPane(t.dataset.pane)));
 
   /* -----------------------------
+     PHONES: switch between "Code" and "Result" instead of
+     scrolling up and down between them (CSS only shows one at a time)
+  ----------------------------- */
+  const heRoot = $("htmlEditor");
+  const viewBtns = document.querySelectorAll(".he-view-btn");
+
+  function setView(name) {
+    if (!heRoot) return;
+    heRoot.classList.toggle("he-view-result", name === "result");
+    viewBtns.forEach((b) => b.setAttribute("aria-selected", String(b.dataset.view === name)));
+  }
+
+  viewBtns.forEach((b) => b.addEventListener("click", () => {
+    setView(b.dataset.view);
+    if (b.dataset.view === "result") run();
+  }));
+
+  /* Phones: show one challenge at a time, the rest behind a button */
+  const challengesBox = document.querySelector(".he-challenges");
+  if (challengesBox && listEl) {
+    const allBtn = document.createElement("button");
+    allBtn.type = "button";
+    allBtn.className = "he-challenges-all";
+    allBtn.addEventListener("click", () => {
+      const open = challengesBox.classList.toggle("he-show-all");
+      allBtn.textContent = open ? "Show only my current challenge" : "See all challenges";
+    });
+    allBtn.textContent = "See all challenges";
+    listEl.insertAdjacentElement("afterend", allBtn);
+  }
+
+  /* -----------------------------
      START
   ----------------------------- */
   let saved = null;
   try { saved = localStorage.getItem(STORAGE_CODE); } catch { /* ignore */ }
-  ta.value = saved && saved.trim() ? saved : STARTER;
+  ta.value = saved && saved.trim() && saved.trim() !== OLD_STARTER.trim() ? saved : STARTER;
   explainEl.innerHTML = DEFAULT_EXPLAIN;
 
   renderChallenges();
@@ -1075,7 +1076,7 @@
       ta.scrollTop = 0;
       run();
     },
-    isStarter: () => ta.value.trim() === STARTER.trim(),
+    isStarter: () => !ta.value.trim() || ta.value.trim() === OLD_STARTER.trim(),
     // Shared with examples.js so code looks the same everywhere
     highlight,
     describe: (tag) => TAGS[tag] || null

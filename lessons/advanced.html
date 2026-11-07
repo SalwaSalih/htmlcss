@@ -6,7 +6,15 @@
   <title>HTML Advanced - Learn HTML</title>
 
   <!-- Global styles -->
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
+    <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <!-- Lesson styles (same pattern as your other lessons) -->
@@ -219,6 +227,7 @@
       .interactive-example { grid-template-columns: 1fr; }
     }
   </style>
+    <script src="../lesson-check.js" defer></script>
     <script src="../script.js" defer></script>
 </head>
 
@@ -226,17 +235,17 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="logo">
-        <i class="fas fa-code"></i>
-        <span>Learn HTML</span>
-      </div>
+      <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+        <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+        <span>ROJ Institute</span>
+      </a>
 
       <ul class="nav-menu">
-        <li><a href="../index.html#home"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="../index.html#lessons" class="active"><i class="fas fa-book"></i> Lessons</a></li>
-        <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Examples</a></li>
-        <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-        <li><a href="../index.html#cheatsheet"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+          <li><a href="../index.html#lessons" class="active" aria-current="page"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+          <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+          <li><a href="css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+          <li><a href="../practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+          <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
       </ul>
 
       <div class="hamburger">
@@ -264,7 +273,7 @@
     <!-- Content -->
     <section class="lesson-content">
       <h1>HTML Advanced</h1>
-      <p style="color:#95a5a6; margin: 10px 0 30px;">
+      <p style="color: #66757a; margin: 10px 0 30px;">
         Professional HTML patterns: responsive markup, accessibility, SEO, metadata, and advanced elements (minimal JS).
       </p>
 
@@ -518,7 +527,7 @@
           <i class="fas fa-arrow-left"></i> Previous: Forms
         </a>
         <a href="css-js.html" class="nav-btn next">
-          Next: CSS & JavaScript <i class="fas fa-arrow-right"></i>
+          Next: CSS Basics <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </section>

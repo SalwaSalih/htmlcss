@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Examples - ROJ Institute</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="images/roj-logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="examples.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="index.html" aria-label="ROJ Institute - home">
+                <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="index.html#examples" class="active" aria-current="page"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
+            </ul>
+
+            <!-- XP HUD (powered by script.js localStorage) -->
+            <div class="xp-pill" title="Your XP and Level">
+                <i class="fas fa-bolt"></i>
+                <span>Level <span data-hm-level>1</span></span>
+                <div class="xp-meter" aria-hidden="true"><div data-hm-xpbar></div></div>
+                <small><span data-hm-xp>0</span> XP</small>
+            </div>
+
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Example Gallery (logic in examples.js, styles in examples.css) -->
+    <main id="quick-examples" class="ex-section ex-page">
+        <div class="container">
+            <h1>HTML Examples</h1>
+            <p class="section-subtitle">Ready-made examples you can preview, read and open in the editor. Pick one, press <strong>Try it in the editor</strong>, and change the code!</p>
+
+            <div class="ex-toolbar">
+                <label class="ex-search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="search" id="exSearch" placeholder="Search examples, e.g. table, form, video&hellip;" aria-label="Search examples">
+                </label>
+                <div class="ex-levels" id="exLevels" aria-label="Filter by level"></div>
+            </div>
+            <div class="ex-cats" id="exCats" aria-label="Filter by topic"></div>
+
+            <p class="ex-count" id="exCount" aria-live="polite"></p>
+            <div class="ex-grid" id="exGrid"></div>
+            <p class="ex-empty" id="exEmpty" hidden>No examples match your search.</p>
+            <div class="ex-more">
+                <button type="button" class="btn btn-primary" id="exMore" hidden>Show all examples</button>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ROJ Institute</h3>
+                <p>A comprehensive resource for learning HTML with interactive examples and quizzes.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="practice.html#references">References</a></li>
+                    <li><a href="practice.html#exercises">Exercises</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Practice</h3>
+                <ul>
+                    <li><a href="index.html#examples">Code Editor</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="practice.html#quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="highlight.js"></script>
+    <script src="examples.js"></script>
+</body>
+</html>

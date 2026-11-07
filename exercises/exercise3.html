@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise 3: Responsive Semantic Layout - HTML Master</title>
+    <title>Exercise 3: Responsive Semantic Layout - ROJ Institute</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -52,13 +60,16 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <span>HTML Master</span>
-            </div>
+            <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+                <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="../index.html#exercises"><i class="fas fa-dumbbell"></i> Back to Exercises</a></li>
-                <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> HTML Arcade</a></li>
+                <li><a href="../index.html#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="../lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="../practice.html" class="active" aria-current="page"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
             </ul>
         </div>
     </nav>
@@ -96,7 +107,7 @@
 
                 <div class="navigation-buttons">
                     <a class="nav-btn back" href="exercise2.html"><i class="fas fa-arrow-left"></i> Previous: Exercise 2</a>
-                    <a class="nav-btn next" id="finishBtn" href="../index.html#certificate"><i class="fas fa-award"></i> Finish & Certificate</a>
+                    <a class="nav-btn next" id="finishBtn" href="../practice.html#certificate"><i class="fas fa-award"></i> Finish & Certificate</a>
                 </div>
             </div>
 
@@ -130,11 +141,12 @@
 
     <footer class="footer" style="margin-top:40px;">
         <div class="footer-bottom">
-            <p>&copy; 2024 HTML Master. Made with ❤️ for students.</p>
+            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
         </div>
     </footer>
 
     <script src="../confirm-button.js"></script>
+    <script src="../script.js"></script>
     <script>
         const starterCode = `<!DOCTYPE html>
 <html lang="en">

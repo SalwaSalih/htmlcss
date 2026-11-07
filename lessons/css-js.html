@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS & JavaScript - Learn HTML</title>
+    <title>CSS Basics - ROJ Institute</title>
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -30,22 +38,41 @@
         .nav-btn.next:hover { background-color: #2980b9; }
         .interactive-demo { background: #f0f8ff; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px dashed #3498db; }
         .demo-box { width: 100px; height: 100px; background: #3498db; margin: 20px auto; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; }
+        .interactive-demo h4 { margin-bottom: 4px; }
+        .demo-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+        .demo-buttons button { min-height: 40px; padding: 8px 14px; border: 1px solid #aed6f1; border-radius: 8px; background: white; color: #2471a3; font: inherit; font-weight: 600; cursor: pointer; }
+        .code-example code { color: #d4d4d4; font-family: Consolas, 'Courier New', monospace; line-height: 1.5; }
+        .info-box { background: #e8f4fc; border-left: 4px solid #3498db; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+        .info-box i { color: #3498db; margin-right: 8px; }
+        .css-ways { padding-left: 22px; margin: 10px 0; display: grid; gap: 6px; }
+        .css-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        .css-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }
+        .css-table td:first-child { width: 40%; }
+        .example-output { padding: 0; overflow: hidden; }
+        .example-output iframe { width: 100%; height: 100%; min-height: 220px; border: 0; display: block; }
+        .box-model { max-width: 360px; margin: 16px auto; font-size: 0.85rem; font-weight: 600; text-align: center; }
+        .bm-margin { background: #fdebd0; padding: 8px 14px 14px; border-radius: 8px; color: #a04000; }
+        .bm-border { background: #2c3e50; padding: 8px 14px 14px; border-radius: 6px; color: white; }
+        .bm-padding { background: #d5f5e3; padding: 8px 14px 14px; color: #1e8449; }
+        .bm-content { background: #d6eaf8; padding: 14px; color: #1f618d; }
+        @media (max-width: 768px) { .interactive-example { grid-template-columns: 1fr; } }
     </style>
+    <script src="../lesson-check.js" defer></script>
     <script src="../script.js" defer></script>
 </head>
 <body data-lesson="css-js">
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <span>Learn HTML</span>
-            </div>
+            <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+                <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="../index.html#home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="../index.html#lessons" class="active"><i class="fas fa-book"></i> Lessons</a></li>
-                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Examples</a></li>
-                <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-                <li><a href="../index.html#cheatsheet"><i class="fas fa-clipboard-list"></i> Cheatsheet</a></li>
+                <li><a href="../index.html#lessons" class="active" aria-current="page"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="../practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -57,136 +84,173 @@
         <div class="lesson-sidebar">
             <h3>Lesson Contents</h3>
             <ul class="lesson-nav">
-                <li><a href="#css-basics" class="active">CSS Basics</a></li>
-                <li><a href="#javascript-basics">JavaScript Basics</a></li>
-                <li><a href="#dom-manipulation">DOM Manipulation</a></li>
-                <li><a href="#events">Event Handling</a></li>
+                <li><a href="#css-basics" class="active">What is CSS?</a></li>
+                <li><a href="#adding-css">Adding CSS to HTML</a></li>
+                <li><a href="#colors-text">Colors &amp; Text</a></li>
+                <li><a href="#boxes">Boxes: padding, border, margin</a></li>
+                <li><a href="#classes">Classes</a></li>
                 <li><a href="#practice">Practice Exercise</a></li>
             </ul>
         </div>
 
         <div class="lesson-content">
-            <h1>CSS & JavaScript Basics</h1>
-            
+            <h1>CSS Basics</h1>
+            <p style="color:#66757a; margin: 10px 0 30px;">HTML builds the page. CSS makes it look good: colors, sizes and spacing.</p>
+
             <section id="css-basics" class="lesson-section">
-                <h2>CSS Styling Basics</h2>
-                <p>CSS (Cascading Style Sheets) is used to style HTML elements.</p>
-                
+                <h2>What is CSS?</h2>
+                <p><strong>CSS</strong> (Cascading Style Sheets) decides how HTML elements <em>look</em>. HTML says "this is a heading". CSS says "make the heading blue and big".</p>
+
                 <div class="interactive-demo">
-                    <h4>CSS Interactive Demo:</h4>
+                    <h4>Try it: press the buttons to change the box with CSS</h4>
                     <div class="demo-box" id="cssDemoBox">Hello!</div>
-                    <div style="margin-top: 20px;">
-                        <button onclick="changeColor()">Change Color</button>
-                        <button onclick="changeSize()">Change Size</button>
-                        <button onclick="rotateBox()">Rotate</button>
-                        <button onclick="resetBox()">Reset</button>
+                    <div class="demo-buttons">
+                        <button type="button" onclick="changeColor()">Change color</button>
+                        <button type="button" onclick="changeSize()">Change size</button>
+                        <button type="button" onclick="rotateBox()">Rotate</button>
+                        <button type="button" onclick="resetBox()">Reset</button>
                     </div>
                 </div>
-                
+
+                <p>A CSS <strong>rule</strong> has three parts:</p>
                 <div class="code-example">
-                    <h4>CSS Example:</h4>
-                    <pre><code>&lt;style&gt;
-    /* Select by element */
+                    <pre><code>h1 {
+    color: blue;
+}
+
+/* h1     = selector  (which elements?)  */
+/* color  = property  (what to change?)  */
+/* blue   = value     (how?)             */</code></pre>
+                </div>
+                <div class="info-box"><i class="fas fa-lightbulb"></i> Every line ends with a <strong>semicolon</strong> <code>;</code> and the rules go inside <strong>curly brackets</strong> <code>{ }</code>.</div>
+            </section>
+
+            <section id="adding-css" class="lesson-section">
+                <h2>Adding CSS to HTML</h2>
+                <p>There are three places you can write CSS:</p>
+                <ol class="css-ways">
+                    <li><strong>In a <code>&lt;style&gt;</code> tag</strong> inside <code>&lt;head&gt;</code> – good for one page. <em>We use this in this lesson.</em></li>
+                    <li><strong>In a separate file</strong> linked with <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> – best for real websites with many pages.</li>
+                    <li><strong>In a <code>style</code> attribute</strong> on one element – quick, but hard to keep tidy.</li>
+                </ol>
+                <div class="code-example">
+                    <pre><code>&lt;head&gt;
+  &lt;style&gt;
     p {
-        color: blue;
-        font-size: 16px;
+      color: green;
     }
-    
-    /* Select by class */
-    .highlight {
-        background-color: yellow;
-        padding: 10px;
-    }
-    
-    /* Select by ID */
-    #main-title {
-        font-size: 2em;
-        color: #333;
-    }
-    
-    /* Hover effect */
-    button:hover {
-        background-color: #4CAF50;
-        color: white;
-    }
-&lt;/style&gt;</code></pre>
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;This text is green.&lt;/p&gt;
+&lt;/body&gt;</code></pre>
                 </div>
             </section>
 
-            <section id="javascript-basics" class="lesson-section">
-                <h2>JavaScript Basics</h2>
-                
+            <section id="colors-text" class="lesson-section">
+                <h2>Colors &amp; Text</h2>
+                <p>Change the values in the code, then press <strong>Run</strong> to see what happens.</p>
                 <div class="interactive-example">
                     <div class="example-code">
-                        <textarea id="jsExample" rows="12">&lt;div id="demo"&gt;Click the button!&lt;/div&gt;
-&lt;button onclick="changeText()"&gt;Click Me&lt;/button&gt;
+                        <textarea id="colorsExample" rows="14" spellcheck="false">&lt;style&gt;
+  h1 {
+    color: royalblue;
+    text-align: center;
+  }
+  p {
+    color: #333333;
+    background-color: lightyellow;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+  }
+&lt;/style&gt;
 
-&lt;script&gt;
-    function changeText() {
-        // Get element by ID
-        let demo = document.getElementById('demo');
-        
-        // Change text content
-        demo.textContent = 'Text changed!';
-        
-        // Change style
-        demo.style.color = 'red';
-        demo.style.fontSize = '20px';
-        demo.style.backgroundColor = '#f0f0f0';
-        demo.style.padding = '10px';
-    }
-&lt;/script&gt;</textarea>
-                        <button onclick="runExample('jsExample')" class="run-example-btn">
-                            <i class="fas fa-play"></i> Run Example
-                        </button>
+&lt;h1&gt;My Page&lt;/h1&gt;
+&lt;p&gt;CSS makes this text bigger and gives it a background.&lt;/p&gt;</textarea>
+                        <button type="button" onclick="runExample('colorsExample')" class="run-example-btn"><i class="fas fa-play"></i> Run</button>
                     </div>
-                    <div class="example-output" id="jsOutput"></div>
+                    <div class="example-output" id="colorsOutput"></div>
+                </div>
+                <table class="css-table">
+                    <tr><td><code>color</code></td><td>Text color</td></tr>
+                    <tr><td><code>background-color</code></td><td>Background color</td></tr>
+                    <tr><td><code>font-size</code></td><td>Size of the text, for example <code>20px</code></td></tr>
+                    <tr><td><code>font-family</code></td><td>The font, for example <code>Arial</code></td></tr>
+                    <tr><td><code>text-align</code></td><td><code>left</code>, <code>center</code> or <code>right</code></td></tr>
+                </table>
+            </section>
+
+            <section id="boxes" class="lesson-section">
+                <h2>Boxes: padding, border, margin</h2>
+                <p>Every element is a <strong>box</strong>. You can add space inside it, a border around it and space outside it.</p>
+                <div class="box-model" aria-hidden="true">
+                    <div class="bm-margin">margin
+                        <div class="bm-border">border
+                            <div class="bm-padding">padding
+                                <div class="bm-content">content</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="interactive-example">
+                    <div class="example-code">
+                        <textarea id="boxesExample" rows="12" spellcheck="false">&lt;style&gt;
+  .card {
+    width: 220px;
+    padding: 20px;
+    border: 3px solid tomato;
+    border-radius: 12px;
+    margin: 20px;
+  }
+&lt;/style&gt;
+
+&lt;div class="card"&gt;I am a box with padding, a border and a margin.&lt;/div&gt;</textarea>
+                        <button type="button" onclick="runExample('boxesExample')" class="run-example-btn"><i class="fas fa-play"></i> Run</button>
+                    </div>
+                    <div class="example-output" id="boxesOutput"></div>
                 </div>
             </section>
 
-            <section id="dom-manipulation" class="lesson-section">
-                <h2>DOM Manipulation</h2>
-                
-                <div class="interactive-demo">
-                    <h4>DOM Playground:</h4>
-                    <div id="domPlayground" style="padding: 20px; background: #fff; border: 1px solid #ddd;">
-                        <p>Original content</p>
+            <section id="classes" class="lesson-section">
+                <h2>Classes</h2>
+                <p>A <strong>class</strong> lets you style only some elements. Give the element <code>class="name"</code> in HTML, and write <code>.name</code> in CSS (with a dot).</p>
+                <div class="interactive-example">
+                    <div class="example-code">
+                        <textarea id="classesExample" rows="12" spellcheck="false">&lt;style&gt;
+  .important {
+    color: white;
+    background-color: crimson;
+    padding: 6px 10px;
+  }
+&lt;/style&gt;
+
+&lt;p&gt;This is a normal paragraph.&lt;/p&gt;
+&lt;p class="important"&gt;This paragraph has the class "important".&lt;/p&gt;
+&lt;p&gt;This one is normal again.&lt;/p&gt;</textarea>
+                        <button type="button" onclick="runExample('classesExample')" class="run-example-btn"><i class="fas fa-play"></i> Run</button>
                     </div>
-                    <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="addElement()">Add Element</button>
-                        <button onclick="removeElement()">Remove Element</button>
-                        <button onclick="changeStyle()">Change Style</button>
-                        <button onclick="toggleClass()">Toggle Class</button>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <input type="text" id="newText" placeholder="Enter new text">
-                        <button onclick="updateText()">Update Text</button>
-                    </div>
+                    <div class="example-output" id="classesOutput"></div>
                 </div>
+                <div class="info-box"><i class="fas fa-lightbulb"></i> Want more? The <a href="css-properties.html">CSS Properties</a> page has every common property with a live demo.</div>
             </section>
 
             <section id="practice" class="lesson-section">
                 <h2>Practice Exercise</h2>
-                
                 <div class="exercise">
-                    <h3>Create Interactive Page</h3>
-                    <p><strong>Task:</strong> Create an interactive HTML page with:</p>
+                    <h3>Style your own profile card</h3>
+                    <p><strong>Task:</strong> Write HTML and CSS for a small card about you:</p>
                     <ol>
-                        <li>A heading styled with CSS</li>
-                        <li>A paragraph with a CSS class</li>
-                        <li>A button that changes the paragraph text</li>
-                        <li>A button that toggles a CSS class</li>
-                        <li>An input field and button to add new elements</li>
-                        <li>Inline CSS in &lt;style&gt; tags</li>
-                        <li>JavaScript in &lt;script&gt; tags</li>
+                        <li>A <code>&lt;style&gt;</code> tag</li>
+                        <li>A heading with a <code>color</code></li>
+                        <li>A paragraph with a <code>font-size</code></li>
+                        <li>An element with <code>class="card"</code> styled with <code>.card</code></li>
+                        <li>The card has <code>padding</code> and a <code>border</code></li>
+                        <li>A <code>background-color</code> somewhere</li>
                     </ol>
-                    
                     <div class="exercise-editor">
-                        <h4>Your Code:</h4>
-                        <textarea id="exerciseCode" rows="15" placeholder="Write your interactive HTML/CSS/JS code here..."></textarea>
-                        <button onclick="checkExercise()" class="submit-exercise-btn">
-                            <i class="fas fa-check"></i> Check My Code
-                        </button>
+                        <h4>Your code:</h4>
+                        <textarea id="exerciseCode" rows="15" spellcheck="false" placeholder="Write your HTML and CSS here..."></textarea>
+                        <button type="button" onclick="checkExercise()" class="submit-exercise-btn"><i class="fas fa-check"></i> Check my code</button>
                         <div id="exerciseFeedback" class="feedback"></div>
                     </div>
                 </div>
@@ -196,8 +260,8 @@
                 <a href="advanced.html" class="nav-btn">
                     <i class="fas fa-arrow-left"></i> Previous: HTML Advanced
                 </a>
-                <a href="apis.html" class="nav-btn next">
-                    Next: HTML APIs <i class="fas fa-arrow-right"></i>
+                <a href="../practice.html#quiz" class="nav-btn next">
+                    Last lesson done? Take the quiz <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -206,149 +270,84 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Learn HTML</h3>
+                <h3>ROJ Institute</h3>
                 <p>Master HTML step by step with interactive examples.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Learn HTML. Made for students.</p>
+            <p>&copy; 2026 ROJ Institute. Made for students.</p>
         </div>
     </footer>
 
     <script>
+        // Show the example's result in a sandboxed frame (the page's own styles do not leak in)
         function runExample(textareaId) {
             const code = document.getElementById(textareaId).value;
-            const outputId = textareaId.replace('Example', 'Output');
-            const outputDiv = document.getElementById(outputId);
-            outputDiv.innerHTML = code;
-            
-            // Execute any scripts in the output
-            const scripts = outputDiv.getElementsByTagName('script');
-            for (let script of scripts) {
-                eval(script.innerHTML);
+            const out = document.getElementById(textareaId.replace('Example', 'Output'));
+            let frame = out.querySelector('iframe');
+            if (!frame) {
+                frame = document.createElement('iframe');
+                frame.title = 'Result';
+                frame.setAttribute('sandbox', '');
+                out.appendChild(frame);
             }
+            frame.srcdoc = code;
         }
+        ['colorsExample', 'boxesExample', 'classesExample'].forEach(runExample);
 
-        // CSS Demo Functions
+        // Sidebar: highlight the section you are reading
+        (function () {
+            const links = document.querySelectorAll('.lesson-nav a');
+            const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+            function setActive() {
+                const y = window.scrollY + 120;
+                let current = sections[0];
+                sections.forEach(s => { if (s.offsetTop <= y) current = s; });
+                links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+            }
+            window.addEventListener('scroll', setActive, { passive: true });
+            setActive();
+        })();
+
+        // Demo box at the top of the lesson
         let rotation = 0;
+        const box = () => document.getElementById('cssDemoBox');
         function changeColor() {
-            const box = document.getElementById('cssDemoBox');
             const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'];
-            box.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            box().style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         }
-        
         function changeSize() {
-            const box = document.getElementById('cssDemoBox');
             const size = Math.floor(Math.random() * 100) + 100;
-            box.style.width = size + 'px';
-            box.style.height = size + 'px';
+            box().style.width = size + 'px';
+            box().style.height = size + 'px';
         }
-        
         function rotateBox() {
-            const box = document.getElementById('cssDemoBox');
             rotation += 45;
-            box.style.transform = `rotate(${rotation}deg)`;
+            box().style.transform = 'rotate(' + rotation + 'deg)';
         }
-        
         function resetBox() {
-            const box = document.getElementById('cssDemoBox');
-            box.style = '';
+            box().removeAttribute('style');
             rotation = 0;
         }
 
-        // DOM Playground Functions
-        let elementCount = 1;
-        function addElement() {
-            const playground = document.getElementById('domPlayground');
-            const newElement = document.createElement('div');
-            newElement.className = 'dom-element';
-            newElement.textContent = `New Element ${elementCount++}`;
-            newElement.style.padding = '10px';
-            newElement.style.margin = '5px';
-            newElement.style.background = '#e0e0e0';
-            playground.appendChild(newElement);
-        }
-        
-        function removeElement() {
-            const playground = document.getElementById('domPlayground');
-            const elements = playground.getElementsByClassName('dom-element');
-            if (elements.length > 0) {
-                playground.removeChild(elements[elements.length - 1]);
-            }
-        }
-        
-        function changeStyle() {
-            const elements = document.getElementsByClassName('dom-element');
-            for (let element of elements) {
-                element.style.background = '#3498db';
-                element.style.color = 'white';
-            }
-        }
-        
-        function toggleClass() {
-            const elements = document.getElementsByClassName('dom-element');
-            for (let element of elements) {
-                element.classList.toggle('highlighted');
-                if (element.classList.contains('highlighted')) {
-                    element.style.border = '2px solid #e74c3c';
-                } else {
-                    element.style.border = '';
-                }
-            }
-        }
-        
-        function updateText() {
-            const newText = document.getElementById('newText').value;
-            if (newText) {
-                const elements = document.getElementsByClassName('dom-element');
-                if (elements.length > 0) {
-                    elements[0].textContent = newText;
-                }
-            }
-        }
-
+        // Practice exercise: CSS only
         function checkExercise() {
             const code = document.getElementById('exerciseCode').value;
             const feedback = document.getElementById('exerciseFeedback');
-            
-            let score = 0;
-            let comments = [];
-            
-            if (code.includes('<style>') || code.includes('style=')) score++;
-            else comments.push("Add CSS styling (either &lt;style&gt; tags or inline styles)");
-            
-            if (code.includes('<script>') || code.includes('onclick=')) score++;
-            else comments.push("Add JavaScript (either &lt;script&gt; tags or inline events)");
-            
-            if (code.includes('onclick') || code.includes('addEventListener')) score++;
-            else comments.push("Add button click functionality");
-            
-            if (code.includes('getElementById') || code.includes('querySelector')) score++;
-            else comments.push("Use DOM manipulation methods");
-            
-            if (code.includes('class=') || code.includes('.className')) score++;
-            else comments.push("Use CSS classes");
-            
-            if (code.includes('textContent') || code.includes('innerHTML')) score++;
-            else comments.push("Change text content dynamically");
-            
-            if (score >= 4) {
-                feedback.innerHTML = `
-                    <div class="success">
-                        <i class="fas fa-check-circle"></i>
-                        <strong>Great job!</strong> You've created an interactive page!
-                        <p>Try running your code in the editor to see it in action.</p>
-                    </div>
-                `;
-            } else {
-                feedback.innerHTML = `
-                    <div class="warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Keep going!</strong> You got ${score}/6 requirements.
-                        <ul>${comments.map(c => `<li>${c}</li>`).join('')}</ul>
-                    </div>
-                `;
-            }
+            const checks = [
+                [/<style[\s>]/i.test(code), 'Add a &lt;style&gt; tag'],
+                [/h[1-6][^{]*\{[^}]*color\s*:/i.test(code), 'Give a heading a color'],
+                [/font-size\s*:/i.test(code), 'Use font-size'],
+                [/class\s*=\s*["']card["']/i.test(code) && /\.card\s*\{/.test(code), 'Add class="card" and style it with .card { }'],
+                [/padding\s*:/i.test(code) && /border\s*:/i.test(code), 'Give the card padding and a border'],
+                [/background(-color)?\s*:/i.test(code), 'Use a background-color']
+            ];
+            const score = checks.filter(c => c[0]).length;
+            const missing = checks.filter(c => !c[0]).map(c => '<li>' + c[1] + '</li>').join('');
+            feedback.className = 'feedback ' + (score === checks.length ? 'success' : 'warning');
+            feedback.innerHTML = score === checks.length
+                ? '<i class="fas fa-check-circle"></i> <strong>Great job!</strong> Your card has everything. Open it in the Editor on the home page to see it.'
+                : '<i class="fas fa-exclamation-triangle"></i> <strong>Keep going!</strong> ' + score + '/' + checks.length + ' done. Still missing:<ul>' + missing + '</ul>';
         }
     </script>
 </body>

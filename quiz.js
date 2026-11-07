@@ -92,12 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
       why: "<header> communicates meaning; div/span are generic containers."
     },
     {
-      q: "What does 'defer' do on a <script> tag?",
-      o: ["Runs script immediately", "Delays until after HTML is parsed", "Blocks rendering forever", "Only runs on mobile"],
-      a: 1,
-      why: "defer downloads in parallel but executes after HTML parsing is complete."
-    },
-    {
       q: "Which element is best for main page content?",
       o: ["<main>", "<article>", "<div>", "<footer>"],
       a: 0,

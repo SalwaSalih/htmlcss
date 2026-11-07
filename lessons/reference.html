@@ -4,9 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HTML Complete Reference - HTML Master</title>
+    <title>HTML Complete Reference - ROJ Institute</title>
 
     <!-- Correct path because this file is inside /lessons/ -->
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="../images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
@@ -78,76 +86,44 @@
             font-size: 0.9rem; margin-top: 10px; transition: var(--transition);
         }
         .try-it-btn:hover { background: #27ae60; }
+
+        /* Same header style as the CSS Properties page (blue card) */
+        .reference-header {
+            text-align: left;
+            background: linear-gradient(135deg, #264de4 0%, #2965f1 55%, #1aa3e8 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px 40px 32px;
+            margin-bottom: 32px;
+        }
+        .reference-header h1 { color: white; font-size: 2.4rem; margin-bottom: 10px; }
+        .reference-header h1 span, .reference-header h1 small { color: rgba(255,255,255,.85) !important; }
+        .reference-header .section-subtitle { color: rgba(255,255,255,.95); text-align: left; margin-bottom: 0; }
+        .reference-header .reference-search { margin: 20px 0 16px; max-width: 560px; }
+        .reference-header .reference-search input { border-color: transparent; }
+        .reference-header .category-filter { justify-content: flex-start; margin-bottom: 0; }
+        .reference-header .filter-btn { background: rgba(255,255,255,.15); color: white; border: 1px solid rgba(255,255,255,.35); }
+        .reference-header .filter-btn.active, .reference-header .filter-btn:hover { background: white; color: #264de4; }
+        @media (max-width: 768px) {
+            .reference-header { padding: 26px 18px 22px; }
+            .reference-header h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">
-            <i class="fas fa-code"></i>
-            <span>HTML Master</span>
-        </div>
+        <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
+            <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+            <span>ROJ Institute</span>
+        </a>
         <ul class="nav-menu">
-            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li class="dropdown">
-                <a href="#"><i class="fas fa-graduation-cap"></i> Tutorials <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column">
-                        <h4>HTML Basics</h4>
-                        <a href="basics.html#introduction"><i class="fas fa-chevron-right"></i> HTML Introduction</a>
-                        <a href="basics.html#structure"><i class="fas fa-chevron-right"></i> Document Structure</a>
-                        <a href="basics.html#elements"><i class="fas fa-chevron-right"></i> HTML Elements</a>
-                        <a href="basics.html#attributes"><i class="fas fa-chevron-right"></i> HTML Attributes</a>
-                        <a href="basics.html#headings"><i class="fas fa-chevron-right"></i> Headings & Paragraphs</a>
-                    </div>
-
-                    <div class="dropdown-column">
-                        <h4>Links & Media</h4>
-                        <a href="links-media.html#links"><i class="fas fa-chevron-right"></i> HTML Links</a>
-                        <a href="links-media.html#paths"><i class="fas fa-chevron-right"></i> Paths (Relative/Absolute)</a>
-                        <a href="links-media.html#images"><i class="fas fa-chevron-right"></i> HTML Images</a>
-                        <a href="links-media.html#audio-video"><i class="fas fa-chevron-right"></i> HTML Media</a>
-                        <a href="links-media.html#embed"><i class="fas fa-chevron-right"></i> HTML iframe</a>
-                    </div>
-
-                    <div class="dropdown-column">
-                        <h4>HTML Advanced</h4>
-                        <a href="tags.html#semantic"><i class="fas fa-chevron-right"></i> Semantic HTML</a>
-                        <a href="tags.html#formatting"><i class="fas fa-chevron-right"></i> Formatting Tags</a>
-                        <a href="advanced.html#responsive"><i class="fas fa-chevron-right"></i> Responsive HTML</a>
-                        <a href="advanced.html#accessibility"><i class="fas fa-chevron-right"></i> Accessibility</a>
-                        <a href="advanced.html#entities"><i class="fas fa-chevron-right"></i> Entities & Symbols</a>
-                    </div>
-
-                    <div class="dropdown-column">
-                        <h4>HTML Forms</h4>
-                        <a href="forms.html#basic-form"><i class="fas fa-chevron-right"></i> HTML Forms</a>
-                        <a href="forms.html#input-types"><i class="fas fa-chevron-right"></i> Input Types</a>
-                        <a href="forms.html#validation"><i class="fas fa-chevron-right"></i> Form Validation</a>
-                    </div>
-
-                    <div class="dropdown-column">
-                        <h4>HTML APIs</h4>
-                        <a href="apis.html#geolocation"><i class="fas fa-chevron-right"></i> Geolocation</a>
-                        <a href="apis.html#dragdrop"><i class="fas fa-chevron-right"></i> Drag &amp; Drop</a>
-                        <a href="apis.html#storage"><i class="fas fa-chevron-right"></i> Web Storage</a>
-                        <a href="apis.html#workers"><i class="fas fa-chevron-right"></i> Web Workers</a>
-                        <a href="apis.html#sse"><i class="fas fa-chevron-right"></i> SSE</a>
-                    </div>
-                </div>
-            </li>
+            <li><a href="../index.html#lessons" class="active" aria-current="page"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+            <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+            <li><a href="css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+            <li><a href="../practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
             <li><a href="../arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
-            <li><a href="../index.html#resources"><i class="fas fa-book-open"></i> Resources</a></li>
-            <li><a href="reference.html" class="active"><i class="fas fa-book"></i> References</a></li>
-            <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Examples</a></li>
-            <li><a href="../index.html#exercises"><i class="fas fa-dumbbell"></i> Exercises</a></li>
-            <li><a href="../index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
-            <li><a href="../index.html#certificate"><i class="fas fa-award"></i> Certificate</a></li>
         </ul>
-        <div class="search-box">
-            <input type="text" placeholder="Search references..." id="referenceSearch">
-            <button><i class="fas fa-search"></i></button>
-        </div>
 
         <!-- XP HUD (powered by script.js localStorage) -->
         <div class="xp-pill" title="Your XP and Level">
@@ -193,7 +169,7 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-section">
-            <h3>HTML Master</h3>
+            <h3>ROJ Institute</h3>
             <p>Complete HTML learning platform with tutorials, references, and interactive examples.</p>
         </div>
         <div class="footer-section">
@@ -201,8 +177,8 @@
             <ul>
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="reference.html">References</a></li>
-                <li><a href="../index.html#quiz">Quizzes</a></li>
-                <li><a href="../index.html#exercises">Exercises</a></li>
+                <li><a href="../practice.html#quiz">Quizzes</a></li>
+                <li><a href="../practice.html#exercises">Exercises</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -215,7 +191,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 HTML Master. All HTML examples are editable and runnable.</p>
+        <p>&copy; 2026 ROJ Institute. All HTML examples are editable and runnable.</p>
     </div>
 </footer>
 

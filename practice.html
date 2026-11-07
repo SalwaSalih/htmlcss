@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice &amp; Quiz - ROJ Institute</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="images/roj-logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" href="index.html" aria-label="ROJ Institute - home">
+                <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+                <span>ROJ Institute</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+                <li><a href="index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+                <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                <li><a href="practice.html" class="active" aria-current="page"><i class="fas fa-dumbbell"></i> Practice</a></li>
+                <li><a href="arcade.html"><i class="fas fa-gamepad"></i> Arcade</a></li>
+            </ul>
+
+            <!-- XP HUD (powered by script.js localStorage) -->
+            <div class="xp-pill" title="Your XP and Level">
+                <i class="fas fa-bolt"></i>
+                <span>Level <span data-hm-level>1</span></span>
+                <div class="xp-meter" aria-hidden="true"><div data-hm-xpbar></div></div>
+                <small><span data-hm-xp>0</span> XP</small>
+            </div>
+
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Tutorial Categories Section -->
+    <header class="practice-head">
+        <div class="container">
+            <h1>Practice &amp; Quiz</h1>
+            <p class="section-subtitle">Finished a lesson? Practise here and check what you have learned.</p>
+            <nav class="practice-jump" aria-label="On this page">
+                <a href="#exercises"><i class="fas fa-dumbbell"></i> Exercises</a>
+                <a href="#quiz"><i class="fas fa-question-circle"></i> Quiz</a>
+                <a href="#references"><i class="fas fa-table"></i> Tag table</a>
+                <a href="#certificate"><i class="fas fa-award"></i> My progress</a>
+                <a href="#resources"><i class="fas fa-book-open"></i> Resources</a>
+                <a href="#cheatsheet"><i class="fas fa-list"></i> Quick reference</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="practice-page">
+    <!-- Exercises Section -->
+    <section id="exercises" class="exercises-section">
+        <div class="container">
+            <h2>HTML Exercises</h2>
+            <p class="section-subtitle">Practice with hands-on exercises</p>
+
+            <div class="exercises-grid">
+                <div class="exercise-card">
+                    <div class="exercise-difficulty easy">Easy</div>
+                    <h4>Create Your First Page</h4>
+                    <p>Create a simple HTML page with heading and paragraph.</p>
+                    <div class="exercise-meta">
+                        <span><i class="far fa-clock"></i> 5 min</span>
+                        <span><i class="fas fa-star"></i> 10 points</span>
+                    </div>
+                    <button class="btn-small" onclick="startExercise(1)">Start Exercise</button>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-difficulty medium">Medium</div>
+                    <h4>Build a Form</h4>
+                    <p>Create a registration form with validation.</p>
+                    <div class="exercise-meta">
+                        <span><i class="far fa-clock"></i> 15 min</span>
+                        <span><i class="fas fa-star"></i> 25 points</span>
+                    </div>
+                    <button class="btn-small" onclick="startExercise(2)">Start Exercise</button>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-difficulty hard">Hard</div>
+                    <h4>Responsive Layout</h4>
+                    <p>Create a responsive webpage using semantic HTML.</p>
+                    <div class="exercise-meta">
+                        <span><i class="far fa-clock"></i> 30 min</span>
+                        <span><i class="fas fa-star"></i> 50 points</span>
+                    </div>
+                    <button class="btn-small" onclick="startExercise(3)">Start Exercise</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2>Test Your Knowledge</h2>
+            <p class="section-subtitle">Take this quiz to check your understanding</p>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div class="quiz-progress">
+                        <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
+                    </div>
+                    <div class="quiz-score">
+                        Score: <span id="score">0</span>
+                    </div>
+                </div>
+
+                <div class="quiz-body">
+                    <div id="questionContainer">
+                        <!-- Questions will be loaded here -->
+                    </div>
+
+                    <div class="quiz-options" id="optionsContainer">
+                        <!-- Options will be loaded here -->
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button id="prevBtn" class="nav-btn">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button id="nextBtn" class="nav-btn">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button id="submitBtn" class="submit-btn">
+                            Submit Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HTML Tag Reference Section -->
+    <section id="references" class="references-section">
+        <div class="container">
+            <h2>HTML Tag Reference</h2>
+            <p class="section-subtitle">Complete list of HTML tags with examples</p>
+
+            <!-- Closed by default; click the summary to open the table -->
+            <details class="tag-details">
+                <summary>
+                    <i class="fas fa-table" aria-hidden="true"></i>
+                    <span>Tag table <small>20 common tags – click to open</small></span>
+                    <i class="fas fa-chevron-down tag-details-arrow" aria-hidden="true"></i>
+                </summary>
+                <div class="tag-details-body">
+                <div class="search-tags">
+                    <input type="search" placeholder="Search HTML tags, e.g. img, list, form…" id="tagSearch" aria-label="Search HTML tags">
+                </div>
+
+                <table class="tag-reference">
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tagTable">
+                        <tr>
+                            <td><code>&lt;!DOCTYPE&gt;</code></td>
+                            <td>Defines document type</td>
+                            <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;html&gt;</code></td>
+                            <td>Root element</td>
+                            <td><code>&lt;html&gt;...&lt;/html&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;head&gt;</code></td>
+                            <td>Container for metadata</td>
+                            <td><code>&lt;head&gt;&lt;title&gt;...&lt;/head&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;title&gt;</code></td>
+                            <td>Document title</td>
+                            <td><code>&lt;title&gt;My Page&lt;/title&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;body&gt;</code></td>
+                            <td>Document body</td>
+                            <td><code>&lt;body&gt;content&lt;/body&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;h1&gt; to &lt;h6&gt;</code></td>
+                            <td>HTML headings</td>
+                            <td><code>&lt;h1&gt;Heading&lt;/h1&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;p&gt;</code></td>
+                            <td>Paragraph</td>
+                            <td><code>&lt;p&gt;Paragraph&lt;/p&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;a&gt;</code></td>
+                            <td>Hyperlink</td>
+                            <td><code>&lt;a href="#"&gt;Link&lt;/a&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;img&gt;</code></td>
+                            <td>Image</td>
+                            <td><code>&lt;img src="img.jpg"&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;ul&gt;</code></td>
+                            <td>Unordered list</td>
+                            <td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;ol&gt;</code></td>
+                            <td>Ordered list</td>
+                            <td><code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;div&gt;</code></td>
+                            <td>Division/container</td>
+                            <td><code>&lt;div&gt;content&lt;/div&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;span&gt;</code></td>
+                            <td>Inline container</td>
+                            <td><code>&lt;span&gt;text&lt;/span&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;table&gt;</code></td>
+                            <td>Table</td>
+                            <td><code>&lt;table&gt;...&lt;/table&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;form&gt;</code></td>
+                            <td>Form</td>
+                            <td><code>&lt;form&gt;inputs&lt;/form&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;input&gt;</code></td>
+                            <td>Input field</td>
+                            <td><code>&lt;input type="text"&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;button&gt;</code></td>
+                            <td>Clickable button</td>
+                            <td><code>&lt;button&gt;Click&lt;/button&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;textarea&gt;</code></td>
+                            <td>Multi-line input</td>
+                            <td><code>&lt;textarea&gt;&lt;/textarea&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;select&gt;</code></td>
+                            <td>Dropdown list</td>
+                            <td><code>&lt;select&gt;&lt;option&gt;1&lt;/option&gt;&lt;/select&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;video&gt;</code></td>
+                            <td>Video player</td>
+                            <td><code>&lt;video src="vid.mp4"&gt;&lt;/video&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="view-all">
+                    <a href="lessons/reference.html" class="btn">View Complete Reference</a>
+                </div>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section id="certificate" class="certificate-section">
+        <div class="container">
+            <div class="certificate-card">
+                <div class="certificate-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>Earn Your HTML Certificate</h3>
+                <p>Complete all lessons and quizzes to earn your ROJ Institute HTML Certificate.</p>
+                <div class="certificate-progress">
+                    <div class="progress-item">
+                        <i class="far fa-circle"></i>
+                        <span>Complete Tutorials</span>
+                    </div>
+                    <div class="progress-item">
+                        <i class="far fa-circle"></i>
+                        <span>Pass All Quizzes</span>
+                    </div>
+                    <div class="progress-item">
+                        <i class="far fa-circle"></i>
+                        <span>Submit Exercises</span>
+                    </div>
+                </div>
+                <button class="btn" onclick="showProgressReport()"><i class="fas fa-file-alt"></i> Show my progress report</button>
+                <p class="certificate-note">Show the report to your teacher, or print it / save it as a PDF.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <h2>HTML Learning Resources</h2>
+            <p class="section-subtitle">Expand your knowledge with these valuable external resources</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Official Documentation</h3>
+                    <p>Comprehensive references from authoritative sources</p>
+                    <ul class="resource-links">
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN Web Docs <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener noreferrer">HTML Living Standard <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://www.w3.org/TR/html52/" target="_blank" rel="noopener noreferrer">W3C HTML 5.2 <i class="fas fa-external-link-alt"></i></a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Validators</h3>
+                    <p>Essential tools to improve your HTML code quality</p>
+                    <ul class="resource-links">
+                        <li><a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Markup Validator <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://wave.webaim.org/" target="_blank" rel="noopener noreferrer">WAVE Accessibility Evaluator <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://caniuse.com/" target="_blank" rel="noopener noreferrer">Can I Use <i class="fas fa-external-link-alt"></i></a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Additional Learning</h3>
+                    <p>Further your HTML education with these resources</p>
+                    <ul class="resource-links">
+                        <li><a href="https://www.freecodecamp.org/learn/responsive-web-design/" target="_blank" rel="noopener noreferrer">freeCodeCamp <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://web.dev/learn/html/" target="_blank" rel="noopener noreferrer">web.dev HTML Course <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://www.codecademy.com/learn/learn-html" target="_blank" rel="noopener noreferrer">Codecademy HTML <i class="fas fa-external-link-alt"></i></a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-universal-access"></i>
+                    </div>
+                    <h3>Accessibility</h3>
+                    <p>Learn to make your HTML accessible to everyone</p>
+                    <ul class="resource-links">
+                        <li><a href="https://www.w3.org/WAI/fundamentals/" target="_blank" rel="noopener noreferrer">W3C Web Accessibility Initiative <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://webaim.org/techniques/semanticstructure/" target="_blank" rel="noopener noreferrer">WebAIM Semantic Structure <i class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="https://a11y-style-guide.com/style-guide/" target="_blank" rel="noopener noreferrer">A11Y Style Guide <i class="fas fa-external-link-alt"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="download-resources">
+                <a href="#" class="btn btn-primary" onclick="alert('HTML Cheatsheet PDF will be available soon!')">
+                    <i class="fas fa-download"></i> Download HTML Cheatsheet
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cheatsheet Section -->
+    <section id="cheatsheet" class="cheatsheet-section">
+        <div class="container">
+            <h2>HTML Quick Reference</h2>
+            <div class="cheatsheet-grid">
+                <div class="cheatsheet-category">
+                    <h3><i class="fas fa-heading"></i> Text Tags</h3>
+                    <table class="cheatsheet-table">
+                        <tr>
+                            <td><code>&lt;h1&gt;</code></td>
+                            <td>Main heading</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;p&gt;</code></td>
+                            <td>Paragraph</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;strong&gt;</code></td>
+                            <td>Important text</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;em&gt;</code></td>
+                            <td>Emphasized text</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-category">
+                    <h3><i class="fas fa-link"></i> Links & Media</h3>
+                    <table class="cheatsheet-table">
+                        <tr>
+                            <td><code>&lt;a href="#"&gt;</code></td>
+                            <td>Hyperlink</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;img src="#"&gt;</code></td>
+                            <td>Image</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;video&gt;</code></td>
+                            <td>Video player</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;audio&gt;</code></td>
+                            <td>Audio player</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-category">
+                    <h3><i class="fas fa-table"></i> Structure</h3>
+                    <table class="cheatsheet-table">
+                        <tr>
+                            <td><code>&lt;div&gt;</code></td>
+                            <td>Division/container</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;span&gt;</code></td>
+                            <td>Inline container</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;header&gt;</code></td>
+                            <td>Header section</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;footer&gt;</code></td>
+                            <td>Footer section</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-category">
+                    <h3><i class="fas fa-list"></i> Lists & Forms</h3>
+                    <table class="cheatsheet-table">
+                        <tr>
+                            <td><code>&lt;ul&gt;</code></td>
+                            <td>Unordered list</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;input&gt;</code></td>
+                            <td>Form input</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;button&gt;</code></td>
+                            <td>Clickable button</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;textarea&gt;</code></td>
+                            <td>Multi-line input</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ROJ Institute</h3>
+                <p>A comprehensive resource for learning HTML with interactive examples and quizzes.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="practice.html#references">References</a></li>
+                    <li><a href="practice.html#exercises">Exercises</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Practice</h3>
+                <ul>
+                    <li><a href="index.html#examples">Code Editor</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="practice.html#quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
+        </div>
+    </footer>
+
+    <script src="confirm-button.js"></script>
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
+    <script src="progress-report.js"></script>
+    <script>
+        // Tag reference search
+        (function () {
+            const tagSearch = document.getElementById('tagSearch');
+            const tagTable = document.getElementById('tagTable');
+            if (!tagSearch || !tagTable) return;
+            tagSearch.addEventListener('input', function (e) {
+                const term = e.target.value.toLowerCase();
+                for (const row of tagTable.getElementsByTagName('tr')) {
+                    row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

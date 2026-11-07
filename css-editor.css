@@ -425,7 +425,7 @@
 .ce-rule-decls {
     font-family: var(--ce-font);
     font-size: 0.8rem;
-    color: #7f8c8d;
+    color: #5f6c70;
     margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -475,7 +475,7 @@
 
 .ce-tip-title small {
     font-weight: 600;
-    color: #7f8c8d;
+    color: #5f6c70;
     margin-left: 6px;
 }
 

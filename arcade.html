@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HTML Arcade - Learn by Playing</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="images/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="images/roj-logo.png">
+    <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Small page-specific tweaks (kept tiny on purpose) */
@@ -50,15 +58,16 @@
   <!-- Navigation (same style as main site) -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="logo">
-        <i class="fas fa-code"></i>
-        <span>HTML Master</span>
-      </div>
+      <a class="logo" href="index.html" aria-label="ROJ Institute - home">
+        <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
+        <span>ROJ Institute</span>
+      </a>
       <ul class="nav-menu">
-        <li><a href="index.html#home"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="index.html#tutorials"><i class="fas fa-graduation-cap"></i> Tutorials</a></li>
-        <li><a href="arcade.html" class="active"><i class="fas fa-gamepad"></i> Arcade</a></li>
-        <li><a href="index.html#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
+          <li><a href="index.html#lessons"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
+          <li><a href="index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
+          <li><a href="lessons/css-properties.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+          <li><a href="practice.html"><i class="fas fa-dumbbell"></i> Practice</a></li>
+          <li><a href="arcade.html" class="active" aria-current="page"><i class="fas fa-gamepad"></i> Arcade</a></li>
       </ul>
 
       <div class="xp-pill" title="Your XP and Level">
@@ -160,7 +169,7 @@
         <div class="badge-list" id="badgeList"></div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;">
           <button class="btn btn-secondary" type="button" id="resetProgress"><i class="fas fa-undo"></i> Reset Progress</button>
-          <a class="btn btn-primary" href="index.html#tutorials"><i class="fas fa-graduation-cap"></i> Back to Lessons</a>
+          <a class="btn btn-primary" href="tutorials.html"><i class="fas fa-graduation-cap"></i> Back to Lessons</a>
         </div>
       </div>
     </section>
@@ -169,15 +178,15 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-section">
-        <h3>HTML Master</h3>
+        <h3>ROJ Institute</h3>
         <p>Learn HTML with interactive lessons, quizzes, and arcade games.</p>
       </div>
       <div class="footer-section">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="index.html#tutorials">Tutorials</a></li>
-          <li><a href="index.html#quiz">Quiz</a></li>
-          <li><a href="index.html#certificate">Certificate</a></li>
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="practice.html#quiz">Quiz</a></li>
+          <li><a href="practice.html#certificate">Certificate</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -190,7 +199,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 HTML Master. Learn • Build • Play</p>
+      <p>&copy; 2026 ROJ Institute. Learn • Build • Play</p>
     </div>
   </footer>
 

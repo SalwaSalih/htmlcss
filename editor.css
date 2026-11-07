@@ -102,34 +102,6 @@
     height: 16px;
 }
 
-/* ---------- Snippet bar ---------- */
-.he-snippets {
-    display: flex;
-    gap: 6px;
-    padding: 10px 16px;
-    background: #f4f6f7;
-    border-bottom: 1px solid #e5e8e8;
-    overflow-x: auto;
-}
-
-.he-snippet {
-    flex: none;
-    font-family: var(--he-font);
-    font-size: 0.8rem;
-    border: 1px solid #d5dbdb;
-    background: white;
-    color: #2471a3;
-    padding: 4px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.he-snippet:hover {
-    border-color: var(--primary-color);
-    background: #ebf5fb;
-}
-
 /* ---------- Body ---------- */
 .he-body {
     display: grid;
@@ -372,7 +344,7 @@
 }
 
 .he-node-desc {
-    color: #7f8c8d;
+    color: #5f6c70;
     font-family: 'Segoe UI', sans-serif;
     font-size: 0.8rem;
 }
@@ -429,7 +401,7 @@
 
 .he-tip-title small {
     font-weight: 600;
-    color: #7f8c8d;
+    color: #5f6c70;
     margin-left: 6px;
 }
 
@@ -603,5 +575,241 @@
     .he {
         --he-size: 13px;
         --he-line: 20px;
+    }
+}
+
+/* ---------- Phones: app-style editor ---------- */
+.he-view,
+.he-challenges-all { display: none; }
+
+@media (max-width: 768px) {
+    /* Use the full screen width (the section and container both added side padding) */
+    .examples-section { padding: 0; margin: 40px auto; }
+    .examples-section > .container { padding: 0 10px; }
+    #examples h2 { font-size: 1.6rem; }
+
+    .he {
+        --he-height: 340px;
+        --he-size: 14px;
+        --he-line: 21px;
+        border-radius: 14px;
+    }
+
+    /* Top bar: title + Live on one row, big buttons with labels below */
+    .he-top {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) 1.5fr;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .he-actions { display: contents; }
+
+    .he-switch {
+        grid-row: 1;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        padding: 6px 12px;
+        min-height: 36px;
+    }
+
+    .he-btn {
+        flex-direction: column;
+        justify-content: center;
+        gap: 3px;
+        min-height: 52px;
+        padding: 6px 2px;
+        font-size: 0.72rem;
+        border-radius: 10px;
+    }
+
+    .he-btn i { font-size: 1.05rem; }
+    .he-btn span { display: inline !important; }
+
+    /* The five buttons share one row; Run is wider */
+    .he-title { grid-column: 1 / 5; align-self: center; }
+    .he-switch { grid-column: 5; justify-self: end; }
+    .he-run { font-size: 0.85rem; }
+    .he-run i { font-size: 1.2rem; }
+
+    /* Code / Result switch */
+    .he-view {
+        display: flex;
+        gap: 4px;
+        padding: 6px;
+        background: #f4f6f7;
+        border-bottom: 1px solid #e5e8e8;
+    }
+
+    .he-view-btn {
+        flex: 1;
+        min-height: 42px;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        color: #5d6d7e;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .he-view-btn i { margin-right: 6px; }
+
+    .he-view-btn[aria-selected="true"] {
+        background: white;
+        color: var(--primary-color);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Only one of code / result is visible at a time */
+    .he-body { grid-template-columns: 1fr; }
+    .he-side { border: none; }
+    /* Hide the result while the student types, but NOT with display: none:
+       a sandboxed frame that starts hidden that way stays blank in Chrome. */
+    .he { position: relative; }
+    .he:not(.he-view-result) .he-side {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: -1;
+    }
+    .he.he-view-result .he-code { display: none; }
+
+    .he-pane-label { padding: 6px 10px; }
+    .he-gutter { min-width: 34px; padding-right: 6px; }
+    #htmlCode, .he-highlight { padding: 12px 10px; }
+
+    .he-explain { font-size: 0.88rem; padding: 10px 12px; }
+    .he-kbd-hint { display: none; }
+
+    .he-tab { padding: 12px 4px; min-height: 46px; }
+
+    /* Result pane: same height as the code area, so switching does not jump */
+    .he-pane { flex: none; height: calc(var(--he-height) + 90px); }
+
+    /* Challenges: one at a time */
+    .he-challenges { padding: 16px; margin-top: 16px; }
+    .he-challenges-head h3 { font-size: 1.1rem; }
+    .he-challenge-list { grid-template-columns: 1fr; gap: 10px; }
+
+    .he-challenges:not(.he-show-all) .he-challenge:not(.he-active) { display: none; }
+
+    .he-challenge-actions button {
+        flex: 1;
+        min-height: 42px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .he-challenges-all {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        min-height: 42px;
+        border: 1px dashed #aed6f1;
+        border-radius: 10px;
+        background: white;
+        color: var(--primary-color);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+/* Less space between the hero and the editor */
+.examples-section { margin: 28px auto 60px; }
+#examples h2 { margin-bottom: 4px; }
+#examples .section-subtitle { margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+    .examples-section { margin: 20px auto 40px; }
+    #examples .section-subtitle { margin-bottom: 14px; }
+}
+
+/* ---------- Challenges: one compact task at a time (all screen sizes) ---------- */
+.he-challenges { padding: 14px 18px; margin-top: 16px; }
+
+.he-challenges-head {
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.he-challenges-head h3 { font-size: 1.05rem; margin: 0; }
+#heChallengeProgress { font-size: 0.85rem; margin-left: auto; }
+
+.he-dots { display: flex; gap: 5px; }
+.he-dots span { width: 9px; height: 9px; border-radius: 50%; background: #d5dbdb; }
+.he-dots span.is-done { background: var(--secondary-color); }
+.he-dots span.is-now { background: var(--primary-color); box-shadow: 0 0 0 3px rgba(52, 152, 219, .25); }
+
+.he-challenge-list { grid-template-columns: 1fr; gap: 8px; margin: 0; }
+.he-challenges:not(.he-show-all) .he-challenge:not(.he-active) { display: none; }
+
+/* The current challenge on one row: text left, buttons right */
+.he-challenge {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2px 16px;
+    padding: 10px 14px;
+}
+
+.he-challenge-title { font-size: 0.98rem; }
+.he-challenge p { grid-column: 1; font-size: 0.88rem; }
+.he-challenge .he-hint { grid-column: 1 / -1; margin-top: 6px; }
+
+.he-challenge-actions {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: 0;
+    padding: 0;
+}
+
+.he-challenges-all {
+    display: inline-block;
+    width: auto;
+    min-height: 0;
+    margin-top: 8px;
+    padding: 4px 0;
+    border: none;
+    background: none;
+    color: var(--primary-color);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.he-challenges-all:hover { text-decoration: underline; }
+
+.he-all-done {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #eafaf1;
+    color: #1e8449;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .he-challenges { padding: 12px 14px; }
+    .he-challenges-head { flex-wrap: wrap; }
+    .he-dots { order: 3; width: 100%; }
+
+    .he-challenge { grid-template-columns: 1fr; }
+    .he-challenge-actions { grid-column: 1; grid-row: auto; margin-top: 6px; }
+
+    .he-challenges-all {
+        display: inline-block;
+        width: auto;
+        min-height: 36px;
+        border: none;
+        background: none;
     }
 }
