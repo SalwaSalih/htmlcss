@@ -9,22 +9,18 @@
     <link rel="apple-touch-icon" href="images/icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-title" content="Learn HTML">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="icon" type="image/png" href="images/roj-logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="highlight.css">
     <link rel="stylesheet" href="editor.css">
+    <link rel="stylesheet" href="share.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a class="logo" href="index.html" aria-label="ROJ Institute - home">
-                <img src="images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
-                <span>ROJ Institute</span>
-            </a>
             <ul class="nav-menu">
                 <li><a href="lessons.html"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
                 <li><a href="#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
@@ -51,7 +47,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Learn HTML step by step</h1>
-            <p class="hero-teacher"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> with Salwa S. Younis &middot; ROJ Institute</p>
+            <p class="hero-teacher"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> with Salwa S. Younis</p>
             <p>Short lessons, a live code editor and quizzes. Start with lesson 1 and go one step at a time.</p>
             <div class="hero-buttons">
                 <a href="lessons.html" class="btn btn-primary">Start Learning</a>
@@ -79,6 +75,7 @@
                         </label>
                         <button type="button" class="he-btn" id="heFormat" title="Fix the indentation"><i class="fas fa-align-left"></i><span>Tidy</span></button>
                         <button type="button" class="he-btn" id="heCopy" title="Copy the code"><i class="far fa-copy"></i><span>Copy</span></button>
+                        <button type="button" class="he-btn he-share" id="heShare" title="Send your code to your teacher"><i class="fas fa-paper-plane"></i><span>Send</span></button>
                         <button type="button" class="he-btn" id="heDownload" title="Save as an .html file"><i class="fas fa-download"></i><span>Save</span></button>
                         <button type="button" class="he-btn" id="heReset" title="Clear the editor"><i class="fas fa-undo"></i><span>Reset</span></button>
                         <button type="button" class="he-btn he-run" id="runCode"><i class="fas fa-play"></i><span>Run</span></button>
@@ -146,7 +143,6 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>ROJ Institute</h3>
                 <p>A comprehensive resource for learning HTML with interactive examples and quizzes.</p>
             </div>
             <div class="footer-section">
@@ -168,13 +164,15 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
+            <p>&copy; 2026 &middot; Made with ❤️ for students.</p>
         </div>
     </footer>
 
     <script src="confirm-button.js"></script>
     <script src="script.js"></script>
     <script src="highlight.js"></script>
+    <script src="teacher-config.js"></script>
+    <script src="share.js"></script>
     <script src="editor.js"></script>
 </body>
 </html>

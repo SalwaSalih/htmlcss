@@ -1,0 +1,173 @@
+/* =========================================================
+   SEND TO TEACHER (share.js) – button, window and banner
+========================================================= */
+.he-btn.he-share,
+.ce-btn.ce-share {
+    background: rgba(155, 89, 182, 0.35);
+    border-color: rgba(155, 89, 182, 0.8);
+}
+
+.he-btn.he-share:hover,
+.ce-btn.ce-share:hover { background: rgba(155, 89, 182, 0.6); }
+
+/* ---------- Window ---------- */
+body.hs-open { overflow: hidden; }
+
+.hs-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(20, 24, 35, 0.55);
+}
+
+.hs-backdrop[hidden] { display: none; }
+
+.hs-modal {
+    position: relative;
+    width: min(420px, 100%);
+    background: white;
+    color: #2c3e50;
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.hs-modal h3 {
+    margin: 0 0 14px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hs-modal h3 i { color: #8e44ad; }
+
+.hs-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #f1f3f6;
+    color: #555;
+    cursor: pointer;
+}
+
+.hs-close:hover { background: #e3e7ec; }
+
+.hs-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.hs-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 2px solid #dfe3e8;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 16px; /* no zoom on iPhone */
+}
+
+.hs-input:focus { outline: none; border-color: #8e44ad; }
+
+.hs-link { margin-top: 10px; font-size: 0.85rem; color: #555; }
+.hs-link[hidden] { display: none; }
+
+.hs-note {
+    margin: 8px 0 14px;
+    font-size: 0.85rem;
+    color: #6c7a89;
+}
+
+.hs-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.hs-actions [hidden] { display: none; }
+
+.hs-btn {
+    flex: 1 1 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 2px solid #8e44ad;
+    background: white;
+    color: #8e44ad;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.hs-btn.hs-send,
+.hs-btn.hs-primary { background: #8e44ad; color: white; }
+.hs-btn:hover { filter: brightness(0.95); }
+
+.hs-msg { margin: 10px 0 0; min-height: 1.2em; font-size: 0.88rem; font-weight: 600; }
+.hs-msg:empty { display: none; }
+
+/* ---------- Banner when looking at shared code ---------- */
+.hs-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: #f5eefa;
+    border: 1px solid #d7bde8;
+    color: #4a235a;
+    font-size: 0.92rem;
+}
+
+.hs-banner > i { color: #8e44ad; font-size: 1.1rem; }
+.hs-banner > div { flex: 1 1 220px; }
+
+.hs-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #8e44ad;
+    color: white !important;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.hs-back:hover { background: #7d3c98; }
+
+/* ---------- Phones: room for one more button in the toolbar ---------- */
+@media (max-width: 768px) {
+    .he .he-top,
+    .cr-page .ce .ce-top { grid-template-columns: repeat(5, 1fr) 1.5fr; gap: 6px; }
+
+    .he .he-title,
+    .cr-page .ce .ce-title { grid-column: 1 / 5; }
+
+    .he .he-focus-btn,
+    .cr-page .ce .ce-focus-btn { grid-column: 5; }
+
+    .he .he-switch,
+    .cr-page .ce .ce-switch { grid-column: 6; }
+
+    .hs-banner { margin: 0 0 10px; padding: 10px 12px; font-size: 0.85rem; }
+    .hs-back { width: 100%; justify-content: center; }
+}
+
+/* Class code (only when the teacher's form asks for it) */
+.hs-code-row { margin-top: 12px; }
+.hs-code-row[hidden] { display: none; }
+.hs-code-row small { font-weight: 400; color: #6c7a89; }
+#hsCode { text-transform: uppercase; letter-spacing: 0.08em; }

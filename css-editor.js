@@ -20,6 +20,8 @@
   const frame = $("ceFrame");
   const explainEl = $("ceExplain");
   const liveEl = $("ceLive");
+  // Opened from a "Send to teacher" link: show that code, never save over the viewer's own
+  const sharedView = !!window.HMShare?.isShared();
   const tipsEl = $("ceTips");
   const tipCountEl = $("ceTipCount");
   const rulesEl = $("ceRules");
@@ -917,7 +919,7 @@ ${inner}
   }
 
   function checkChallenges(doc, rules) {
-    if (!doc) return;
+    if (!doc || sharedView) return;
     let changed = false;
     CHALLENGES.forEach((c, i) => {
       if (done.has(i)) return;
@@ -962,6 +964,7 @@ ${inner}
 
   function save() {
     clearTimeout(saveTimer);
+    if (sharedView) return;
     saveTimer = setTimeout(() => {
       try {
         localStorage.setItem(STORE.css, cssPane.ta.value);
@@ -1091,6 +1094,10 @@ ${inner}
     }
   });
 
+  // Send to teacher (share.js): both files go inside the link
+  $("ceShare")?.addEventListener("click", () =>
+    window.HMShare?.open(() => ({ k: "css", css: cssPane.ta.value, html: htmlPane.ta.value })));
+
   $("ceDownload")?.addEventListener("click", () => {
     const download = (name, text, type) => {
       const url = URL.createObjectURL(new Blob([text], { type }));
@@ -1201,13 +1208,27 @@ ${inner}
      START
   ----------------------------- */
   const read = (key) => { try { return localStorage.getItem(key); } catch { return null; } };
-  cssPane.ta.value = read(STORE.css) ?? STARTER_CSS;
-  htmlPane.ta.value = read(STORE.html) || STARTER_HTML;
+  cssPane.ta.value = sharedView ? "" : read(STORE.css) ?? STARTER_CSS;
+  htmlPane.ta.value = sharedView ? "" : read(STORE.html) || STARTER_HTML;
   cssPane.render();
   htmlPane.render();
   explainEl.innerHTML = DEFAULT_EXPLAIN;
   renderChallenges();
   run();
+
+  if (sharedView) {
+    window.HMShare.readShared().then((data) => {
+      const ok = data && data.k === "css" && typeof data.css === "string" && typeof data.html === "string";
+      window.HMShare.showBanner(root, ok ? data : null);
+      if (!ok) return;
+      cssPane.ta.value = data.css;
+      htmlPane.ta.value = data.html;
+      cssPane.render();
+      htmlPane.render();
+      run();
+      showPane("preview");
+    });
+  }
 
   // Used by the "Try it" buttons on the property cards (css-reference.js)
   window.CSSEditor = {

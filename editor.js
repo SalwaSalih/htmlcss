@@ -23,6 +23,8 @@
   const tipCountEl = $("heTipCount");
   const treeEl = $("heTree");
   const liveEl = $("heLive");
+  // Opened from a "Send to teacher" link: show that code, never save over the viewer's own
+  const sharedView = !!window.HMShare?.isShared();
 
   const STORAGE_CODE = "htmlEditorCode";
   const STORAGE_CHALLENGES = "htmlmaster_editor_challenges";
@@ -689,6 +691,7 @@
   }
 
   function checkChallenges(doc, code) {
+    if (sharedView) return;
     let changed = false;
     CHALLENGES.forEach((c, i) => {
       if (done.has(i)) return;
@@ -763,6 +766,7 @@
       runTimer = setTimeout(run, 400);
     }
     clearTimeout(saveTimer);
+    if (sharedView) return;
     saveTimer = setTimeout(() => {
       try { localStorage.setItem(STORAGE_CODE, ta.value); } catch { /* ignore */ }
     }, 500);
@@ -976,6 +980,9 @@
     }
   });
 
+  // Send to teacher (share.js): the code goes inside the link
+  $("heShare")?.addEventListener("click", () => window.HMShare?.open(() => ({ k: "html", c: ta.value })));
+
   $("heDownload")?.addEventListener("click", () => {
     let code = ta.value;
     // A fragment becomes a complete page so the file opens correctly
@@ -1084,13 +1091,25 @@
   ----------------------------- */
   let saved = null;
   try { saved = localStorage.getItem(STORAGE_CODE); } catch { /* ignore */ }
-  ta.value = saved && saved.trim() && saved.trim() !== OLD_STARTER.trim() ? saved : STARTER;
+  ta.value = sharedView ? "" : saved && saved.trim() && saved.trim() !== OLD_STARTER.trim() ? saved : STARTER;
   explainEl.innerHTML = DEFAULT_EXPLAIN;
 
   renderChallenges();
   renderCode();
   analyse();
   run();
+
+  if (sharedView) {
+    window.HMShare.readShared().then((data) => {
+      const ok = data && data.k === "html" && typeof data.c === "string";
+      window.HMShare.showBanner(heRoot, ok ? data : null);
+      if (!ok) return;
+      ta.value = data.c;
+      renderCode();
+      analyse();
+      run();
+    });
+  }
 
   // Other scripts can set code with HMEditor.setCode()
   window.HMEditor = {

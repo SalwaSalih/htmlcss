@@ -47,10 +47,9 @@
       <div class="pr-dialog" role="dialog" aria-modal="true" aria-labelledby="prTitle">
         <div class="pr-report">
           <div class="pr-top">
-            <img src="images/roj-logo.png" alt="" class="pr-logo">
             <div>
               <h2 id="prTitle">Progress Report – HTML</h2>
-              <p class="pr-date">ROJ Institute · ${esc(date)}</p>
+              <p class="pr-date">${esc(date)}</p>
             </div>
           </div>
 

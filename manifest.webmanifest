@@ -1,6 +1,6 @@
 {
-  "name": "ROJ Institute – Learn HTML",
-  "short_name": "ROJ HTML",
+  "name": "Learn HTML",
+  "short_name": "Learn HTML",
   "description": "Learn HTML step by step: short lessons, a live code editor and quizzes.",
   "start_url": "./index.html",
   "scope": "./",

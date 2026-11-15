@@ -7,7 +7,7 @@
    Font Awesome (CDN): saved copy first, it never changes.
 ========================================================= */
 
-const CACHE = "roj-html-v3";
+const CACHE = "roj-html-v4";
 
 // The pages and files a student needs first
 const CORE = [
@@ -27,6 +27,9 @@ const CORE = [
   "./examples.css",
   "./script.js",
   "./editor.js",
+  "./share.js",
+  "./share.css",
+  "./teacher-config.js",
   "./highlight.js",
   "./examples.js",
   "./quiz.js",

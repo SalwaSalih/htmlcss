@@ -3797,3 +3797,6 @@ body.pr-open { overflow: hidden; }
 }
 /* Short pages: keep the footer at the bottom of the screen */
 .page-main { min-height: calc(100vh - 250px); }
+
+/* No logo/name in the navbar: keep the level pill on the right */
+.nav-container .xp-pill { margin-left: auto; }

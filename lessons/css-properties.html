@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS Properties - ROJ Institute</title>
+    <title>CSS Properties</title>
     <meta name="description" content="All the CSS properties you need, with live demos and examples of how to use them in HTML." />
 
     <!-- Shared site styles (navbar, footer) + this page's own stylesheet -->
@@ -12,28 +12,26 @@
     <link rel="apple-touch-icon" href="../images/icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="ROJ HTML">
+    <meta name="apple-mobile-web-app-title" content="Learn HTML">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="icon" type="image/png" href="../images/roj-logo.png">
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../css-reference.css" />
     <link rel="stylesheet" href="../highlight.css" />
     <link rel="stylesheet" href="../css-editor.css" />
+    <link rel="stylesheet" href="../share.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <script src="../confirm-button.js" defer></script>
     <script src="../script.js" defer></script>
     <script src="../css-reference.js" defer></script>
     <script src="../highlight.js" defer></script>
+    <script src="../teacher-config.js" defer></script>
+    <script src="../share.js" defer></script>
     <script src="../css-editor.js" defer></script>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <a class="logo" href="../index.html" aria-label="ROJ Institute - home">
-            <img src="../images/roj-logo.png" alt="ROJ Institute logo" class="logo-img">
-            <span>ROJ Institute</span>
-        </a>
         <ul class="nav-menu">
             <li><a href="../lessons.html"><i class="fas fa-graduation-cap"></i> Lessons</a></li>
             <li><a href="../index.html#examples"><i class="fas fa-laptop-code"></i> Editor</a></li>
@@ -90,6 +88,7 @@
                     </label>
                     <button type="button" class="ce-btn" id="ceFormat" title="Tidy the CSS: one declaration per line"><i class="fas fa-align-left"></i><span>Tidy</span></button>
                     <button type="button" class="ce-btn" id="ceCopy" title="Copy style.css"><i class="far fa-copy"></i><span>Copy</span></button>
+                    <button type="button" class="ce-btn ce-share" id="ceShare" title="Send your code to your teacher"><i class="fas fa-paper-plane"></i><span>Send</span></button>
                     <button type="button" class="ce-btn" id="ceDownload" title="Download style.css and index.html"><i class="fas fa-download"></i><span>Save</span></button>
                     <button type="button" class="ce-btn" id="ceReset" title="Start again"><i class="fas fa-undo"></i><span>Reset</span></button>
                     <button type="button" class="ce-btn ce-run" id="ceRun"><i class="fas fa-play"></i><span>Run</span></button>
@@ -292,7 +291,6 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-section">
-            <h3>ROJ Institute</h3>
             <p>Learn HTML and CSS with interactive examples, quizzes and games.</p>
         </div>
         <div class="footer-section">
@@ -306,7 +304,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 ROJ Institute. Made with ❤️ for students.</p>
+        <p>&copy; 2026 &middot; Made with ❤️ for students.</p>
     </div>
 </footer>
 </body>
