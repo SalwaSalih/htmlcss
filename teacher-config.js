@@ -28,5 +28,5 @@
    and send it to you another way.
 ========================================================= */
 window.HM_TEACHER = {
-  formLink: "https://docs.google.com/forms/d/e/1FAIpQLSfToFs-1DGgsy2BFE2n-3traOoGj4ExAnC1e_gdX7h5QqGtIw/viewform?usp=pp_url&entry.1939382413=NAME&entry.1395681040=LINK&entry.1657660594=CODE"
+  formLink: "https://docs.google.com/forms/d/e/1FAIpQLSfToFs-1DGgsy2BFE2n-3traOoGj4ExAnC1e_gdX7h5QqGtIw/viewform?usp=pp_url&entry.1939382413=NAME&entry.1395681040=LINK"
 };
